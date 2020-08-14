@@ -1,6 +1,6 @@
 "use strict";
 
-const glMatrix = require("glMatrix");
+const glMatrix = require("gl-matrix")
 
 exports.js_equals = (a, b) => {
     return glMatrix.equals(a, b)
