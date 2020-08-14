@@ -1,7 +1,8 @@
 module GLMatrix.Mat2 where
 
 import Prelude
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn4, runFn0, runFn1, runFn2, runFn4)
+
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
 import Data.Tuple.Nested (Tuple3, tuple3)
 import Partial.Unsafe (unsafePartial)
 
@@ -81,3 +82,35 @@ ldu m = unsafePartial $ array3ToTuple $ runFn1 js_ldu m
   where
   array3ToTuple :: forall a. Partial => Array a -> Tuple3 a a a
   array3ToTuple [ a, b, c ] = tuple3 a b c
+
+foreign import js_multiply :: Fn2 Mat2 Mat2 Mat2
+
+-- |Multiplies two mat2's
+multiply :: Mat2 -> Mat2 -> Mat2
+multiply = runFn2 js_multiply
+
+foreign import js_multiplyScalar :: Fn2 Mat2 Number Mat2
+
+-- |Multiply each element of the matrix by a scalar
+multiplyScalar :: Mat2 -> Number -> Mat2
+multiplyScalar = runFn2 js_multiplyScalar
+
+foreign import js_multiplyScalarAndAdd :: Fn3 Mat2 Mat2 Number Mat2
+
+-- |Adds two mat2's after multiplying each element of the second operand by a scalar value
+multiplyScalarAndAdd :: Mat2 -> Mat2 -> Number -> Mat2
+multiplyScalarAndAdd = runFn3 js_multiplyScalarAndAdd
+
+foreign import js_rotate :: Fn2 Mat2 Number Mat2
+
+-- |Rotates a mat2 by the given angle
+rotate :: Mat2 -> Number -> Mat2
+rotate = runFn2 js_rotate
+
+-- TODO: (static) scale(out, a, v) → {mat2} (once there is Vec2)
+
+foreign import js_str :: Fn1 Mat2 String
+
+-- |Returns a string representation of a mat2
+str :: Mat2 -> String
+str = runFn1 js_str
