@@ -7,6 +7,7 @@ import GLMatrix (MatrixArrayType(..), equals, setMatrixArrayType, toRadian)
 import Math (pi)
 import Test.QuickCheck (quickCheck, (<?>))
 
+-- |Covers `setMatrixArrayType`, `equals` and `toRadian`, so the whole root package
 testToRadian :: Effect Unit
 testToRadian = do
   setMatrixArrayType MatrixArrayTypeFloat32Array
