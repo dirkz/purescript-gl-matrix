@@ -1,19 +1,19 @@
 "use strict";
 
-const glMatrix = require("gl-matrix")
+const m = require("gl-matrix")
 
 exports.js_equals = (a, b) => {
-    return glMatrix.equals(a, b)
+    return m.glMatrix.equals(a, b)
 }
 
 exports.js_setMatrixArrayTypeArray = () => {
-    glMatrix.setMatrixType(Array)
+    m.glMatrix.setMatrixType(Array)
 }
 
 exports.js_setMatrixArrayTypeFloat32Array = () => {
-    glMatrix.setMatrixType(Float32Array)
+    m.glMatrix.setMatrixType(Float32Array)
 }
 
 exports.js_toRadian = (a) => {
-    return glMatrix.toRadian(a)
+    return m.glMatrix.toRadian(a)
 }
