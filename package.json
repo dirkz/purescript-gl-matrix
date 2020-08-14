@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/gl-matrix": "^3.2.0",
     "gl-matrix": "^3.3.0"
   }
 }
