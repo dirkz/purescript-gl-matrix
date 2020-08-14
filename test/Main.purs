@@ -1,7 +1,6 @@
 module Test.Main where
 
 import Prelude
-
 import Effect (Effect)
 import GLMatrix (MatrixArrayType(..), equals, setMatrixArrayType, toRadian)
 import Math (pi)
