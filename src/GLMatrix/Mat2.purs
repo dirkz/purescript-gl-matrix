@@ -127,3 +127,6 @@ transpose = runFn1 js_transpose
 
 instance showMat2 :: Show Mat2 where
   show = str
+
+instance eqMat2 :: Eq Mat2 where
+  eq = exactEquals
