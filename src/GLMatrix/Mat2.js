@@ -92,3 +92,15 @@ exports.js_rotate = (a, r) => {
 exports.js_str = (a) => {
     return m.mat2.str(a)
 }
+
+exports.js_subtract = (a, b) => {
+    let out = m.mat2.create()
+    m.mat2.subtract(out, a, b)
+    return out
+}
+
+exports.js_transpose = (a) => {
+    let out = m.mat2.create()
+    m.mat2.transpose(out, a)
+    return out
+}
