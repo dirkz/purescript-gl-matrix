@@ -7,11 +7,11 @@ exports.js_equals = (a, b) => {
 }
 
 exports.js_setMatrixArrayTypeArray = () => {
-    m.glMatrix.setMatrixType(Array)
+    m.glMatrix.setMatrixArrayType(Array)
 }
 
 exports.js_setMatrixArrayTypeFloat32Array = () => {
-    m.glMatrix.setMatrixType(Float32Array)
+    m.glMatrix.setMatrixArrayType(Float32Array)
 }
 
 exports.js_toRadian = (a) => {
