@@ -6,5 +6,6 @@ foreign import data Mat2 :: Type
 
 foreign import js_fromValues :: Fn4 Number Number Number Number Mat2
 
+-- |Create a new mat2 with the given values
 fromValues :: Number -> Number -> Number -> Number -> Mat2
 fromValues = runFn4 js_fromValues
