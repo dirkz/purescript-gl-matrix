@@ -65,3 +65,30 @@ exports.js_ldu = (a) => {
     return m.mat2.ldu(l, d, u, a)
 }
 
+exports.js_multiply = (a, b) => {
+    let out = m.mat2.create()
+    m.mat2.multiply(out, a, b)
+    return out
+}
+
+exports.js_multiplyScalar = (a, b) => {
+    let out = m.mat2.create()
+    m.mat2.multiplyScalar(out, a, b)
+    return out
+}
+
+exports.js_multiplyScalarAndAdd = (a, b, scale) => {
+    let out = m.mat2.create()
+    m.mat2.multiplyScalarAndAdd(out, a, b, scale)
+    return out
+}
+
+exports.js_rotate = (a, r) => {
+    let out = m.mat2.create()
+    m.mat2.rotate(out, a, r)
+    return out
+}
+
+exports.js_str = (a) => {
+    return m.mat2.str(a)
+}
