@@ -1,7 +1,6 @@
 module GLMatrix.Mat2 where
 
 import Prelude
-
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
 import Data.Tuple.Nested (Tuple3, tuple3)
 import Partial.Unsafe (unsafePartial)
@@ -108,9 +107,23 @@ rotate :: Mat2 -> Number -> Mat2
 rotate = runFn2 js_rotate
 
 -- TODO: (static) scale(out, a, v) → {mat2} (once there is Vec2)
-
 foreign import js_str :: Fn1 Mat2 String
 
 -- |Returns a string representation of a mat2
 str :: Mat2 -> String
 str = runFn1 js_str
+
+foreign import js_subtract :: Fn2 Mat2 Mat2 Mat2
+
+-- |Subtracts matrix b from matrix a
+subtract :: Mat2 -> Mat2 -> Mat2
+subtract = runFn2 js_subtract
+
+foreign import js_transpose :: Fn1 Mat2 Mat2
+
+-- |Transpose the values of a mat2
+transpose :: Mat2 -> Mat2
+transpose = runFn1 js_transpose
+
+instance showMat2 :: Show Mat2 where
+  show = str
