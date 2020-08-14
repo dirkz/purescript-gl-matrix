@@ -75,8 +75,9 @@ invert = runFn1 js_invert
 
 foreign import js_ldu :: Fn1 Mat2 (Array Mat2)
 
-array3ToTuple :: forall a. Partial => Array a -> Tuple3 a a a
-array3ToTuple [ a, b, c ] = tuple3 a b c
-
+-- |Returns L, D and U matrices (Lower triangular, Diagonal and Upper triangular) by factorizing the input matrix
 ldu :: Mat2 -> Tuple3 Mat2 Mat2 Mat2
 ldu m = unsafePartial $ array3ToTuple $ runFn1 js_ldu m
+  where
+  array3ToTuple :: forall a. Partial => Array a -> Tuple3 a a a
+  array3ToTuple [ a, b, c ] = tuple3 a b c
