@@ -1,0 +1,14 @@
+{
+  "name": "purescript-gl-matrix",
+  "version": "2.0.0",
+  "description": "Purescript wrapper of glmatrix.net",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
