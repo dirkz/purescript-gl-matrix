@@ -96,3 +96,39 @@ exports.js_normalize = (a) => {
     return out
 }
 
+exports.js_rotate = (a, b, r) => {
+    let out = m.vec2.create()
+    m.vec2.rotate(out, a, b, r)
+    return out
+}
+
+exports.js_round = (a) => {
+    let out = m.vec2.create()
+    m.vec2.round(out, a)
+    return out
+}
+
+exports.js_scale = (a, b) => {
+    let out = m.vec2.create()
+    m.vec2.scale(out, a, b)
+    return out
+}
+
+exports.js_scaleAndAdd = (a, b, scale) => {
+    let out = m.vec2.create()
+    m.vec2.scaleAndAdd(out, a, b, scale)
+    return out
+}
+
+exports.js_squaredDistance = (a, b) => {
+    return m.vec2.squaredDistance(a, b)
+}
+
+exports.js_squaredLength = (a) => {
+    return m.vec2.squaredLength(a)
+}
+
+exports.js_str = (a) => {
+    return m.vec2.str(a)
+}
+

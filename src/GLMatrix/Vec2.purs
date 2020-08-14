@@ -115,3 +115,45 @@ foreign import js_normalize :: Fn1 Vec2 Vec2
 normalize :: Vec2 -> Vec2
 normalize = runFn1 js_normalize
 
+foreign import js_rotate :: Fn3 Vec2 Vec2 Number Vec2
+
+-- |Rotate a 2D vector
+rotate :: Vec2 -> Vec2 -> Number -> Vec2
+rotate = runFn3 js_rotate
+
+foreign import js_round :: Fn1 Vec2 Vec2
+
+-- |Math.round the components of a vec2
+round :: Vec2 -> Vec2
+round = runFn1 js_round
+
+foreign import js_scale :: Fn2 Vec2 Vec2 Vec2
+
+-- |Scales a vec2 by a scalar number
+scale :: Vec2 -> Vec2 -> Vec2
+scale = runFn2 js_scale
+
+foreign import js_scaleAndAdd :: Fn3 Vec2 Vec2 Number Vec2
+
+-- |Adds two vec2's after scaling the second operand by a scalar value
+scaleAndAdd :: Vec2 -> Vec2 -> Number -> Vec2
+scaleAndAdd = runFn3 js_scaleAndAdd
+
+foreign import js_squaredDistance :: Fn2 Vec2 Vec2 Number
+
+-- |Calculates the squared euclidian distance between two vec2's
+squaredDistance :: Vec2 -> Vec2 -> Number
+squaredDistance = runFn2 js_squaredDistance
+
+foreign import js_squaredLength :: Fn1 Vec2 Number
+
+-- |Calculates the squared length of a vec2
+squaredLength :: Vec2 -> Number
+squaredLength = runFn1 js_squaredLength
+
+foreign import js_str :: Fn1 Vec2 String
+
+-- |Returns a string representation of a vector
+str :: Vec2 -> String
+str = runFn1 js_str
+
