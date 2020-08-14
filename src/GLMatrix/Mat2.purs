@@ -7,12 +7,6 @@ import Partial.Unsafe (unsafePartial)
 
 foreign import data Mat2 :: Type
 
-foreign import js_fromValues :: Fn4 Number Number Number Number Mat2
-
--- |Create a new mat2 with the given values
-fromValues :: Number -> Number -> Number -> Number -> Mat2
-fromValues = runFn4 js_fromValues
-
 foreign import js_add :: Fn2 Mat2 Mat2 Mat2
 
 -- |Adds two mat2's
@@ -60,6 +54,12 @@ foreign import js_fromScaling :: Fn1 Number Mat2
 -- |Creates a matrix from a vector scaling This is equivalent to (but much faster than): mat2.identity(dest); mat2.scale(dest, dest, vec);
 fromScaling :: Number -> Mat2
 fromScaling = runFn1 js_fromScaling
+
+foreign import js_fromValues :: Fn4 Number Number Number Number Mat2
+
+-- |Create a new mat2 with the given values
+fromValues :: Number -> Number -> Number -> Number -> Mat2
+fromValues = runFn4 js_fromValues
 
 foreign import js_identity :: Fn0 Mat2
 
