@@ -3,7 +3,7 @@ module Test.TestMat2 where
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2 (add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromValues, identity, multiplyScalar)
+import GLMatrix.Mat2 (add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, multiplyScalar, rotate)
 import Math (sqrt)
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
@@ -55,6 +55,9 @@ testFrob =
     in
       GLMatrix.epsilonEquals theFrob theSum <?> "testFrob " <> show xs <> " frob " <> show theFrob <> " sum " <> show theSum
 
+testFromRotation :: Effect Unit
+testFromRotation = quickCheck \r -> epsilonEquals (fromRotation r) (rotate identity r)
+
 main :: Effect Unit
 main = do
   testAdd
@@ -63,3 +66,4 @@ main = do
   testDeterminantZero
   testDeterminantNonZero
   testFrob
+  testFromRotation
