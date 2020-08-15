@@ -3,7 +3,7 @@ module Test.TestVec2 where
 import Effect (Effect)
 import GLMatrix as GLMatrix
 import GLMatrix.Vec2 (Vec2, add, angle, epsilonEquals, fromValues, scale)
-import Prelude (Unit, (<$>), (<*>), (==), discard)
+import Prelude (Unit, (<$>), (<*>), discard)
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck)
 
 newtype ArbVec2
