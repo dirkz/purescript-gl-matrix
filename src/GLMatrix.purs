@@ -1,6 +1,9 @@
 module GLMatrix where
 
 import Prelude
+
+import Data.Array (zipWith)
+import Data.Foldable (and)
 import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, runEffectFn1)
@@ -36,3 +39,6 @@ foreign import js_toRadian :: Fn1 Number Number
 -- |Convert Degree To Radian
 toRadian :: Number -> Number
 toRadian = runFn1 js_toRadian
+
+epsilonEqualArrays :: Array Number -> Array Number -> Boolean
+epsilonEqualArrays ns1 ns2 = and $ zipWith epsilonEquals ns1 ns2

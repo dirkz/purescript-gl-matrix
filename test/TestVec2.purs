@@ -1,12 +1,11 @@
 module Test.TestVec2 where
 
-import Data.Array (zipWith)
-import Data.Foldable (and)
 import Effect (Effect)
+import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Vec2 (Vec2, add, angle, ceil, epsilonEquals, fromValues, numbers, scale)
 import Math as Math
-import Prelude (Unit, discard, map, ($), (<$>), (<*>), (>>>))
+import Prelude (Unit, discard, map, ($), (<$>), (<*>))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck)
 
 newtype ArbVec2
@@ -40,7 +39,7 @@ testCeil =
       ceil2 :: Array Number
       ceil2 = map Math.ceil [ x, y ]
     in
-      and $ zipWith GLMatrix.epsilonEquals ceil1 ceil2
+      epsilonEqualArrays ceil1 ceil2
 
 main :: Effect Unit
 main = do
