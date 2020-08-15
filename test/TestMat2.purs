@@ -33,9 +33,13 @@ testAdjoint =
 testDeterminantZero :: Effect Unit
 testDeterminantZero = quickCheck \m00 m01 -> determinant (fromValues m00 m01 m00 m01) == 0.0
 
+testDeterminantNonZero :: Effect Unit
+testDeterminantNonZero = quickCheck \m00 m01 -> determinant (fromValues m00 m01 m01 m00) /= 0.0
+
 main :: Effect Unit
 main = do
   testAdd
   testNotEqual
   testAdjoint
   testDeterminantZero
+  testDeterminantNonZero
