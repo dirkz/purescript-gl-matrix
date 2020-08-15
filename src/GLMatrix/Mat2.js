@@ -10,7 +10,7 @@ exports.js_add = (a, b) => {
 
 exports.js_adjoint = (a) => {
     let out = m.mat2.create()
-    m.mat2.adjoint(a)
+    m.mat2.adjoint(out, a)
     return out
 }
 
