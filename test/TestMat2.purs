@@ -1,7 +1,7 @@
 module Test.TestMat2 where
 
 import Effect (Effect)
-import GLMatrix.Mat2 (add, adjoint, equals, exactEquals, fromValues, identity, multiplyScalar)
+import GLMatrix.Mat2 (add, adjoint, determinant, equals, exactEquals, fromValues, identity, multiplyScalar)
 import Prelude (Unit, discard, show, (&&), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
@@ -31,8 +31,12 @@ testAdjoint = do
     in
       equals (adjoint m) m2 <?> "testAdjoint " <> show n
 
+testDeterminantZero :: Effect Unit
+testDeterminantZero = quickCheck \m00 m01 -> determinant (fromValues m00 m01 m00 m01) == 0.0
+
 main :: Effect Unit
 main = do
   testAdd
   testNotEqual
   testAdjoint
+  testDeterminantZero
