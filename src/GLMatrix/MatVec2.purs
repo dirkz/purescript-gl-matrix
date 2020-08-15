@@ -16,4 +16,7 @@ foreign import js_fromScaling :: Fn1 Vec2 Mat2
 fromScaling :: Vec2 -> Mat2
 fromScaling = runFn1 js_fromScaling
 
--- TODO: (static) scale(out, a, v) → {mat2} (once there is Vec2)
+foreign import js_scale :: Fn2 Mat2 Vec2 Mat2
+
+scale :: Mat2 -> Vec2 -> Mat2
+scale = runFn2 js_scale
