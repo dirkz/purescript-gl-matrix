@@ -101,6 +101,16 @@ testMultiply =
     in
       resM1 /= resM2
 
+testMultiplyDistributivity :: Effect Unit
+testMultiplyDistributivity =
+  quickCheck \(ArbMat2 m1) (ArbMat2 m2) (ArbMat2 m3) ->
+    let
+      resM1 = multiply m1 (add m2 m3)
+
+      resM2 = add (multiply m2 m1) m3
+    in
+      resM1 /= resM2
+
 testMultiplyScalarAndAdd :: Effect Unit
 testMultiplyScalarAndAdd =
   quickCheck \r (ArbMat2 m1) (ArbMat2 m2) ->
@@ -133,5 +143,6 @@ main = do
   testFromScaling
   testLDU
   testMultiply
+  testMultiplyDistributivity
   testMultiplyScalarAndAdd
   testMultiplyScalar
