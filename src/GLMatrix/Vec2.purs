@@ -3,7 +3,6 @@ module GLMatrix.Vec2 where
 import Prelude
 
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn1, runFn2, runFn3)
-import GLMatrix.Mat2 (Mat2)
 
 foreign import data Vec2 :: Type
 
@@ -163,12 +162,6 @@ foreign import js_subtract :: Fn2 Vec2 Vec2 Vec2
 -- |Subtracts vector b from vector a
 subtract :: Vec2 -> Vec2 -> Vec2
 subtract = runFn2 js_subtract
-
-foreign import js_transformMat2 :: Fn2 Vec2 Mat2 Vec2
-
--- |Transforms the vec2 with a mat2
-transformMat2 :: Vec2 -> Mat2 -> Vec2
-transformMat2 = runFn2 js_transformMat2
 
 -- TODO: (static) transformMat2d(out, a, m) → {vec2}
 -- TODO: (static) transformMat3(out, a, m) → {vec2}
