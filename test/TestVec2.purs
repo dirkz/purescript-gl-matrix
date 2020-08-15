@@ -1,8 +1,9 @@
 module Test.TestVec2 where
 
 import Effect (Effect)
-import GLMatrix.Vec2 (Vec2, add, epsilonEquals, fromValues, scale)
-import Prelude (Unit, (<$>), (<*>))
+import GLMatrix as GLMatrix
+import GLMatrix.Vec2 (Vec2, add, angle, epsilonEquals, fromValues, scale)
+import Prelude (Unit, (<$>), (<*>), (==), discard)
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck)
 
 newtype ArbVec2
@@ -21,6 +22,10 @@ testAdd =
     in
       epsilonEquals v1 v2
 
+testAngleSame :: Effect Unit
+testAngleSame = quickCheck \(ArbVec2 v) -> GLMatrix.epsilonEquals (angle v v) 0.0
+
 main :: Effect Unit
 main = do
   testAdd
+  testAngleSame
