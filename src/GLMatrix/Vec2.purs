@@ -2,7 +2,8 @@ module GLMatrix.Vec2 where
 
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn1, runFn2, runFn3)
 
-data Vec2 = Array Number
+data Vec2
+  = Array Number
 
 foreign import js_add :: Fn2 Vec2 Vec2 Vec2
 
@@ -49,7 +50,9 @@ epsilonEquals = runFn2 js_epsilonEquals
 
 foreign import js_exactEquals :: Fn2 Vec2 Vec2 Boolean
 
--- |Returns whether or not the vectors exactly have the same elements in the same position (when compared with ===)
+-- |Returns whether or not the vectors exactly have the same elements in the same position (when compared with ===).
+-- |Note: Only makes sense when using `Float32Array`,
+-- |but this is not supported by the purescript wrapper (which assumes `Array Number`).
 exactEquals :: Vec2 -> Vec2 -> Boolean
 exactEquals = runFn2 js_exactEquals
 

@@ -33,6 +33,8 @@ epsilonEquals = runFn2 js_epsilonEquals
 foreign import js_exactEquals :: Fn2 Mat2 Mat2 Boolean
 
 -- |Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
+-- |Note: Only makes sense when using `Float32Array`,
+-- |but this is not supported by the purescript wrapper (which assumes `Array Number`).
 exactEquals :: Mat2 -> Mat2 -> Boolean
 exactEquals = runFn2 js_exactEquals
 
