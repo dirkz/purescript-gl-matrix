@@ -2,7 +2,6 @@ module GLMatrix.Mat2 where
 
 import Prelude
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
-import Data.Tuple.Nested (Tuple3, tuple3)
 import Partial.Unsafe (unsafePartial)
 
 foreign import data Mat2 :: Type
@@ -67,14 +66,17 @@ foreign import js_invert :: Fn1 Mat2 Mat2
 invert :: Mat2 -> Mat2
 invert = runFn1 js_invert
 
+type LDU
+  = { l :: Mat2, d :: Mat2, u :: Mat2 }
+
 foreign import js_ldu :: Fn1 Mat2 (Array Mat2)
 
 -- |Returns L, D and U matrices (Lower triangular, Diagonal and Upper triangular) by factorizing the input matrix
-ldu :: Mat2 -> Tuple3 Mat2 Mat2 Mat2
-ldu m = unsafePartial $ array3ToTuple $ runFn1 js_ldu m
+ldu :: Mat2 -> LDU
+ldu m = unsafePartial $ array3ToRecord $ runFn1 js_ldu m
   where
-  array3ToTuple :: forall a. Partial => Array a -> Tuple3 a a a
-  array3ToTuple [ a, b, c ] = tuple3 a b c
+  array3ToRecord :: Partial => Array Mat2 -> LDU
+  array3ToRecord [ a, b, c ] = { l: a, d: b, u: c }
 
 foreign import js_multiply :: Fn2 Mat2 Mat2 Mat2
 
