@@ -1,7 +1,7 @@
 module Test.Main where
 
 import Prelude
-
+import Data.Foldable (for_)
 import Effect (Effect)
 import GLMatrix (MatrixArrayType(..), epsilonEquals, setMatrixArrayType, toRadian)
 import Math (pi)
@@ -11,11 +11,11 @@ import Test.TestMat2 as TestMat2
 -- |Covers `setMatrixArrayType`, `equals` and `toRadian`, so the whole root package
 testToRadian :: Effect Unit
 testToRadian = do
-  setMatrixArrayType MatrixArrayTypeFloat32Array
-  setMatrixArrayType MatrixArrayTypeArray
   quickCheck \n -> epsilonEquals (toRadian n) (n * pi / 180.0) <?> "testToRadian " <> show n
 
 main :: Effect Unit
 main = do
-  testToRadian
-  TestMat2.main
+  for_ [ MatrixArrayTypeFloat32Array, MatrixArrayTypeArray ] \arrayType -> do
+    setMatrixArrayType arrayType
+    testToRadian
+    TestMat2.main
