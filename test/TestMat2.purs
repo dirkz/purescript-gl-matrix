@@ -7,7 +7,7 @@ import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEqual
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
-import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
+import Prelude (Unit, discard, map, negate, show, ($), (&&), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
 
 newtype ArbMat2
@@ -131,6 +131,16 @@ testMultiplyScalar =
     in
       resM1 == resM2
 
+testRotate :: Effect Unit
+testRotate =
+  quickCheck \r (ArbMat2 m) ->
+    let
+      resM1 = rotate m r
+
+      resM2 = rotate resM1 (negate r)
+    in
+      epsilonEquals m resM2
+
 testTranspose :: Effect Unit
 testTranspose =
   quickCheck \(ArbMat2 m1) (ArbMat2 m2) ->
@@ -156,4 +166,5 @@ main = do
   testMultiplyDistributivity
   testMultiplyScalarAndAdd
   testMultiplyScalar
+  testRotate
   testTranspose
