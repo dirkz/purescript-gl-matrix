@@ -100,7 +100,6 @@ foreign import js_rotate :: Fn2 Mat2 Number Mat2
 rotate :: Mat2 -> Number -> Mat2
 rotate = runFn2 js_rotate
 
--- TODO: (static) scale(out, a, v) → {mat2} (once there is Vec2)
 foreign import js_str :: Fn1 Mat2 String
 
 -- |Returns a string representation of a mat2
