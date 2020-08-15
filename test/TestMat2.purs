@@ -2,7 +2,7 @@ module Test.TestMat2 where
 
 import Data.Foldable (sum)
 import Effect (Effect)
-import GLMatrix (equalsEpsilon)
+import GLMatrix (epsilonEquals)
 import GLMatrix.Mat2 (add, adjoint, determinant, equals, exactEquals, frob, fromValues, identity, multiplyScalar)
 import Math (sqrt)
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<>), (==))
@@ -53,7 +53,7 @@ testFrob =
 
       theSum = sqrt $ sum (map (\n -> n * n) xs)
     in
-      equalsEpsilon theFrob theSum <?> "testFrob " <> show xs <> " frob " <> show theFrob <> " sum " <> show theSum
+      epsilonEquals theFrob theSum <?> "testFrob " <> show xs <> " frob " <> show theFrob <> " sum " <> show theSum
 
 main :: Effect Unit
 main = do

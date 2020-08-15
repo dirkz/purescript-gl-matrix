@@ -2,7 +2,7 @@
 
 const m = require("gl-matrix")
 
-exports.js_equalsEpsilon = (a, b) => {
+exports.js_epsilonEquals = (a, b) => {
     return m.glMatrix.equals(a, b)
 }
 
