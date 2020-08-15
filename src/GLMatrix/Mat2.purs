@@ -1,10 +1,12 @@
 module GLMatrix.Mat2 where
 
 import Prelude
+
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
+import GLMatrix.ArrayType (ArrayType)
 import Partial.Unsafe (unsafePartial)
 
-foreign import data Mat2 :: Type
+type Mat2 = ArrayType
 
 foreign import js_add :: Fn2 Mat2 Mat2 Mat2
 
@@ -23,18 +25,6 @@ foreign import js_determinant :: Fn1 Mat2 Number
 -- |Calculates the determinant of a mat2
 determinant :: Mat2 -> Number
 determinant = runFn1 js_determinant
-
-foreign import js_epsilonEquals :: Fn2 Mat2 Mat2 Boolean
-
--- |Returns whether or not the matrices have approximately the same elements in the same position
-epsilonEquals :: Mat2 -> Mat2 -> Boolean
-epsilonEquals = runFn2 js_epsilonEquals
-
-foreign import js_exactEquals :: Fn2 Mat2 Mat2 Boolean
-
--- |Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
-exactEquals :: Mat2 -> Mat2 -> Boolean
-exactEquals = runFn2 js_exactEquals
 
 foreign import js_frob :: Fn1 Mat2 Number
 
@@ -102,12 +92,6 @@ foreign import js_rotate :: Fn2 Mat2 Number Mat2
 rotate :: Mat2 -> Number -> Mat2
 rotate = runFn2 js_rotate
 
-foreign import js_str :: Fn1 Mat2 String
-
--- |Returns a string representation of a mat2
-str :: Mat2 -> String
-str = runFn1 js_str
-
 foreign import js_subtract :: Fn2 Mat2 Mat2 Mat2
 
 -- |Subtracts matrix b from matrix a
@@ -119,9 +103,3 @@ foreign import js_transpose :: Fn1 Mat2 Mat2
 -- |Transpose the values of a mat2
 transpose :: Mat2 -> Mat2
 transpose = runFn1 js_transpose
-
-instance showMat2 :: Show Mat2 where
-  show = str
-
-instance eqMat2 :: Eq Mat2 where
-  eq = exactEquals

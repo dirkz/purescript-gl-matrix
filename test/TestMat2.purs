@@ -3,7 +3,8 @@ module Test.TestMat2 where
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, rotate, subtract, transpose)
+import GLMatrix.ArrayType (epsilonEquals, exactEquals, numbers)
+import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, rotate, subtract, transpose)
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
@@ -15,6 +16,14 @@ newtype ArbMat2
 
 instance arbMat2 :: Arbitrary ArbMat2 where
   arbitrary = ArbMat2 <$> (fromValues <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
+
+testExtractNumbers :: Effect Unit
+testExtractNumbers =
+    quickCheck \m00 m01 m10 m11 ->
+        let
+            ns = [m00, m01, m10, m11]
+            m = fromValues m00 m01 m10 m11
+        in numbers m == ns
 
 testAdd :: Effect Unit
 testAdd =

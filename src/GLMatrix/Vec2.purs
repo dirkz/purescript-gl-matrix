@@ -1,10 +1,9 @@
 module GLMatrix.Vec2 where
 
-import Prelude
-
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn1, runFn2, runFn3)
+import GLMatrix.ArrayType (ArrayType)
 
-foreign import data Vec2 :: Type
+type Vec2 = ArrayType
 
 foreign import js_add :: Fn2 Vec2 Vec2 Vec2
 
@@ -170,9 +169,3 @@ foreign import js_zero :: Fn0 Vec2
 
 zero :: Fn0 Vec2
 zero = js_zero
-
-instance showVec2 :: Show Vec2 where
-  show = str
-
-instance eqVec2 :: Eq Vec2 where
-  eq = exactEquals
