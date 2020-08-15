@@ -98,5 +98,5 @@ exports.js_transpose = (a) => {
 }
 
 exports.js_numbers = (ar) => {
-    Array.prototype.slice.call(ar)
+    return Array.prototype.slice.call(ar)
 }
