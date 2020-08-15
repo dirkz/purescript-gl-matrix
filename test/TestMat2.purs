@@ -3,7 +3,7 @@ module Test.TestMat2 where
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, rotate, subtract, transpose)
+import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, rotate, subtract, transpose)
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
@@ -26,7 +26,7 @@ testAdd =
 
       multiplied = multiplyScalar m 2.0
     in
-      added == multiplied && exactEquals added multiplied <?> "testAdd " <> show n
+      added == multiplied && added == multiplied <?> "testAdd " <> show n
 
 testNotEqual :: Effect Unit
 testNotEqual = quickCheck \n -> multiplyScalar identity n /= multiplyScalar identity (n + 1.0)
