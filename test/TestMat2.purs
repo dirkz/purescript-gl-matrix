@@ -4,6 +4,8 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat2 (add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, multiplyScalar, rotate)
+import GLMatrix.MatVec2 (fromScaling, scale)
+import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
@@ -58,6 +60,18 @@ testFrob =
 testFromRotation :: Effect Unit
 testFromRotation = quickCheck \r -> epsilonEquals (fromRotation r) (rotate identity r)
 
+testFromScaling :: Effect Unit
+testFromScaling =
+  quickCheck \x y ->
+    let
+      v = Vec2.fromValues x y
+
+      m1 = fromScaling v
+
+      m2 = scale identity v
+    in
+      m1 == m2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -67,3 +81,4 @@ main = do
   testDeterminantNonZero
   testFrob
   testFromRotation
+  testFromScaling
