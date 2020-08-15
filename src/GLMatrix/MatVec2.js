@@ -13,3 +13,9 @@ exports.js_fromScaling = (v) => {
     m.mat2.fromScaling(out, r)
     return out
 }
+
+exports.js_scale = (a, v) => {
+    let out = m.mat2.create()
+    m.mat2.scale(out, a, v)
+    return out
+}
