@@ -2,8 +2,8 @@ module Test.TestMat2 where
 
 import Data.Foldable (sum)
 import Effect (Effect)
-import GLMatrix (epsilonEquals)
-import GLMatrix.Mat2 (add, adjoint, determinant, equals, exactEquals, frob, fromValues, identity, multiplyScalar)
+import GLMatrix as GLMatrix
+import GLMatrix.Mat2 (add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromValues, identity, multiplyScalar)
 import Math (sqrt)
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
@@ -31,7 +31,7 @@ testAdjoint =
 
       m2 = multiplyScalar (multiplyScalar m n) (1.0 / n) -- somehow utilize n
     in
-      equals (adjoint m) m2 <?> "testAdjoint " <> show n
+      epsilonEquals (adjoint m) m2 <?> "testAdjoint " <> show n
 
 testDeterminantZero :: Effect Unit
 testDeterminantZero =
@@ -53,7 +53,7 @@ testFrob =
 
       theSum = sqrt $ sum (map (\n -> n * n) xs)
     in
-      epsilonEquals theFrob theSum <?> "testFrob " <> show xs <> " frob " <> show theFrob <> " sum " <> show theSum
+      GLMatrix.epsilonEquals theFrob theSum <?> "testFrob " <> show xs <> " frob " <> show theFrob <> " sum " <> show theSum
 
 main :: Effect Unit
 main = do
