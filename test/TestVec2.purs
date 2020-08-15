@@ -6,8 +6,8 @@ import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, fromValues, length, numbers, scale, subtract)
 import Math as Math
-import Prelude (Unit, discard, map, ($), (*), (/), (<$>), (<*>))
-import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck)
+import Prelude (Unit, discard, map, show, ($), (*), (/), (<$>), (<*>), (<>))
+import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
 
 newtype ArbVec2
   = ArbVec2 Vec2
@@ -32,10 +32,22 @@ angleViaDotProduct :: Vec2 -> Vec2 -> Number
 angleViaDotProduct v1 v2 =
   let
     dotP = dot v1 v2
+
     len1 = length v1
+
     len2 = length v2
   in
     Math.tan dotP / (len1 * len2)
+
+testAngle :: Effect Unit
+testAngle =
+  quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
+    let
+      a1 = angleViaDotProduct v1 v2
+
+      a2 = angle v1 v2
+    in
+      GLMatrix.epsilonEquals a1 a2 <?> "testAngle " <> show v1 <> " " <> show v2 <> " a1:" <> show a1 <> " a2:" <> show a2
 
 testCeil :: Effect Unit
 testCeil =
@@ -77,6 +89,7 @@ main :: Effect Unit
 main = do
   testAdd
   testAngleSame
+  testAngle
   testCeil
   testDistance
   testDivide
