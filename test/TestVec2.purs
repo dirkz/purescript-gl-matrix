@@ -4,9 +4,9 @@ import Data.Array (zipWith)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, epsilonEquals, fromValues, length, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, fromValues, length, numbers, scale, subtract)
 import Math as Math
-import Prelude (Unit, discard, map, ($), (/), (<$>), (<*>))
+import Prelude (Unit, discard, map, ($), (*), (/), (<$>), (<*>))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck)
 
 newtype ArbVec2
@@ -27,6 +27,15 @@ testAdd =
 
 testAngleSame :: Effect Unit
 testAngleSame = quickCheck \(ArbVec2 v) -> GLMatrix.epsilonEquals (angle v v) 0.0
+
+angleViaDotProduct :: Vec2 -> Vec2 -> Number
+angleViaDotProduct v1 v2 =
+  let
+    dotP = dot v1 v2
+    len1 = length v1
+    len2 = length v2
+  in
+    Math.tan dotP / (len1 * len2)
 
 testCeil :: Effect Unit
 testCeil =
