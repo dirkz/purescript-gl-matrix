@@ -19,11 +19,13 @@ instance arbMat2 :: Arbitrary ArbMat2 where
 
 testExtractNumbers :: Effect Unit
 testExtractNumbers =
-    quickCheck \m00 m01 m10 m11 ->
-        let
-            ns = [m00, m01, m10, m11]
-            m = fromValues m00 m01 m10 m11
-        in numbers m == ns
+  quickCheck \m00 m01 m10 m11 ->
+    let
+      ns = [ m00, m01, m10, m11 ]
+
+      m = fromValues m00 m01 m10 m11
+    in
+      numbers m == ns
 
 testAdd :: Effect Unit
 testAdd =
