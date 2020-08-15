@@ -89,9 +89,9 @@ testLDU :: Effect Unit
 testLDU =
   quickCheck \(ArbMat2 m) ->
     let
-      lduM@(Tuple m1 (Tuple m2 m3)) = ldu m
+      lduRec = ldu m
     in
-      m2 == (fromValues 1.0 0.0 0.0 1.0) <?> show lduM
+      lduRec.d == (fromValues 1.0 0.0 0.0 1.0) <?> show lduRec
 
 main :: Effect Unit
 main = do
