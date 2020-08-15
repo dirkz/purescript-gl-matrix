@@ -1,7 +1,6 @@
 module Test.TestMat2 where
 
 import Data.Foldable (sum)
-import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, rotate)
@@ -9,7 +8,6 @@ import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
-import Prim.Boolean (True)
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
 
 newtype ArbMat2
