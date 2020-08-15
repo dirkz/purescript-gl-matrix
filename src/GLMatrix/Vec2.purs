@@ -127,10 +127,10 @@ foreign import js_round :: Fn1 Vec2 Vec2
 round :: Vec2 -> Vec2
 round = runFn1 js_round
 
-foreign import js_scale :: Fn2 Vec2 Vec2 Vec2
+foreign import js_scale :: Fn2 Vec2 Number Vec2
 
 -- |Scales a vec2 by a scalar number
-scale :: Vec2 -> Vec2 -> Vec2
+scale :: Vec2 -> Number -> Vec2
 scale = runFn2 js_scale
 
 foreign import js_scaleAndAdd :: Fn3 Vec2 Vec2 Number Vec2
