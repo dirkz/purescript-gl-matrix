@@ -7,6 +7,7 @@ import GLMatrix (MatrixArrayType(..), epsilonEquals, setMatrixArrayType, toRadia
 import Math (pi)
 import Test.QuickCheck (quickCheck, (<?>))
 import Test.TestMat2 as TestMat2
+import Test.TestVec2 as TestVec2
 
 -- |Covers `setMatrixArrayType`, `equals` and `toRadian`, so the whole root package
 testToRadian :: Effect Unit
@@ -19,3 +20,4 @@ main = do
     setMatrixArrayType arrayType
     testToRadian
     TestMat2.main
+    TestVec2.main
