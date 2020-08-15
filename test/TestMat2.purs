@@ -6,7 +6,7 @@ import Prelude (Unit, discard, show, (&&), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
-testAdd = do
+testAdd =
   quickCheck \n ->
     let
       m = fromValues n n n n
@@ -18,11 +18,10 @@ testAdd = do
       added == multiplied && exactEquals added multiplied <?> "testAdd " <> show n
 
 testNotEqual :: Effect Unit
-testNotEqual = do
-  quickCheck \n -> multiplyScalar identity n /= multiplyScalar identity (n + 1.0)
+testNotEqual = quickCheck \n -> multiplyScalar identity n /= multiplyScalar identity (n + 1.0)
 
 testAdjoint :: Effect Unit
-testAdjoint = do
+testAdjoint =
   quickCheck \n ->
     let
       m = identity
