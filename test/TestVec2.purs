@@ -1,11 +1,12 @@
 module Test.TestVec2 where
 
+import Data.Array (zipWith)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, epsilonEquals, fromValues, length, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, epsilonEquals, fromValues, length, numbers, scale, subtract)
 import Math as Math
-import Prelude (Unit, discard, map, ($), (<$>), (<*>))
+import Prelude (Unit, discard, map, ($), (/), (<$>), (<*>))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck)
 
 newtype ArbVec2
@@ -53,8 +54,19 @@ testDistance =
     in
       GLMatrix.epsilonEquals d1 d2
 
+testDivide :: Effect Unit
+testDivide =
+  quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
+    let
+      v = divide v1 v2
+
+      divided = zipWith (/) (numbers v1) (numbers v2)
+    in
+      epsilonEqualArrays divided (numbers v)
+
 main :: Effect Unit
 main = do
   testAdd
   testAngleSame
   testCeil
+  testDistance
