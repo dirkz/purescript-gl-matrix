@@ -49,12 +49,6 @@ foreign import js_fromRotation :: Fn1 Number Mat2
 fromRotation :: Number -> Mat2
 fromRotation = runFn1 js_fromRotation
 
-foreign import js_fromScaling :: Fn1 Number Mat2
-
--- |Creates a matrix from a vector scaling This is equivalent to (but much faster than): mat2.identity(dest); mat2.scale(dest, dest, vec);
-fromScaling :: Number -> Mat2
-fromScaling = runFn1 js_fromScaling
-
 foreign import js_fromValues :: Fn4 Number Number Number Number Mat2
 
 -- |Create a new mat2 with the given values
