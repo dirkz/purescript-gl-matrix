@@ -3,7 +3,7 @@ module Test.TestVec2 where
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, epsilonEquals, fromValues, numbers, scale)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, epsilonEquals, fromValues, length, numbers, scale, subtract)
 import Math as Math
 import Prelude (Unit, discard, map, ($), (<$>), (<*>))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck)
@@ -40,6 +40,18 @@ testCeil =
       ceil2 = map Math.ceil [ x, y ]
     in
       epsilonEqualArrays ceil1 ceil2
+
+testDistance :: Effect Unit
+testDistance =
+  quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
+    let
+      d1 :: Number
+      d1 = distance v1 v2
+
+      d2 :: Number
+      d2 = length $ subtract v1 v2
+    in
+      GLMatrix.epsilonEquals d1 d2
 
 main :: Effect Unit
 main = do
