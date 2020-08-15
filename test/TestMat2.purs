@@ -3,7 +3,7 @@ module Test.TestMat2 where
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, rotate)
+import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, rotate, transpose)
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
@@ -131,6 +131,16 @@ testMultiplyScalar =
     in
       resM1 == resM2
 
+testTranspose :: Effect Unit
+testTranspose =
+  quickCheck \(ArbMat2 m1) (ArbMat2 m2) ->
+    let
+      resM1 = transpose $ multiply m1 m2
+
+      resM2 = multiply (transpose m2) (transpose m1)
+    in
+      resM1 == resM2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -146,3 +156,4 @@ main = do
   testMultiplyDistributivity
   testMultiplyScalarAndAdd
   testMultiplyScalar
+  testTranspose
