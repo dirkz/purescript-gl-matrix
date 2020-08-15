@@ -47,9 +47,7 @@ exports.js_fromValues = (m00, m01, m10, m11) => {
 }
 
 exports.js_identity = () => {
-    let out = m.mat2.create()
-    m.mat2.identity(out)
-    return out
+    return m.mat2.create()
 }
 
 exports.js_invert = (a) => {
