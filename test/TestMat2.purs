@@ -1,6 +1,7 @@
 module Test.TestMat2 where
 
-import Data.Foldable (sum)
+import Data.Array (zipWith)
+import Data.Foldable (and, sum)
 import Effect (Effect)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose)
@@ -163,8 +164,9 @@ testExtractNumbers =
       ns = [ m00, m01, m10, m11 ]
 
       m = fromValues m00 m01 m10 m11
+      zipped = zipWith GLMatrix.epsilonEquals ns (numbers m)
     in
-      numbers m == ns
+      and zipped <?> "testExtractNumbers " <> show m <> " != " <> show ns
 
 main :: Effect Unit
 main = do
