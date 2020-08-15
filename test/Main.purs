@@ -13,7 +13,7 @@ testToRadian :: Effect Unit
 testToRadian = do
   setMatrixArrayType MatrixArrayTypeFloat32Array
   setMatrixArrayType MatrixArrayTypeArray
-  quickCheck \n -> equals (toRadian n) (n * pi / 180.0) <?> "toRadian " <> show n <> " not correct"
+  quickCheck \n -> equals (toRadian n) (n * pi / 180.0) <?> "testToRadian " <> show n
 
 main :: Effect Unit
 main = do
