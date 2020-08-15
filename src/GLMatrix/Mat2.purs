@@ -4,7 +4,7 @@ import Prelude
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
 import Partial.Unsafe (unsafePartial)
 
-foreign import data Mat2 :: Type
+type Mat2 = Array Number
 
 foreign import js_add :: Fn2 Mat2 Mat2 Mat2
 
@@ -119,9 +119,3 @@ foreign import js_transpose :: Fn1 Mat2 Mat2
 -- |Transpose the values of a mat2
 transpose :: Mat2 -> Mat2
 transpose = runFn1 js_transpose
-
-instance showMat2 :: Show Mat2 where
-  show = str
-
-instance eqMat2 :: Eq Mat2 where
-  eq = exactEquals

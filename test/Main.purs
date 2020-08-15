@@ -11,11 +11,10 @@ import Test.TestMat2 as TestMat2
 -- |Covers `setMatrixArrayType`, `equals` and `toRadian`, so the whole root package
 testToRadian :: Effect Unit
 testToRadian = do
-  setMatrixArrayType MatrixArrayTypeFloat32Array
-  setMatrixArrayType MatrixArrayTypeArray
   quickCheck \n -> epsilonEquals (toRadian n) (n * pi / 180.0) <?> "testToRadian " <> show n
 
 main :: Effect Unit
 main = do
+  setMatrixArrayType MatrixArrayTypeArray
   testToRadian
   TestMat2.main
