@@ -18,5 +18,6 @@ fromScaling = runFn1 js_fromScaling
 
 foreign import js_scale :: Fn2 Mat2 Vec2 Mat2
 
+-- |Scales the mat2 by the dimensions in the given vec2
 scale :: Mat2 -> Vec2 -> Mat2
 scale = runFn2 js_scale
