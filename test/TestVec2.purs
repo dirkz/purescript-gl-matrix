@@ -70,3 +70,4 @@ main = do
   testAngleSame
   testCeil
   testDistance
+  testDivide
