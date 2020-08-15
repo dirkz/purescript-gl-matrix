@@ -10,7 +10,7 @@ exports.js_transformMat2 = (a, m) => {
 
 exports.js_fromScaling = (v) => {
     let out = m.mat2.create()
-    m.mat2.fromScaling(out, r)
+    m.mat2.fromScaling(out, v)
     return out
 }
 
