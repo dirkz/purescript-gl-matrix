@@ -129,7 +129,7 @@ testMultiplyScalar =
 
       resM2 = scale m (Vec2.fromValues r r)
     in
-      resM1 == resM2
+      epsilonEquals resM1 resM2 <?> show "testMultiplyScalar " <> show r <> " " <> show m
 
 testRotate :: Effect Unit
 testRotate =
