@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
 
--- |Represents the array type used internally by glMatrix,
+-- |Represents the (foreign) array type used internally by glMatrix,
 -- |which is either Float32Array or an array of numbers.
 -- |All glMatrix types (like vec2, mat2 etc.) are essentially just this type,
 -- |so functionality can be shared.
