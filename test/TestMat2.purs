@@ -78,8 +78,8 @@ testFromScaling =
     in
       m1 == m2
 
-testInverse :: Effect Unit
-testInverse =
+testInvert :: Effect Unit
+testInvert =
   quickCheck \(ArbMat2 m) ->
     epsilonEquals (multiply m (invert m)) identity
 
@@ -93,4 +93,4 @@ main = do
   testFrob
   testFromRotation
   testFromScaling
-  testInverse
+  testInvert
