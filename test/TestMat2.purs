@@ -119,7 +119,7 @@ testMultiplyScalarAndAdd =
 
       resM2 = add m1 (scale m2 (Vec2.fromValues r r))
     in
-      resM1 == resM2
+      epsilonEquals resM1 resM2 <?> show "testMultiplyScalarAndAdd " <> show m1 <> " " <> show m2
 
 testMultiplyScalar :: Effect Unit
 testMultiplyScalar =
