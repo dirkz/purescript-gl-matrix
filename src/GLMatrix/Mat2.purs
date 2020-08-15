@@ -25,11 +25,11 @@ foreign import js_determinant :: Fn1 Mat2 Number
 determinant :: Mat2 -> Number
 determinant = runFn1 js_determinant
 
-foreign import js_equals :: Fn2 Mat2 Mat2 Boolean
+foreign import js_epsilonEquals :: Fn2 Mat2 Mat2 Boolean
 
 -- |Returns whether or not the matrices have approximately the same elements in the same position
-equals :: Mat2 -> Mat2 -> Boolean
-equals = runFn2 js_equals
+epsilonEquals :: Mat2 -> Mat2 -> Boolean
+epsilonEquals = runFn2 js_epsilonEquals
 
 foreign import js_exactEquals :: Fn2 Mat2 Mat2 Boolean
 
