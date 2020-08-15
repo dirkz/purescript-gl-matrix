@@ -14,8 +14,8 @@ epsilonEquals = runFn2 js_epsilonEquals
 foreign import js_setMatrixArrayTypeToArray :: EffectFn1 Unit Unit
 
 -- |glMatrix supports both `Number` `Array`s and `Float32Array`s internally,
--- |but this library assumes the former, so this function must be called before
--- |using the library.
+-- |but this library assumes the former, so this function _must_ be called _before_
+-- |using any other function of this library.
 setMatrixArrayTypeToArray :: Effect Unit
 setMatrixArrayTypeToArray = runEffectFn1 js_setMatrixArrayTypeToArray unit
 
