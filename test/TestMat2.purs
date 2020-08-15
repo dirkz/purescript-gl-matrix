@@ -1,8 +1,10 @@
 module Test.TestMat2 where
 
+import Data.Foldable (sum)
 import Effect (Effect)
-import GLMatrix.Mat2 (add, adjoint, determinant, equals, exactEquals, fromValues, identity, multiplyScalar)
-import Prelude (Unit, discard, show, (&&), (+), (/), (/=), (<>), (==))
+import GLMatrix.Mat2 (add, adjoint, determinant, equals, exactEquals, frob, fromValues, identity, multiplyScalar)
+import Math (sqrt)
+import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
@@ -31,10 +33,26 @@ testAdjoint =
       equals (adjoint m) m2 <?> "testAdjoint " <> show n
 
 testDeterminantZero :: Effect Unit
-testDeterminantZero = quickCheck \m00 m01 -> determinant (fromValues m00 m01 m00 m01) == 0.0
+testDeterminantZero =
+  quickCheck \m00 m01 ->
+    determinant (fromValues m00 m01 m00 m01) == 0.0 <?> "testDeterminantZero " <> show [ m00, m01 ]
 
 testDeterminantNonZero :: Effect Unit
-testDeterminantNonZero = quickCheck \m00 m01 -> determinant (fromValues m00 m01 m01 m00) /= 0.0
+testDeterminantNonZero =
+  quickCheck \m00 m01 ->
+    determinant (fromValues m00 m01 m01 m00) /= 0.0 <?> "testDeterminantZero " <> show [ m00, m01 ]
+
+testFrob :: Effect Unit
+testFrob =
+  quickCheck \m00 m01 m10 m11 ->
+    let
+      xs = [ m00, m01, m10, m11 ]
+
+      theFrob = frob (fromValues m00 m01 m10 m11)
+
+      theSum = sqrt $ sum (map (\n -> n * n) xs)
+    in
+      theFrob == theSum <?> "testFrob " <> show xs <> " frob " <> show theFrob <> " sum " <> show theSum
 
 main :: Effect Unit
 main = do
@@ -43,3 +61,4 @@ main = do
   testAdjoint
   testDeterminantZero
   testDeterminantNonZero
+  testFrob
