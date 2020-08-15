@@ -143,3 +143,7 @@ exports.js_zero = () => {
     m.vec2.zero(out)
     return out
 }
+
+exports.js_numbers = (ar) => {
+    Array.prototype.slice.call(ar)
+}

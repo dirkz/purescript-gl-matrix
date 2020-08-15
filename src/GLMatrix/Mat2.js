@@ -96,3 +96,7 @@ exports.js_transpose = (a) => {
     m.mat2.transpose(out, a)
     return out
 }
+
+exports.js_numbers = (ar) => {
+    Array.prototype.slice.call(ar)
+}
