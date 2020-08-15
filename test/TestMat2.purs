@@ -1,13 +1,15 @@
 module Test.TestMat2 where
 
 import Data.Foldable (sum)
+import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, multiply, multiplyScalar, rotate)
+import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, rotate)
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
+import Prim.Boolean (True)
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
 
 newtype ArbMat2
@@ -83,6 +85,14 @@ testInvert =
   quickCheck \(ArbMat2 m) ->
     epsilonEquals (multiply m (invert m)) identity
 
+testLDU :: Effect Unit
+testLDU =
+  quickCheck \(ArbMat2 m) ->
+    let
+      lduM@(Tuple m1 (Tuple m2 m3)) = ldu m
+    in
+      m2 == (fromValues 1.0 0.0 0.0 1.0) <?> show lduM
+
 main :: Effect Unit
 main = do
   testAdd
@@ -93,4 +103,4 @@ main = do
   testFrob
   testFromRotation
   testFromScaling
-  testInvert
+  testLDU

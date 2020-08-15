@@ -54,7 +54,7 @@ exports.js_ldu = (a) => {
     let l = m.mat2.create()
     let d = m.mat2.create()
     let u = m.mat2.create()
-    return m.mat2.ldu(l, d, u, a)
+    return m.mat2.LDU(l, d, u, a)
 }
 
 exports.js_multiply = (a, b) => {
