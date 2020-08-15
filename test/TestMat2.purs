@@ -101,6 +101,16 @@ testMultiplyScalarAndAdd =
     in
       resM1 == resM2
 
+testMultiplyScalar :: Effect Unit
+testMultiplyScalar =
+  quickCheck \r (ArbMat2 m) ->
+    let
+      resM1 = multiplyScalar m r
+
+      resM2 = scale m (Vec2.fromValues r r)
+    in
+      resM1 == resM2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -113,3 +123,4 @@ main = do
   testFromScaling
   testLDU
   testMultiplyScalarAndAdd
+  testMultiplyScalar
