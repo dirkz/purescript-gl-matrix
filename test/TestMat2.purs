@@ -3,12 +3,18 @@ module Test.TestMat2 where
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2 (add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, multiply, multiplyScalar, rotate)
+import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, multiply, multiplyScalar, rotate)
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
-import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<>), (==))
-import Test.QuickCheck (quickCheck, (<?>))
+import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
+import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
+
+newtype ArbMat2
+  = ArbMat2 Mat2
+
+instance arbMat2 :: Arbitrary ArbMat2 where
+  arbitrary = ArbMat2 <$> (fromValues <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
 
 testAdd :: Effect Unit
 testAdd =
@@ -74,11 +80,8 @@ testFromScaling =
 
 testInverse :: Effect Unit
 testInverse =
-  quickCheck \m00 m01 m10 m11 ->
-    let
-      m = fromValues m00 m01 m10 m11
-    in
-      epsilonEquals (multiply m (invert m)) identity
+  quickCheck \(ArbMat2 m) ->
+    epsilonEquals (multiply m (invert m)) identity
 
 main :: Effect Unit
 main = do
