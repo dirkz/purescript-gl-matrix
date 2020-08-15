@@ -6,12 +6,8 @@ exports.js_epsilonEquals = (a, b) => {
     return m.glMatrix.equals(a, b)
 }
 
-exports.js_setMatrixArrayTypeArray = () => {
+exports.js_setMatrixArrayTypeToArray = () => {
     m.glMatrix.setMatrixArrayType(Array)
-}
-
-exports.js_setMatrixArrayTypeFloat32Array = () => {
-    m.glMatrix.setMatrixArrayType(Float32Array)
 }
 
 exports.js_toRadian = (a) => {

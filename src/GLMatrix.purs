@@ -11,25 +11,13 @@ foreign import js_epsilonEquals :: Fn2 Number Number Boolean
 epsilonEquals :: Number -> Number -> Boolean
 epsilonEquals = runFn2 js_epsilonEquals
 
-data MatrixArrayType
-  = MatrixArrayTypeArray
-  | MatrixArrayTypeFloat32Array
+foreign import js_setMatrixArrayTypeToArray :: EffectFn1 Unit Unit
 
-foreign import js_setMatrixArrayTypeArray :: EffectFn1 Unit Unit
-
--- |Sets the type of array used when creating new vectors and matrices
-setMatrixArrayTypeArray :: Unit -> Effect Unit
-setMatrixArrayTypeArray = runEffectFn1 js_setMatrixArrayTypeArray
-
-foreign import js_setMatrixArrayTypeFloat32Array :: EffectFn1 Unit Unit
-
--- |Sets the type of array used when creating new vectors and matrices
-setMatrixArrayTypeFloat32Array :: Unit -> Effect Unit
-setMatrixArrayTypeFloat32Array = runEffectFn1 js_setMatrixArrayTypeFloat32Array
-
-setMatrixArrayType :: MatrixArrayType -> Effect Unit
-setMatrixArrayType MatrixArrayTypeArray = runEffectFn1 js_setMatrixArrayTypeArray unit
-setMatrixArrayType MatrixArrayTypeFloat32Array = runEffectFn1 js_setMatrixArrayTypeFloat32Array unit
+-- |glMatrix supports both `Number` `Array`s and `Float32Array`s internally,
+-- |but this library assumes the former, so this function must be called before
+-- |using the library.
+setMatrixArrayTypeToArray :: Effect Unit
+setMatrixArrayTypeToArray = runEffectFn1 js_setMatrixArrayTypeToArray unit
 
 foreign import js_toRadian :: Fn1 Number Number
 

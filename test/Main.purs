@@ -3,7 +3,7 @@ module Test.Main where
 import Prelude
 
 import Effect (Effect)
-import GLMatrix (MatrixArrayType(..), epsilonEquals, setMatrixArrayType, toRadian)
+import GLMatrix (epsilonEquals, setMatrixArrayTypeToArray, toRadian)
 import Math (pi)
 import Test.QuickCheck (quickCheck, (<?>))
 import Test.TestMat2 as TestMat2
@@ -15,6 +15,6 @@ testToRadian = do
 
 main :: Effect Unit
 main = do
-  setMatrixArrayType MatrixArrayTypeArray
+  setMatrixArrayTypeToArray
   testToRadian
   TestMat2.main
