@@ -91,6 +91,16 @@ testLDU =
     in
       lduRec.d == (fromValues 1.0 0.0 0.0 1.0) <?> show lduRec
 
+testMultiply :: Effect Unit
+testMultiply =
+  quickCheck \(ArbMat2 m1) (ArbMat2 m2) ->
+    let
+      resM1 = multiply m1 m2
+
+      resM2 = multiply m2 m1
+    in
+      resM1 /= resM2
+
 testMultiplyScalarAndAdd :: Effect Unit
 testMultiplyScalarAndAdd =
   quickCheck \r (ArbMat2 m1) (ArbMat2 m2) ->
@@ -122,5 +132,6 @@ main = do
   testFromRotation
   testFromScaling
   testLDU
+  testMultiply
   testMultiplyScalarAndAdd
   testMultiplyScalar
