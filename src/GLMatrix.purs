@@ -5,11 +5,11 @@ import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, runEffectFn1)
 
-foreign import js_equals :: Fn2 Number Number Boolean
+foreign import js_equalsEpsilon :: Fn2 Number Number Boolean
 
 -- |Tests whether or not the arguments have approximately the same value, within an absolute or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less than or equal to 1.0, and a relative tolerance is used for larger values)
-equals :: Number -> Number -> Boolean
-equals = runFn2 js_equals
+equalsEpsilon :: Number -> Number -> Boolean
+equalsEpsilon = runFn2 js_equalsEpsilon
 
 data MatrixArrayType
   = MatrixArrayTypeArray
