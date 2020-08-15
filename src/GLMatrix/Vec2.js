@@ -132,3 +132,20 @@ exports.js_str = (a) => {
     return m.vec2.str(a)
 }
 
+exports.js_subtract = (a, b) => {
+    let out = m.vec2.create()
+    m.vec2.subtract(out, a, b)
+    return out
+}
+
+exports.js_transformMat2 = (a, m) => {
+    let out = m.vec2.create()
+    m.vec2.transformMat2(out, a, m)
+    return out
+}
+
+exports.js_zero = () => {
+    let out = m.vec2.create()
+    m.vec2.zero(out)
+    return out
+}

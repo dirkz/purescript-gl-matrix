@@ -1,7 +1,7 @@
 module GLMatrix.Vec2 where
-  
-import Prelude
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
+
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn1, runFn2, runFn3)
+import GLMatrix.Mat2 (Mat2)
 
 foreign import data Vec2 :: Type
 
@@ -24,7 +24,6 @@ ceil :: Vec2 -> Vec2
 ceil = runFn1 js_ceil
 
 -- TODO: (static) cross(out, a, b) → {vec3}
-
 foreign import js_distance :: Fn2 Vec2 Vec2 Number
 
 -- |Calculates the euclidian distance between two vec2's
@@ -157,3 +156,22 @@ foreign import js_str :: Fn1 Vec2 String
 str :: Vec2 -> String
 str = runFn1 js_str
 
+foreign import js_subtract :: Fn2 Vec2 Vec2 Vec2
+
+-- |Subtracts vector b from vector a
+subtract :: Vec2 -> Vec2 -> Vec2
+subtract = runFn2 js_subtract
+
+foreign import js_transformMat2 :: Fn2 Vec2 Mat2 Vec2
+
+-- |Transforms the vec2 with a mat2
+transformMat2 :: Vec2 -> Mat2 -> Vec2
+transformMat2 = runFn2 js_transformMat2
+
+-- TODO: (static) transformMat2d(out, a, m) → {vec2}
+-- TODO: (static) transformMat3(out, a, m) → {vec2}
+-- TODO: (static) transformMat4(out, a, m) → {vec2}
+foreign import js_zero :: Fn0 Vec2
+
+zero :: Fn0 Vec2
+zero = js_zero
