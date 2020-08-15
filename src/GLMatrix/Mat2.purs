@@ -120,6 +120,12 @@ foreign import js_transpose :: Fn1 Mat2 Mat2
 transpose :: Mat2 -> Mat2
 transpose = runFn1 js_transpose
 
+foreign import js_numbers :: Fn1 Mat2 (Array Number)
+
+-- |Extract a number array
+numbers :: Mat2 -> Array Number
+numbers = runFn1 js_numbers
+
 instance showMat2 :: Show Mat2 where
   show = str
 

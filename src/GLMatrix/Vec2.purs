@@ -171,6 +171,12 @@ foreign import js_zero :: Fn0 Vec2
 zero :: Fn0 Vec2
 zero = js_zero
 
+foreign import js_numbers :: Fn1 Vec2 (Array Number)
+
+-- |Extract a number array
+numbers :: Vec2 -> Array Number
+numbers = runFn1 js_numbers
+
 instance showVec2 :: Show Vec2 where
   show = str
 
