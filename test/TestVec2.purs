@@ -121,9 +121,9 @@ testLerpDouble :: Effect Unit
 testLerpDouble =
   quickCheck \(ArbVec2 v) ->
     let
-      doubleVec = scale v 2.0
+      vDouble = scale v 2.0
     in
-      epsilonEquals (lerp v doubleVec 1.0) doubleVec <?> "testLerpDouble " <> show v
+      epsilonEquals (lerp v vDouble 1.0) vDouble <?> "testLerpDouble " <> show v
 
 testLerpOriginal :: Effect Unit
 testLerpOriginal =
