@@ -21,11 +21,11 @@ module GLMatrix.Mat3
   , map
   ) where
 
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
+import Data.Array as Array
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, Fn9, runFn0, runFn1, runFn2, runFn3, runFn4, runFn9)
 import Partial.Unsafe (unsafeCrashWith, unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
-import Data.Array as Array
 
 foreign import data Mat3 :: Type
 
@@ -71,11 +71,11 @@ foreign import js_fromRotation :: Fn1 Number Mat3
 fromRotation :: Number -> Mat3
 fromRotation = runFn1 js_fromRotation
 
-foreign import js_fromValues :: Fn4 Number Number Number Number Mat3
+foreign import js_fromValues :: Fn9 Number Number Number Number Number Number Number Number Number Mat3
 
 -- |Create a new Mat3 with the given values
-fromValues :: Number -> Number -> Number -> Number -> Mat3
-fromValues = runFn4 js_fromValues
+fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Mat3
+fromValues = runFn9 js_fromValues
 
 foreign import js_identity :: Fn0 Mat3
 
@@ -151,7 +151,7 @@ numbers = runFn1 js_numbers
 
 -- |Create a matrix from an array produced by `numbers`.
 unsafeFromNumbers :: Array Number -> Mat3
-unsafeFromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
+unsafeFromNumbers [ m00, m01, m02, m10, m11, m12, m20, m21, m22 ] = fromValues m00 m01 m02 m10 m11 m12 m20 m21 m22
 
 unsafeFromNumbers _ = unsafeCrashWith "Mat3.numbers must produce exactly 4 numbers"
 
