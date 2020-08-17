@@ -160,6 +160,6 @@ instance eqMat2 :: Prelude.Eq Mat2 where
 map :: (Number -> Number) -> Mat2 -> Mat2
 map fn v = fromNumbers $ Prelude.map fn $ numbers v
   where
-  fromNumbers [ a, b, c, d ] = fromValues a b c d
+  fromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
 
   fromNumbers _ = unsafeCrashWith "Mat2.numbers must produce exactly 4 numbers"
