@@ -17,7 +17,7 @@ module GLMatrix.Vec3
   , multiply
   , negate
   , normalize
-  , rotate
+  , rotateX
   , round
   , scale
   , scaleAndAdd
@@ -148,11 +148,11 @@ foreign import js_normalize :: Fn1 Vec3 Vec3
 normalize :: Vec3 -> Vec3
 normalize = runFn1 js_normalize
 
-foreign import js_rotate :: Fn3 Vec3 Vec3 Number Vec3
+foreign import js_rotateX :: Fn3 Vec3 Vec3 Number Vec3
 
--- |Rotate a 3D vector
-rotate :: Vec3 -> Vec3 -> Number -> Vec3
-rotate = runFn3 js_rotate
+-- |Rotate a 3D vector around the x-axis
+rotateX :: Vec3 -> Vec3 -> Number -> Vec3
+rotateX = runFn3 js_rotateX
 
 foreign import js_round :: Fn1 Vec3 Vec3
 
