@@ -4,9 +4,9 @@ import Data.Array (zipWith)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, fromValues, length, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, exactEquals, fromValues, length, numbers, scale, subtract)
 import Math as Math
-import Prelude (Unit, discard, map, show, ($), (*), (/), (<$>), (<*>), (<>))
+import Prelude (Unit, discard, map, not, show, ($), (&&), (*), (/), (/=), (<$>), (<*>), (<>))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
 
 newtype ArbVec2
@@ -84,6 +84,14 @@ testDivide =
       divided = zipWith (/) (numbers v1) (numbers v2)
     in
       epsilonEqualArrays divided (numbers v)
+
+testExactEquals :: Effect Unit
+testExactEquals =
+  quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
+    let
+      v3 = add v1 v2
+    in
+      v3 /= v1 && not exactEquals v1 v3
 
 main :: Effect Unit
 main = do
