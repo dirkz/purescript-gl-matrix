@@ -19,6 +19,11 @@ newtype ArbMat2
 instance arbMat2 :: Arbitrary ArbMat2 where
   arbitrary = ArbMat2 <$> (fromValues <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
 
+fromNumbers :: Array Number -> Mat2
+fromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
+
+fromNumbers _ = unsafeCrashWith "Mat22.numbers must produce exactly 2 numbers"
+
 testAdd :: Effect Unit
 testAdd =
   quickCheck \(ArbMat2 m) ->
@@ -152,11 +157,6 @@ testTranspose =
       resM2 = multiply (transpose m2) (transpose m1)
     in
       resM1 == resM2
-
-fromNumbers :: Array Number -> Mat2
-fromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
-
-fromNumbers _ = unsafeCrashWith "Mat22.numbers must produce exactly 2 numbers"
 
 testExtractNumbers :: Effect Unit
 testExtractNumbers =
