@@ -1,6 +1,8 @@
 module Test.TestVec2 where
 
+import Test.Arbitrary
 import Data.Array (zipWith)
+import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
@@ -9,7 +11,6 @@ import GLMatrix.Vec2 as Vec2
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
-import Test.Arbitrary
 
 testAdd :: Effect Unit
 testAdd =
@@ -109,6 +110,13 @@ testInverse =
     in
       v1 == v2 <?> "testInverse " <> show v <> " -> " <> show (inverse v)
 
+testLength :: Effect Unit
+testLength =
+  quickCheck \(ArbVec2 v) ->
+    GLMatrix.epsilonEquals (length v) (manualLength v) <?> "testLength " <> show v <> " -> " <> show (manualLength v)
+  where
+  manualLength v = Math.sqrt $ sum $ map (\n -> n * n) (numbers v)
+
 main :: Effect Unit
 main = do
   testAdd
@@ -120,3 +128,4 @@ main = do
   testEquals
   testFloor
   testInverse
+  testLength
