@@ -148,6 +148,12 @@ foreign import js_numbers :: Fn1 Mat2 (Array Number)
 numbers :: Mat2 -> Array Number
 numbers = runFn1 js_numbers
 
+-- |Create a matrix from an array produced by `numbers`.
+unsafeFromNumbers :: Array Number -> Mat2
+unsafeFromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
+
+unsafeFromNumbers _ = unsafeCrashWith "Mat2.numbers must produce exactly 4 numbers"
+
 instance showMat2 :: Prelude.Show Mat2 where
   show = str
 
@@ -158,8 +164,4 @@ instance eqMat2 :: Prelude.Eq Mat2 where
 -- |a matrix.
 -- |Note: Since a Matrix is not a general container, it cannot be a `Functor`.
 map :: (Number -> Number) -> Mat2 -> Mat2
-map fn v = fromNumbers $ Prelude.map fn $ numbers v
-  where
-  fromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
-
-  fromNumbers _ = unsafeCrashWith "Mat2.numbers must produce exactly 4 numbers"
+map fn v = unsafeFromNumbers $ Prelude.map fn $ numbers v
