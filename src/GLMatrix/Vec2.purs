@@ -33,7 +33,7 @@ module GLMatrix.Vec2
 
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn0, runFn1, runFn2, runFn3)
-import Partial.Unsafe (unsafeCrashWith)
+import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
 
@@ -211,10 +211,8 @@ numbers :: Vec2 -> Array Number
 numbers = runFn1 js_numbers
 
 -- |Create a vector from an array produced by `numbers`.
-unsafeFromNumbers :: Array Number -> Vec2
+unsafeFromNumbers :: Partial => Array Number -> Vec2
 unsafeFromNumbers [ x, y ] = fromValues x y
-
-unsafeFromNumbers _ = unsafeCrashWith "Vec2 numbers/unsafeFromNumbers must match"
 
 instance showVec2 :: Prelude.Show Vec2 where
   show = str
@@ -226,7 +224,7 @@ instance eqVec2 :: Prelude.Eq Vec2 where
 -- |a vector.
 -- |Note: Since a Vector is not a general container, it cannot be a `Functor`.
 map :: (Number -> Number) -> Vec2 -> Vec2
-map fn v = unsafeFromNumbers $ Prelude.map fn $ numbers v
+map fn v = unsafePartial $ unsafeFromNumbers $ Prelude.map fn $ numbers v
 
 zipWith :: (Number -> Number -> Number) -> Vec2 -> Vec2 -> Vec2
-zipWith fn v1 v2 = unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
+zipWith fn v1 v2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
