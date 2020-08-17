@@ -1,13 +1,13 @@
 module Test.TestVec2 where
 
 import Test.Arbitrary
-
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, numbers, scale, subtract)
+import GLMatrix.Vec2 as Vec
 import GLMatrix.Vec2 as Vec2
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
@@ -152,6 +152,16 @@ testMinDouble =
     in
       epsilonEquals (min v vDouble) v <?> "testMinDouble " <> show v
 
+testMultiply :: Effect Unit
+testMultiply =
+  quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
+    let
+      r1 = multiply v1 v2
+
+      r2 = Vec.zipWith (*) v1 v2
+    in
+      epsilonEquals r1 r2 <?> "testMultiply " <> show v1 <> ", " <> show v2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -169,3 +179,4 @@ main = do
   testLerpDifferent
   testMaxDouble
   testMinDouble
+  testMultiply
