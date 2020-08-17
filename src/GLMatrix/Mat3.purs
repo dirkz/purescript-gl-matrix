@@ -151,10 +151,8 @@ numbers :: Mat3 -> Array Number
 numbers = runFn1 js_numbers
 
 -- |Create a matrix from an array produced by `numbers`.
-unsafeFromNumbers :: Array Number -> Mat3
+unsafeFromNumbers :: Partial => Array Number -> Mat3
 unsafeFromNumbers [ m00, m01, m02, m10, m11, m12, m20, m21, m22 ] = fromValues m00 m01 m02 m10 m11 m12 m20 m21 m22
-
-unsafeFromNumbers _ = unsafeCrashWith "Mat3 numbers/unsafeFromNumbers must match"
 
 instance showMat3 :: Prelude.Show Mat3 where
   show = str
@@ -166,7 +164,7 @@ instance eqMat3 :: Prelude.Eq Mat3 where
 -- |a matrix.
 -- |Note: Since a Matrix is not a general container, it cannot be a `Functor`.
 map :: (Number -> Number) -> Mat3 -> Mat3
-map fn v = unsafeFromNumbers $ Prelude.map fn $ numbers v
+map fn v = unsafePartial $ unsafeFromNumbers $ Prelude.map fn $ numbers v
 
 zipWith :: (Number -> Number -> Number) -> Mat3 -> Mat3 -> Mat3
-zipWith fn v1 v2 = unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
+zipWith fn v1 v2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
