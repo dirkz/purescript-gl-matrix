@@ -7,6 +7,8 @@ import GLMatrix.Mat3 (Mat3)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Vec2 (Vec2)
 import GLMatrix.Vec2 as Vec2
+import GLMatrix.Vec3 (Vec3)
+import GLMatrix.Vec3 as Vec3
 import Test.QuickCheck (class Arbitrary, arbitrary)
 
 newtype ArbMat2
@@ -38,3 +40,9 @@ newtype ArbVec2
 
 instance arbVec2 :: Arbitrary ArbVec2 where
   arbitrary = ArbVec2 <$> (Vec2.fromValues <$> arbitrary <*> arbitrary)
+
+newtype ArbVec3
+  = ArbVec3 Vec3
+
+instance arbVec3 :: Arbitrary ArbVec3 where
+  arbitrary = ArbVec3 <$> (Vec3.fromValues <$> arbitrary <*> arbitrary <*> arbitrary)
