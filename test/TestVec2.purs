@@ -6,7 +6,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, subtract)
 import GLMatrix.Vec2 as Vec
 import GLMatrix.Vec2 as Vec2
 import Math as Math
@@ -217,6 +217,18 @@ testScaleAndAdd =
     in
       epsilonEquals r1 r2 <?> "testScaleAndAdd " <> show v1 <> ", " <> show v2 <> ", " <> show s
 
+testSquaredDistance :: Effect Unit
+testSquaredDistance =
+  quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
+    let
+      r1 = squaredDistance v1 v2
+
+      d = distance v1 v2
+
+      r2 = Math.sqrt d
+    in
+      GLMatrix.epsilonEquals r1 r2 <?> "testSquaredDistance " <> show v1 <> ", " <> show v2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -240,3 +252,4 @@ main = do
   testRotate
   testRound
   testScaleAndAdd
+  testSquaredDistance
