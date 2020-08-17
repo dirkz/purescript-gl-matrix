@@ -19,7 +19,19 @@ newtype ArbMat3
   = ArbMat3 Mat3
 
 instance arbMat3 :: Arbitrary ArbMat3 where
-  arbitrary = ArbMat3 <$> (Mat3.fromValues <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
+  arbitrary =
+    ArbMat3
+      <$> ( Mat3.fromValues
+            <$> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+        )
 
 newtype ArbVec2
   = ArbVec2 Vec2
