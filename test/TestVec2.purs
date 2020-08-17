@@ -111,4 +111,5 @@ main = do
   testCeil
   testDistance
   testDivide
+  testExactEquals
   testFloor
