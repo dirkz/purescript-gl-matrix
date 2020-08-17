@@ -212,7 +212,7 @@ numbers = runFn1 js_numbers
 
 -- |Create a vector from an array produced by `numbers`.
 unsafeFromNumbers :: Array Number -> Vec2
-unsafeFromNumbers [ a, b ] = fromValues a b
+unsafeFromNumbers [ x, y ] = fromValues x y
 
 unsafeFromNumbers _ = unsafeCrashWith "Vec2 numbers/unsafeFromNumbers must match"
 
