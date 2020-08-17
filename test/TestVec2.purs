@@ -6,7 +6,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, multiply, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, numbers, scale, subtract)
 import GLMatrix.Vec2 as Vec2
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
