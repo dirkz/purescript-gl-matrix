@@ -123,7 +123,12 @@ testLerpDouble =
     let
       doubleVec = scale v 2.0
     in
-      epsilonEquals (lerp v doubleVec 1.0) doubleVec <?> "testLerp " <> show v
+      epsilonEquals (lerp v doubleVec 1.0) doubleVec <?> "testLerpDouble " <> show v
+
+testLerpDifferent :: Effect Unit
+testLerpDifferent =
+  quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
+    epsilonEquals (lerp v1 v2 1.0) v2 <?> "testLerpDifferent " <> show v1 <> ", " <> show v2
 
 main :: Effect Unit
 main = do
@@ -137,4 +142,4 @@ main = do
   testFloor
   testInverse
   testLength
-  testLerpDouble
+  testLerpDifferent
