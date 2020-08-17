@@ -29,7 +29,9 @@ testAdd =
       added == multiplied <?> "testAdd " <> show m
 
 testNotEqual :: Effect Unit
-testNotEqual = quickCheck \n -> multiplyScalar identity n /= multiplyScalar identity (n + 1.0)
+testNotEqual =
+  quickCheck \n ->
+    multiplyScalar identity n /= multiplyScalar identity (n + 1.0) <?> "testNotEqual " <> show n
 
 testAdjoint :: Effect Unit
 testAdjoint =
@@ -49,7 +51,7 @@ testDeterminantZero =
 testDeterminantNonZero :: Effect Unit
 testDeterminantNonZero =
   quickCheck \m00 m01 ->
-    determinant (fromValues m00 m01 m01 m00) /= 0.0 <?> "testDeterminantZero " <> show [ m00, m01 ]
+    determinant (fromValues m00 m01 m01 m00) /= 0.0 <?> "testDeterminantNonZero " <> show [ m00, m01 ]
 
 testFrob :: Effect Unit
 testFrob =
@@ -62,7 +64,9 @@ testFrob =
       GLMatrix.epsilonEquals theFrob theSum <?> "testFrob " <> show m <> " frob " <> show theFrob <> " sum " <> show theSum
 
 testFromRotation :: Effect Unit
-testFromRotation = quickCheck \r -> epsilonEquals (fromRotation r) (rotate identity r)
+testFromRotation =
+  quickCheck \r ->
+    epsilonEquals (fromRotation r) (rotate identity r) <?> "testFromRotation " <> show r
 
 testFromScaling :: Effect Unit
 testFromScaling =
