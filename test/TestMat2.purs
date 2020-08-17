@@ -16,7 +16,7 @@ import Test.Arbitrary
 fromNumbers :: Array Number -> Mat2
 fromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
 
-fromNumbers _ = unsafeCrashWith "Mat22.numbers must produce exactly 2 numbers"
+fromNumbers _ = unsafeCrashWith "Mat2.numbers must produce exactly 2 numbers"
 
 testAdd :: Effect Unit
 testAdd =
