@@ -7,7 +7,6 @@ module GLMatrix.Vec2
   , divide
   , dot
   , epsilonEquals
-  , exactEquals
   , floor
   , fromValues
   , inverse

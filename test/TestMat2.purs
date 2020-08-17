@@ -4,11 +4,11 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, exactEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose)
+import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose)
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
-import Prelude (Unit, discard, map, negate, show, ($), (&&), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
+import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
 
 newtype ArbMat2
@@ -27,7 +27,7 @@ testAdd =
 
       multiplied = multiplyScalar m 2.0
     in
-      added == multiplied && exactEquals added multiplied <?> "testAdd " <> show n
+      added == multiplied <?> "testAdd " <> show n
 
 testNotEqual :: Effect Unit
 testNotEqual = quickCheck \n -> multiplyScalar identity n /= multiplyScalar identity (n + 1.0)

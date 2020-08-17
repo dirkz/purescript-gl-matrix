@@ -1,4 +1,25 @@
-module GLMatrix.Mat2 where
+module GLMatrix.Mat2
+  ( Mat2
+  , LDU
+  , add
+  , adjoint
+  , determinant
+  , epsilonEquals
+  , frob
+  , fromRotation
+  , fromValues
+  , identity
+  , invert
+  , ldu
+  , multiply
+  , multiplyScalar
+  , multiplyScalarAndAdd
+  , rotate
+  , subtract
+  , transpose
+  , numbers
+  , map
+  ) where
 
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
 import Partial.Unsafe (unsafeCrashWith, unsafePartial)
