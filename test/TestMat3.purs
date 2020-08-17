@@ -85,6 +85,8 @@ testInvert =
   quickCheck \(ArbMat3 m) ->
     epsilonEquals (multiply m (invert m)) identity <?> "testInvert " <> show m
 
+
+{-
 testLDU :: Effect Unit
 testLDU =
   quickCheck \(ArbMat3 m) ->
@@ -92,6 +94,7 @@ testLDU =
       lduRec = ldu m
     in
       lduRec.d == (fromValues 1.0 0.0 0.0 1.0) <?> "testLDU " <> show m <> " -> " <> show lduRec
+      -}
 
 testMultiply :: Effect Unit
 testMultiply =
