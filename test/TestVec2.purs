@@ -117,8 +117,8 @@ testLength =
   where
   manualLength v = Math.sqrt $ sum $ map (\n -> n * n) (numbers v)
 
-testLerp :: Effect Unit
-testLerp =
+testLerpDouble :: Effect Unit
+testLerpDouble =
   quickCheck \(ArbVec2 v) ->
     let
       doubleVec = scale v 2.0
@@ -137,4 +137,4 @@ main = do
   testFloor
   testInverse
   testLength
-  testLerp
+  testLerpDouble
