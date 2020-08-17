@@ -37,7 +37,7 @@ angleViaDotProduct v1 v2 =
 
     len2 = length v2
   in
-    Math.tan dotP / (len1 * len2)
+    Math.acos $ dotP / (len1 * len2)
 
 testAngle :: Effect Unit
 testAngle =
