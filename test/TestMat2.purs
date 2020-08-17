@@ -9,15 +9,9 @@ import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
 import Partial.Unsafe (unsafeCrashWith, unsafePartial)
-import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
-import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
-import Test.TestVec2 (ArbVec2(..))
-
-newtype ArbMat2
-  = ArbMat2 Mat2
-
-instance arbMat2 :: Arbitrary ArbMat2 where
-  arbitrary = ArbMat2 <$> (fromValues <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
+import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
+import Test.QuickCheck (quickCheck, (<?>))
+import Test.Arbitrary
 
 fromNumbers :: Array Number -> Mat2
 fromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11

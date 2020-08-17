@@ -4,17 +4,12 @@ import Data.Array (zipWith)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, fromValues, inverse, length, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, numbers, scale, subtract)
 import GLMatrix.Vec2 as Vec2
 import Math as Math
-import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<$>), (<*>), (<>), (==))
-import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
-
-newtype ArbVec2
-  = ArbVec2 Vec2
-
-instance arbVec2 :: Arbitrary ArbVec2 where
-  arbitrary = ArbVec2 <$> (fromValues <$> arbitrary <*> arbitrary)
+import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
+import Test.QuickCheck (quickCheck, (<?>))
+import Test.Arbitrary
 
 testAdd :: Effect Unit
 testAdd =
