@@ -51,15 +51,13 @@ testAngle =
 
 testCeil :: Effect Unit
 testCeil =
-  quickCheck \x y ->
+  quickCheck \(ArbVec2 v) ->
     let
-      v = fromValues x y
-
       ceil1 :: Array Number
       ceil1 = numbers $ ceil v
 
       ceil2 :: Array Number
-      ceil2 = map Math.ceil [ x, y ]
+      ceil2 = map Math.ceil (numbers v)
     in
       epsilonEqualArrays ceil1 ceil2
 
