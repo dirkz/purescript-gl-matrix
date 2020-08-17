@@ -123,6 +123,7 @@ testMultiplyScalarAndAdd =
       epsilonEquals resM1 resM2 <?> "testMultiplyScalarAndAdd " <> show m1 <> " " <> show m2
       -}
 
+{-
 testMultiplyScalar :: Effect Unit
 testMultiplyScalar =
   quickCheck \r (ArbMat3 m) ->
@@ -132,6 +133,7 @@ testMultiplyScalar =
       resM2 = scale m (Vec2.fromValues r r)
     in
       epsilonEquals resM1 resM2 <?> "testMultiplyScalar " <> show r <> " " <> show m
+      -}
 
 testRotate :: Effect Unit
 testRotate =
@@ -182,7 +184,7 @@ main = do
   testMultiply
   testMultiplyDistributivity
   --testMultiplyScalarAndAdd
-  testMultiplyScalar
+  --testMultiplyScalar
   testRotate
   testSubtract
   testTranspose
