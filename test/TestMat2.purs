@@ -1,6 +1,5 @@
 module Test.TestMat2 where
 
-import Data.Array (unsafeIndex)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
@@ -9,7 +8,7 @@ import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, frob, from
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
-import Partial.Unsafe (unsafePartial)
+import Partial.Unsafe (unsafeCrashWith, unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
 import Test.TestVec2 (ArbVec2(..))
@@ -154,13 +153,18 @@ testTranspose =
     in
       resM1 == resM2
 
+fromNumbers :: Array Number -> Mat2
+fromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
+
+fromNumbers _ = unsafeCrashWith "Mat22.numbers must produce exactly 2 numbers"
+
 testExtractNumbers :: Effect Unit
 testExtractNumbers =
   quickCheck \(ArbMat2 m1) ->
     let
       ns = numbers m1
 
-      m2 = unsafePartial $ fromValues (unsafeIndex ns 0) (unsafeIndex ns 1) (unsafeIndex ns 2) (unsafeIndex ns 3)
+      m2 = unsafePartial $ fromNumbers ns
     in
       epsilonEqualArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
 
