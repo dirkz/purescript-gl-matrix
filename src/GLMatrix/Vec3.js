@@ -96,9 +96,9 @@ exports.js_normalize = (a) => {
     return out
 }
 
-exports.js_rotate = (a, b, r) => {
+exports.js_rotateX = (a, b, r) => {
     let out = m.vec3.create()
-    m.vec3.rotate(out, a, b, r)
+    m.vec3.rotateX(out, a, b, r)
     return out
 }
 
