@@ -1,6 +1,7 @@
 module GLMatrix.Mat2 where
 
-import Prelude
+import Prelude (($))
+import Prelude as Prelude
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
 import Partial.Unsafe (unsafePartial)
 
@@ -126,8 +127,8 @@ foreign import js_numbers :: Fn1 Mat2 (Array Number)
 numbers :: Mat2 -> Array Number
 numbers = runFn1 js_numbers
 
-instance showMat2 :: Show Mat2 where
+instance showMat2 :: Prelude.Show Mat2 where
   show = str
 
-instance eqMat2 :: Eq Mat2 where
+instance eqMat2 :: Prelude.Eq Mat2 where
   eq = exactEquals
