@@ -1,12 +1,13 @@
 module Test.TestVec2 where
 
 import Test.Arbitrary
+
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract)
 import GLMatrix.Vec2 as Vec
 import GLMatrix.Vec2 as Vec2
 import Math as Math
@@ -229,6 +230,18 @@ testSquaredDistance =
     in
       GLMatrix.epsilonEquals r1 r2 <?> "testSquaredDistance " <> show v1 <> ", " <> show v2
 
+testSquaredLength :: Effect Unit
+testSquaredLength =
+  quickCheck \(ArbVec2 v) ->
+    let
+      r1 = squaredLength v
+
+      l = length v
+
+      r2 = l * l
+    in
+      GLMatrix.epsilonEquals r1 r2 <?> "testSquaredLength " <> show v
+
 main :: Effect Unit
 main = do
   testAdd
@@ -253,3 +266,4 @@ main = do
   testRound
   testScaleAndAdd
   testSquaredDistance
+  testSquaredLength
