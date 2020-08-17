@@ -25,6 +25,7 @@ import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2,
 import Partial.Unsafe (unsafeCrashWith, unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
+import Data.Array as Array
 
 foreign import data Mat2 :: Type
 
@@ -165,3 +166,6 @@ instance eqMat2 :: Prelude.Eq Mat2 where
 -- |Note: Since a Matrix is not a general container, it cannot be a `Functor`.
 map :: (Number -> Number) -> Mat2 -> Mat2
 map fn v = unsafeFromNumbers $ Prelude.map fn $ numbers v
+
+zipWith :: (Number -> Number -> Number) -> Mat2 -> Mat2 -> Mat2
+zipWith fn v1 v2 = unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
