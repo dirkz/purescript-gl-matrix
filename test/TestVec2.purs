@@ -6,7 +6,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, multiply, numbers, scale, subtract)
 import GLMatrix.Vec2 as Vec2
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
@@ -117,6 +117,14 @@ testLength =
   where
   manualLength v = Math.sqrt $ sum $ map (\n -> n * n) (numbers v)
 
+testLerp :: Effect Unit
+testLerp =
+  quickCheck \(ArbVec2 v) ->
+    let
+      doubleVec = scale v 2.0
+    in
+      epsilonEquals (lerp v doubleVec 1.0) doubleVec <?> "testLerp " <> show v
+
 main :: Effect Unit
 main = do
   testAdd
@@ -129,3 +137,4 @@ main = do
   testFloor
   testInverse
   testLength
+  testLerp
