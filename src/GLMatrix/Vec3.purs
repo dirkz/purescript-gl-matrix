@@ -150,7 +150,7 @@ normalize = runFn1 js_normalize
 
 foreign import js_rotate :: Fn3 Vec3 Vec3 Number Vec3
 
--- |Rotate a 2D vector
+-- |Rotate a 3D vector
 rotate :: Vec3 -> Vec3 -> Number -> Vec3
 rotate = runFn3 js_rotate
 
