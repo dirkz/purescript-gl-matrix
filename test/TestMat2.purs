@@ -1,5 +1,6 @@
 module Test.TestMat2 where
 
+import Data.Array (unsafeIndex)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
@@ -8,8 +9,10 @@ import GLMatrix.Mat2 (Mat2, add, adjoint, determinant, epsilonEquals, frob, from
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
+import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<$>), (<*>), (<>), (==))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
+import Test.TestVec2 (ArbVec2(..))
 
 newtype ArbMat2
   = ArbMat2 Mat2
@@ -19,15 +22,13 @@ instance arbMat2 :: Arbitrary ArbMat2 where
 
 testAdd :: Effect Unit
 testAdd =
-  quickCheck \n ->
+  quickCheck \(ArbMat2 m) ->
     let
-      m = fromValues n n n n
-
       added = add m m
 
       multiplied = multiplyScalar m 2.0
     in
-      added == multiplied <?> "testAdd " <> show n
+      added == multiplied <?> "testAdd " <> show m
 
 testNotEqual :: Effect Unit
 testNotEqual = quickCheck \n -> multiplyScalar identity n /= multiplyScalar identity (n + 1.0)
@@ -54,25 +55,21 @@ testDeterminantNonZero =
 
 testFrob :: Effect Unit
 testFrob =
-  quickCheck \m00 m01 m10 m11 ->
+  quickCheck \(ArbMat2 m) ->
     let
-      xs = [ m00, m01, m10, m11 ]
+      theFrob = frob m
 
-      theFrob = frob (fromValues m00 m01 m10 m11)
-
-      theSum = sqrt $ sum (map (\n -> n * n) xs)
+      theSum = sqrt $ sum (map (\n -> n * n) (numbers m))
     in
-      GLMatrix.epsilonEquals theFrob theSum <?> "testFrob " <> show xs <> " frob " <> show theFrob <> " sum " <> show theSum
+      GLMatrix.epsilonEquals theFrob theSum <?> "testFrob " <> show m <> " frob " <> show theFrob <> " sum " <> show theSum
 
 testFromRotation :: Effect Unit
 testFromRotation = quickCheck \r -> epsilonEquals (fromRotation r) (rotate identity r)
 
 testFromScaling :: Effect Unit
 testFromScaling =
-  quickCheck \x y ->
+  quickCheck \(ArbVec2 v) ->
     let
-      v = Vec2.fromValues x y
-
       m1 = fromScaling v
 
       m2 = scale identity v
@@ -159,13 +156,13 @@ testTranspose =
 
 testExtractNumbers :: Effect Unit
 testExtractNumbers =
-  quickCheck \m00 m01 m10 m11 ->
+  quickCheck \(ArbMat2 m1) ->
     let
-      ns = [ m00, m01, m10, m11 ]
+      ns = numbers m1
 
-      m = fromValues m00 m01 m10 m11
+      m2 = unsafePartial $ fromValues (unsafeIndex ns 0) (unsafeIndex ns 1) (unsafeIndex ns 2) (unsafeIndex ns 3)
     in
-      epsilonEqualArrays (numbers m) ns <?> "testExtractNumbers " <> show m <> " != " <> show ns
+      epsilonEqualArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
 
 main :: Effect Unit
 main = do
