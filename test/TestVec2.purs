@@ -4,7 +4,8 @@ import Data.Array (zipWith)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, exactEquals, floor, fromValues, inverse, length, mapV, negate, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, exactEquals, floor, fromValues, inverse, length, numbers, scale, subtract)
+import GLMatrix.Vec2 as Vec2
 import Math as Math
 import Prelude (Unit, discard, map, not, show, ($), (&&), (*), (/), (/=), (<$>), (<*>), (<>), (==))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
@@ -109,7 +110,7 @@ testInverse =
     let
       v1 = inverse v
 
-      v2 = mapV (\n -> 1.0 / n) v
+      v2 = Vec2.map (\n -> 1.0 / n) v
     in
       v1 == v2 <?> "testInverse " <> show v <> " -> " <> show (inverse v)
 
