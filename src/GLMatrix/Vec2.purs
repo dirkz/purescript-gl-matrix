@@ -27,12 +27,14 @@ module GLMatrix.Vec2
   , zero
   , numbers
   , map
+  , zipWith
   ) where
 
 import Prelude (($))
 import Prelude as Prelude
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn1, runFn2, runFn3)
 import Partial.Unsafe (unsafeCrashWith)
+import Data.Array as Array
 
 foreign import data Vec2 :: Type
 
@@ -224,3 +226,6 @@ instance eqVec2 :: Prelude.Eq Vec2 where
 -- |Note: Since a Vector is not a general container, it cannot be a `Functor`.
 map :: (Number -> Number) -> Vec2 -> Vec2
 map fn v = unsafeFromNumbers $ Prelude.map fn $ numbers v
+
+zipWith :: (Number -> Number -> Number) -> Vec2 -> Vec2 -> Vec2
+zipWith fn v1 v2 = unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
