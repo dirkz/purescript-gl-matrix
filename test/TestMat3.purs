@@ -1,22 +1,18 @@
 module Test.TestMat3 where
 
+import Test.Arbitrary
+
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat3 (Mat3, add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose)
+import GLMatrix.Mat3 (Mat3, add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose, unsafeFromNumbers)
 import GLMatrix.MatVec2 (fromScaling, scale)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
 import Partial.Unsafe (unsafeCrashWith, unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
-import Test.Arbitrary
-
-fromNumbers :: Array Number -> Mat3
-fromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
-
-fromNumbers _ = unsafeCrashWith "Mat3.numbers must produce exactly 2 numbers"
 
 testAdd :: Effect Unit
 testAdd =
@@ -175,7 +171,7 @@ testExtractNumbers =
     let
       ns = numbers m1
 
-      m2 = unsafePartial $ fromNumbers ns
+      m2 = unsafePartial $ unsafeFromNumbers ns
     in
       epsilonEqualArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
 

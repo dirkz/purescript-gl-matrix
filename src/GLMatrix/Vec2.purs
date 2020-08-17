@@ -27,6 +27,7 @@ module GLMatrix.Vec2
   , zero
   , numbers
   , map
+  , unsafeFromNumbers
   , zipWith
   ) where
 
@@ -213,7 +214,7 @@ numbers = runFn1 js_numbers
 unsafeFromNumbers :: Array Number -> Vec2
 unsafeFromNumbers [ a, b ] = fromValues a b
 
-unsafeFromNumbers _ = unsafeCrashWith "Vec2.numbers must produce exactly 2 numbers"
+unsafeFromNumbers _ = unsafeCrashWith "Vec2 numbers/unsafeFromNumbers must match"
 
 instance showVec2 :: Prelude.Show Vec2 where
   show = str

@@ -19,6 +19,7 @@ module GLMatrix.Mat2
   , transpose
   , numbers
   , map
+  , unsafeFromNumbers
   ) where
 
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
@@ -153,7 +154,7 @@ numbers = runFn1 js_numbers
 unsafeFromNumbers :: Array Number -> Mat2
 unsafeFromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
 
-unsafeFromNumbers _ = unsafeCrashWith "Mat2.numbers must produce exactly 4 numbers"
+unsafeFromNumbers _ = unsafeCrashWith "Mat2 numbers/unsafeFromNumbers must match"
 
 instance showMat2 :: Prelude.Show Mat2 where
   show = str
