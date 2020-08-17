@@ -1,4 +1,34 @@
-module GLMatrix.Vec2 where
+module GLMatrix.Vec2
+  ( Vec2
+  , add
+  , angle
+  , ceil
+  , distance
+  , divide
+  , dot
+  , epsilonEquals
+  , exactEquals
+  , floor
+  , fromValues
+  , inverse
+  , length
+  , lerp
+  , max
+  , min
+  , multiply
+  , negate
+  , normalize
+  , rotate
+  , round
+  , scale
+  , scaleAndAdd
+  , squaredDistance
+  , squaredLength
+  , subtract
+  , zero
+  , numbers
+  , map
+  ) where
 
 import Prelude (($))
 import Prelude as Prelude
