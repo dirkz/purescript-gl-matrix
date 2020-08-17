@@ -1,7 +1,7 @@
 module GLMatrix.Vec2 where
 
-import Prelude
-
+import Prelude (($))
+import Prelude as Prelude
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn1, runFn2, runFn3)
 import Partial.Unsafe (unsafeCrashWith)
 
@@ -178,17 +178,18 @@ foreign import js_numbers :: Fn1 Vec2 (Array Number)
 numbers :: Vec2 -> Array Number
 numbers = runFn1 js_numbers
 
-instance showVec2 :: Show Vec2 where
+instance showVec2 :: Prelude.Show Vec2 where
   show = str
 
-instance eqVec2 :: Eq Vec2 where
+instance eqVec2 :: Prelude.Eq Vec2 where
   eq = exactEquals
 
 -- |Map a function from `Number` to `Number` over it the given vector, producing
 -- |a vector.
 -- |Note: Since a Vector is not a general container, it cannot be a `Functor`.
-mapV :: (Number -> Number) -> Vec2 -> Vec2
-mapV fn v = fromNumbers $ map fn $ numbers v
+map :: (Number -> Number) -> Vec2 -> Vec2
+map fn v = fromNumbers $ Prelude.map fn $ numbers v
   where
-    fromNumbers [a, b] = fromValues a b
-    fromNumbers _ = unsafeCrashWith "Vec2.numbers must produce exactly 2 numbers"
+  fromNumbers [ a, b ] = fromValues a b
+
+  fromNumbers _ = unsafeCrashWith "Vec2.numbers must produce exactly 2 numbers"
