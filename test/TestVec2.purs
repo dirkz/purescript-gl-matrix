@@ -4,7 +4,7 @@ import Data.Array (zipWith)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, exactEquals, fromValues, length, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, exactEquals, floor, fromValues, length, numbers, scale, subtract)
 import Math as Math
 import Prelude (Unit, discard, map, not, show, ($), (&&), (*), (/), (/=), (<$>), (<*>), (<>))
 import Test.QuickCheck (class Arbitrary, arbitrary, quickCheck, (<?>))
@@ -91,6 +91,18 @@ testExactEquals =
     in
       v3 /= v1 && not exactEquals v1 v3
 
+testFloor :: Effect Unit
+testFloor =
+  quickCheck \(ArbVec2 v) ->
+    let
+      floor1 :: Array Number
+      floor1 = numbers $ floor v
+
+      floor2 :: Array Number
+      floor2 = map Math.floor (numbers v)
+    in
+      epsilonEqualArrays floor1 floor2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -99,3 +111,4 @@ main = do
   testCeil
   testDistance
   testDivide
+  testFloor
