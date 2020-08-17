@@ -1,12 +1,13 @@
 module Test.TestVec2 where
 
 import Test.Arbitrary
+
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, fromValues, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, scale, subtract)
 import GLMatrix.Vec2 as Vec
 import GLMatrix.Vec2 as Vec2
 import Math as Math
@@ -185,6 +186,14 @@ testNormalize =
     in
       epsilonEquals r1 r2 <?> "testNormalize " <> show v
 
+testRotate :: Effect Unit
+testRotate =
+  quickCheck \(ArbVec2 v) r ->
+    let
+      r1 = rotate v v r
+    in
+      epsilonEquals r1 v <?> "testRotate " <> show v <> ", " <> show r
+
 main :: Effect Unit
 main = do
   testAdd
@@ -205,3 +214,4 @@ main = do
   testMultiply
   testNegate
   testNormalize
+  testRotate
