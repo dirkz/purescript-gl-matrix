@@ -30,11 +30,11 @@ module GLMatrix.Vec2
   , zipWith
   ) where
 
+import Data.Array as Array
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn0, runFn1, runFn2, runFn3)
+import Partial.Unsafe (unsafeCrashWith)
 import Prelude (($))
 import Prelude as Prelude
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn1, runFn2, runFn3)
-import Partial.Unsafe (unsafeCrashWith)
-import Data.Array as Array
 
 foreign import data Vec2 :: Type
 
@@ -200,8 +200,8 @@ subtract = runFn2 js_subtract
 -- TODO: (static) transformMat4(out, a, m) → {vec2}
 foreign import js_zero :: Fn0 Vec2
 
-zero :: Fn0 Vec2
-zero = js_zero
+zero :: Vec2
+zero = runFn0 js_zero
 
 foreign import js_numbers :: Fn1 Vec2 (Array Number)
 
