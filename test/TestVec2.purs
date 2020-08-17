@@ -6,6 +6,8 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
+import GLMatrix.Mat2 (identity)
+import GLMatrix.MatVec2 (transformMat2)
 import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract)
 import GLMatrix.Vec2 as Vec
 import GLMatrix.Vec2 as Vec2
@@ -251,6 +253,14 @@ testSubtract =
     in
       epsilonEquals r1 r2 <?> "testSubtract " <> show v1 <> ", " <> show v2
 
+testTransformMat2 :: Effect Unit
+testTransformMat2 =
+  quickCheck \(ArbVec2 v) ->
+    let
+      r1 = transformMat2 v identity
+    in
+      epsilonEquals r1 v <?> "testTransformMat2 " <> show v
+
 main :: Effect Unit
 main = do
   testAdd
@@ -277,3 +287,4 @@ main = do
   testSquaredDistance
   testSquaredLength
   testSubtract
+  testTransformMat2
