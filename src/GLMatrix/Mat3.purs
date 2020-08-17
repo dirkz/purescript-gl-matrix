@@ -68,7 +68,7 @@ frob = runFn1 js_frob
 
 foreign import js_fromRotation :: Fn1 Number Mat3
 
--- |Creates a matrix from a given angle This is equivalent to (but much faster than): Mat3.identity(dest); Mat3.rotate(dest, dest, rad);
+-- |Creates a matrix from a given angle This is equivalent to (but much faster than): mat3.identity(dest); mat3.rotate(dest, dest, rad);
 fromRotation :: Number -> Mat3
 fromRotation = runFn1 js_fromRotation
 
