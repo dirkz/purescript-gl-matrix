@@ -207,6 +207,12 @@ foreign import js_numbers :: Fn1 Vec2 (Array Number)
 numbers :: Vec2 -> Array Number
 numbers = runFn1 js_numbers
 
+-- |Create a vector from an array produced by `numbers`.
+unsafeFromNumbers :: Array Number -> Vec2
+unsafeFromNumbers [ a, b ] = fromValues a b
+
+unsafeFromNumbers _ = unsafeCrashWith "Vec2.numbers must produce exactly 2 numbers"
+
 instance showVec2 :: Prelude.Show Vec2 where
   show = str
 
@@ -217,8 +223,4 @@ instance eqVec2 :: Prelude.Eq Vec2 where
 -- |a vector.
 -- |Note: Since a Vector is not a general container, it cannot be a `Functor`.
 map :: (Number -> Number) -> Vec2 -> Vec2
-map fn v = fromNumbers $ Prelude.map fn $ numbers v
-  where
-  fromNumbers [ a, b ] = fromValues a b
-
-  fromNumbers _ = unsafeCrashWith "Vec2.numbers must produce exactly 2 numbers"
+map fn v = unsafeFromNumbers $ Prelude.map fn $ numbers v
