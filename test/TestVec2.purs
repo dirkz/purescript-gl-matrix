@@ -225,7 +225,7 @@ testSquaredDistance =
 
       d = distance v1 v2
 
-      r2 = Math.sqrt d
+      r2 = d * d
     in
       GLMatrix.epsilonEquals r1 r2 <?> "testSquaredDistance " <> show v1 <> ", " <> show v2
 
