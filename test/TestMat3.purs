@@ -1,3 +1,4 @@
+-- |Tests for Mat3. Missing: `determinant`, `ldu`
 module Test.TestMat3 where
 
 import Test.Arbitrary
@@ -39,20 +40,6 @@ testAdjoint =
     in
       epsilonEquals (adjoint m) m2 <?> "testAdjoint " <> show n
 
-{-
-testDeterminantZero :: Effect Unit
-testDeterminantZero =
-  quickCheck \m00 m01 ->
-    determinant (fromValues m00 m01 m00 m01) == 0.0 <?> "testDeterminantZero " <> show [ m00, m01 ]
---}
-
-{-
-testDeterminantNonZero :: Effect Unit
-testDeterminantNonZero =
-  quickCheck \m00 m01 ->
-    determinant (fromValues m00 m01 m01 m00) /= 0.0 <?> "testDeterminantNonZero " <> show [ m00, m01 ]
-    -}
-
 testFrob :: Effect Unit
 testFrob =
   quickCheck \(ArbMat3 m) ->
@@ -85,16 +72,6 @@ testInvert =
   quickCheck \(ArbMat3 m) ->
     epsilonEquals (multiply m (invert m)) identity <?> "testInvert " <> show m
 
-
-{-
-testLDU :: Effect Unit
-testLDU =
-  quickCheck \(ArbMat3 m) ->
-    let
-      lduRec = ldu m
-    in
-      lduRec.d == (fromValues 1.0 0.0 0.0 1.0) <?> "testLDU " <> show m <> " -> " <> show lduRec
-      -}
 
 testMultiply :: Effect Unit
 testMultiply =
