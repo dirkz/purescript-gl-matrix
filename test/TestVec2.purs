@@ -1,7 +1,6 @@
 module Test.TestVec2 where
 
 import Test.Arbitrary
-
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -23,7 +22,7 @@ testAdd =
 
       v2 = scale v 2.0
     in
-      epsilonEquals v1 v2
+      epsilonEquals v1 v2 <?> "testAdd " <> show v
 
 testAngleSame :: Effect Unit
 testAngleSame = quickCheck \(ArbVec2 v) -> GLMatrix.epsilonEquals (angle v v) 0.0
@@ -59,7 +58,7 @@ testCeil =
       ceil2 :: Array Number
       ceil2 = map Math.ceil (numbers v)
     in
-      epsilonEqualArrays ceil1 ceil2
+      epsilonEqualArrays ceil1 ceil2 <?> "testCeil " <> show v
 
 testDistance :: Effect Unit
 testDistance =
@@ -71,7 +70,7 @@ testDistance =
       d2 :: Number
       d2 = length $ subtract v1 v2
     in
-      GLMatrix.epsilonEquals d1 d2
+      GLMatrix.epsilonEquals d1 d2 <?> "testDistance " <> show v1 <> ", " <> show v2
 
 testDivide :: Effect Unit
 testDivide =
@@ -81,7 +80,7 @@ testDivide =
 
       divided = zipWith (/) (numbers v1) (numbers v2)
     in
-      epsilonEqualArrays divided (numbers v)
+      epsilonEqualArrays divided (numbers v) <?> "testDivide " <> show v1 <> ", " <> show v2
 
 testEquals :: Effect Unit
 testEquals =
@@ -89,7 +88,7 @@ testEquals =
     let
       v3 = add v1 v2
     in
-      v3 /= v1
+      v3 /= v1 <?> "testEquals " <> show v1 <> ", " <> show v2
 
 testFloor :: Effect Unit
 testFloor =
@@ -101,7 +100,7 @@ testFloor =
       floor2 :: Array Number
       floor2 = map Math.floor (numbers v)
     in
-      epsilonEqualArrays floor1 floor2
+      epsilonEqualArrays floor1 floor2 <?> "testFloor " <> show v
 
 testInverse :: Effect Unit
 testInverse =
