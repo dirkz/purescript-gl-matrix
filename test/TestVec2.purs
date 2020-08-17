@@ -25,7 +25,9 @@ testAdd =
       epsilonEquals v1 v2 <?> "testAdd " <> show v
 
 testAngleSame :: Effect Unit
-testAngleSame = quickCheck \(ArbVec2 v) -> GLMatrix.epsilonEquals (angle v v) 0.0
+testAngleSame =
+  quickCheck \(ArbVec2 v) ->
+    GLMatrix.epsilonEquals (angle v v) 0.0 <?> "testAngleSame " <> show v
 
 testAngle :: Effect Unit
 testAngle =
