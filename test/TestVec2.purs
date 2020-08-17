@@ -6,7 +6,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, multiply, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, multiply, numbers, scale, subtract)
 import GLMatrix.Vec2 as Vec2
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
@@ -135,6 +135,14 @@ testLerpDifferent =
   quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
     epsilonEquals (lerp v1 v2 1.0) v2 <?> "testLerpDifferent " <> show v1 <> ", " <> show v2
 
+testMaxDouble :: Effect Unit
+testMaxDouble =
+  quickCheck \(ArbVec2 v) ->
+    let
+      vDouble = scale v 2.0
+    in
+      epsilonEquals (max v vDouble) vDouble <?> "testMaxDouble " <> show v
+
 main :: Effect Unit
 main = do
   testAdd
@@ -150,3 +158,4 @@ main = do
   testLerpDouble
   testLerpOriginal
   testLerpDifferent
+  testMaxDouble
