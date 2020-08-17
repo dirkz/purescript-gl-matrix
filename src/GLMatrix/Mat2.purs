@@ -1,9 +1,9 @@
 module GLMatrix.Mat2 where
 
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
+import Partial.Unsafe (unsafeCrashWith, unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
-import Partial.Unsafe (unsafePartial)
 
 foreign import data Mat2 :: Type
 
@@ -132,3 +132,13 @@ instance showMat2 :: Prelude.Show Mat2 where
 
 instance eqMat2 :: Prelude.Eq Mat2 where
   eq = exactEquals
+
+-- |Map a function from `Number` to `Number` over the given matrix, producing
+-- |a matrix.
+-- |Note: Since a Matrix is not a general container, it cannot be a `Functor`.
+map :: (Number -> Number) -> Mat2 -> Mat2
+map fn v = fromNumbers $ Prelude.map fn $ numbers v
+  where
+  fromNumbers [ a, b, c, d ] = fromValues a b c d
+
+  fromNumbers _ = unsafeCrashWith "Mat2.numbers must produce exactly 4 numbers"
