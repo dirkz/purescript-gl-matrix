@@ -7,11 +7,9 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat3 (Mat3, add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose, unsafeFromNumbers)
-import GLMatrix.MatVec2 (fromScaling, scale)
-import GLMatrix.Vec2 as Vec2
+import GLMatrix.Mat3 (Mat3, add, adjoint, epsilonEquals, frob, fromRotation, fromValues, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose, unsafeFromNumbers)
 import Math (sqrt)
-import Partial.Unsafe (unsafeCrashWith, unsafePartial)
+import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
