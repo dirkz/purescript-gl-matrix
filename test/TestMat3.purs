@@ -43,15 +43,19 @@ testAdjoint =
     in
       epsilonEquals (adjoint m) m2 <?> "testAdjoint " <> show n
 
+{-
 testDeterminantZero :: Effect Unit
 testDeterminantZero =
   quickCheck \m00 m01 ->
     determinant (fromValues m00 m01 m00 m01) == 0.0 <?> "testDeterminantZero " <> show [ m00, m01 ]
+--}
 
+{-
 testDeterminantNonZero :: Effect Unit
 testDeterminantNonZero =
   quickCheck \m00 m01 ->
     determinant (fromValues m00 m01 m01 m00) /= 0.0 <?> "testDeterminantNonZero " <> show [ m00, m01 ]
+    -}
 
 testFrob :: Effect Unit
 testFrob =
@@ -180,12 +184,12 @@ main = do
   testAdd
   testNotEqual
   testAdjoint
-  testDeterminantZero
-  testDeterminantNonZero
+  --testDeterminantZero
+  --testDeterminantNonZero
   testFrob
   testFromRotation
   --testFromScaling
-  testLDU
+  --testLDU
   testMultiply
   testMultiplyDistributivity
   --testMultiplyScalarAndAdd
