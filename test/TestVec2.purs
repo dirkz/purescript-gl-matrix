@@ -1,6 +1,7 @@
 module Test.TestVec2 where
 
 import Test.Arbitrary
+
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -8,7 +9,7 @@ import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat2 (identity)
 import GLMatrix.MatVec2 (transformMat2)
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
 import GLMatrix.Vec2 as Vec
 import GLMatrix.Vec2 as Vec2
 import Math as Math
@@ -261,6 +262,15 @@ testTransformMat2 =
     in
       epsilonEquals r1 v <?> "testTransformMat2 " <> show v
 
+testZero :: Effect Unit
+testZero =
+  quickCheck \r ->
+    let
+      v = zero
+      r1 = scale v r
+    in
+      epsilonEquals r1 v <?> "testZero " <> show r
+
 main :: Effect Unit
 main = do
   testAdd
@@ -288,3 +298,4 @@ main = do
   testSquaredLength
   testSubtract
   testTransformMat2
+  testZero
