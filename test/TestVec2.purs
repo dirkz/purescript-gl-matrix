@@ -1,7 +1,6 @@
 module Test.TestVec2 where
 
 import Test.Arbitrary
-
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -242,6 +241,16 @@ testSquaredLength =
     in
       GLMatrix.epsilonEquals r1 r2 <?> "testSquaredLength " <> show v
 
+testSubtract :: Effect Unit
+testSubtract =
+  quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
+    let
+      r1 = subtract v1 v2
+
+      r2 = add v1 (negate v2)
+    in
+      epsilonEquals r1 r2 <?> "testSubtract " <> show v1 <> ", " <> show v2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -267,3 +276,4 @@ main = do
   testScaleAndAdd
   testSquaredDistance
   testSquaredLength
+  testSubtract
