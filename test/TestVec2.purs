@@ -28,17 +28,6 @@ testAdd =
 testAngleSame :: Effect Unit
 testAngleSame = quickCheck \(ArbVec2 v) -> GLMatrix.epsilonEquals (angle v v) 0.0
 
-angleViaDotProduct :: Vec2 -> Vec2 -> Number
-angleViaDotProduct v1 v2 =
-  let
-    dotP = dot v1 v2
-
-    len1 = length v1
-
-    len2 = length v2
-  in
-    Math.acos $ dotP / (len1 * len2)
-
 testAngle :: Effect Unit
 testAngle =
   quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
@@ -48,6 +37,17 @@ testAngle =
       a2 = angle v1 v2
     in
       GLMatrix.epsilonEquals a1 a2 <?> "testAngle " <> show v1 <> " " <> show v2 <> " a1:" <> show a1 <> " a2:" <> show a2
+  where
+  angleViaDotProduct :: Vec2 -> Vec2 -> Number
+  angleViaDotProduct v1 v2 =
+    let
+      dotP = dot v1 v2
+
+      len1 = length v1
+
+      len2 = length v2
+    in
+      Math.acos $ dotP / (len1 * len2)
 
 testCeil :: Effect Unit
 testCeil =
