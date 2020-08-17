@@ -72,12 +72,12 @@ testFromScaling =
 
       m2 = scale identity v
     in
-      m1 == m2
+      m1 == m2 <?> "testFromScaling " <> show v
 
 testInvert :: Effect Unit
 testInvert =
   quickCheck \(ArbMat2 m) ->
-    epsilonEquals (multiply m (invert m)) identity
+    epsilonEquals (multiply m (invert m)) identity <?> "testInvert " <> show m
 
 testLDU :: Effect Unit
 testLDU =
@@ -85,7 +85,7 @@ testLDU =
     let
       lduRec = ldu m
     in
-      lduRec.d == (fromValues 1.0 0.0 0.0 1.0) <?> show lduRec
+      lduRec.d == (fromValues 1.0 0.0 0.0 1.0) <?> "testLDU " <> show m <> " -> " <> show lduRec
 
 testMultiply :: Effect Unit
 testMultiply =
@@ -95,7 +95,7 @@ testMultiply =
 
       resM2 = multiply m2 m1
     in
-      resM1 /= resM2
+      resM1 /= resM2 <?> "testMultiply " <> show m1 <> ", " <> show m2
 
 testMultiplyDistributivity :: Effect Unit
 testMultiplyDistributivity =
@@ -105,7 +105,7 @@ testMultiplyDistributivity =
 
       resM2 = add (multiply m2 m1) m3
     in
-      resM1 /= resM2
+      resM1 /= resM2 <?> "testMultiplyDistributivity " <> show m1 <> ", " <> show m2 <> ", " <> show m3
 
 testMultiplyScalarAndAdd :: Effect Unit
 testMultiplyScalarAndAdd =
@@ -115,7 +115,7 @@ testMultiplyScalarAndAdd =
 
       resM2 = add m1 (scale m2 (Vec2.fromValues r r))
     in
-      epsilonEquals resM1 resM2 <?> show "testMultiplyScalarAndAdd " <> show m1 <> " " <> show m2
+      epsilonEquals resM1 resM2 <?> "testMultiplyScalarAndAdd " <> show m1 <> " " <> show m2
 
 testMultiplyScalar :: Effect Unit
 testMultiplyScalar =
@@ -125,7 +125,7 @@ testMultiplyScalar =
 
       resM2 = scale m (Vec2.fromValues r r)
     in
-      epsilonEquals resM1 resM2 <?> show "testMultiplyScalar " <> show r <> " " <> show m
+      epsilonEquals resM1 resM2 <?> "testMultiplyScalar " <> show r <> " " <> show m
 
 testRotate :: Effect Unit
 testRotate =
@@ -135,12 +135,12 @@ testRotate =
 
       resM2 = rotate resM1 (negate r)
     in
-      epsilonEquals m resM2
+      epsilonEquals m resM2 <?> "testRotate " <> show m
 
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat2 m1) (ArbMat2 m2) ->
-    epsilonEquals m1 $ subtract (add m1 m2) m2
+    epsilonEquals m1 (subtract (add m1 m2) m2) <?> "testSubtract " <> show m1 <> " " <> show m2
 
 testTranspose :: Effect Unit
 testTranspose =
@@ -150,7 +150,7 @@ testTranspose =
 
       resM2 = multiply (transpose m2) (transpose m1)
     in
-      resM1 == resM2
+      resM1 == resM2 <?> "testTranspose " <> show m1 <> " " <> show m2
 
 testExtractNumbers :: Effect Unit
 testExtractNumbers =
