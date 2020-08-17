@@ -6,11 +6,12 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, numbers, scale, subtract)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, numbers, scale, subtract)
 import GLMatrix.Vec2 as Vec
 import GLMatrix.Vec2 as Vec2
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
+import Prelude as Prelude
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
@@ -162,6 +163,16 @@ testMultiply =
     in
       epsilonEquals r1 r2 <?> "testMultiply " <> show v1 <> ", " <> show v2
 
+testNegate :: Effect Unit
+testNegate =
+  quickCheck \(ArbVec2 v) ->
+    let
+      r1 = negate v
+
+      r2 = Vec.map Prelude.negate v
+    in
+      epsilonEquals r1 r2 <?> "testNegate " <> show v
+
 main :: Effect Unit
 main = do
   testAdd
@@ -180,3 +191,4 @@ main = do
   testMaxDouble
   testMinDouble
   testMultiply
+  testNegate
