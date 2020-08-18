@@ -1,18 +1,19 @@
 module Test.TestVec2 where
 
 import Test.Arbitrary
-
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2 (identity)
+import GLMatrix.Mat2 as Mat2
+import GLMatrix.Mat3 as Mat3
 import GLMatrix.MatVec2 (transformMat2)
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec2 as Vec
 import GLMatrix.Vec2 as Vec2
 import Math as Math
+import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
 import Test.QuickCheck (quickCheck, (<?>))
@@ -258,15 +259,33 @@ testTransformMat2 :: Effect Unit
 testTransformMat2 =
   quickCheck \(ArbVec2 v) ->
     let
-      r1 = transformMat2 v identity
+      r1 = transformMat2 v Mat2.identity
     in
       epsilonEquals r1 v <?> "testTransformMat2 " <> show v
+
+testTransformMat3 :: Effect Unit
+testTransformMat3 =
+  quickCheck \(ArbVec2 v) (ArbMat3 m1) ->
+    let
+      nums = unsafePartial $ extractNumbers $ Mat3.numbers m1
+
+      m2 = unsafePartial $ Mat3.unsafeFromNumbers nums
+
+      r1 = transformMat3 v m1
+
+      r2 = transformMat3 v m2
+    in
+      epsilonEquals r1 r2 <?> "testTransformMat3 " <> show v <> " " <> show m1
+  where
+  extractNumbers :: Partial => Array Number -> Array Number
+  extractNumbers [ m00, m01, _, m10, m11, _, m20, m21, _ ] = [ m00, m01, 1.0, m10, m11, 1.0, m20, m21, 1.0 ]
 
 testZero :: Effect Unit
 testZero =
   quickCheck \r ->
     let
       v = zero
+
       r1 = scale v r
     in
       epsilonEquals r1 v <?> "testZero " <> show r
@@ -298,4 +317,5 @@ main = do
   testSquaredLength
   testSubtract
   testTransformMat2
+  testTransformMat3
   testZero
