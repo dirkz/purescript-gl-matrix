@@ -152,9 +152,9 @@ exports.js_subtract = (a, b) => {
     return out
 }
 
-exports.js_transformMat3 = (a, mat) => {
+exports.js_transformMat4 = (a, mat) => {
     let out = m.vec4.create()
-    m.vec4.transformMat3(out, a, mat)
+    m.vec4.transformMat4(out, a, mat)
     return out
 }
 
