@@ -12,6 +12,7 @@ import GLMatrix.MatVec2 (transformMat2)
 import GLMatrix.Vec2 (Vec2, add, angle, ceil, cross, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec2 as Vec2
 import GLMatrix.Vec3 as Vec3
+import GLMatrix.Vec3.Init (fromVec2)
 import Math as Math
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (/), (/=), (<>), (==))
@@ -66,23 +67,17 @@ testCeil =
     in
       epsilonEqualArrays ceil1 ceil2 <?> "testCeil " <> show v
 
-vec3FromVec2 :: Vec2 -> Vec3.Vec3
-vec3FromVec2 v = unsafePartial $ Vec3.unsafeFromNumbers $ extendArray $ numbers v
-  where
-  extendArray :: Partial => Array Number -> Array Number
-  extendArray [ x, y ] = [ x, y, 0.0 ]
-
 testCross :: Effect Unit
 testCross =
   quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
     let
       r1 = cross v1 v2
 
-      d1 = Vec3.dot (vec3FromVec2 v1) r1
+      d1 = Vec3.dot (fromVec2 v1) r1
 
-      d2 = Vec3.dot (vec3FromVec2 v2) r1
+      d2 = Vec3.dot (fromVec2 v2) r1
     in
-      GLMatrix.epsilonEquals d1 0.0 && GLMatrix.epsilonEquals d2 0.0 <?> "testCross " <> show v1 <> " " <> show v2 <> " r1: " <> show r1 <> " d1: " <> show d1 <> " d2: " <> show d2 <> " (vec3FromVec2 v1) " <> show (vec3FromVec2 v1)
+      GLMatrix.epsilonEquals d1 0.0 && GLMatrix.epsilonEquals d2 0.0 <?> "testCross " <> show v1 <> " " <> show v2
 
 testDistance :: Effect Unit
 testDistance =
