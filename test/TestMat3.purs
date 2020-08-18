@@ -2,12 +2,13 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
-
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat3 (add, adjoint, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, subtract, transpose, unsafeFromNumbers)
+import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, subtract, transpose, unsafeFromNumbers)
+import GLMatrix.Mat3.Init (fromVec3)
+import GLMatrix.Vec3 (Vec3)
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
@@ -38,6 +39,9 @@ testAdjoint =
     in
       epsilonEquals (adjoint m) m2 <?> "testAdjoint " <> show n
 
+testDeterminant :: Effect Unit
+testDeterminant = quickCheck \(ArbVec3 v) -> GLMatrix.epsilonEquals (determinant $ fromVec3 v v v) 0.0
+
 testFrob :: Effect Unit
 testFrob =
   quickCheck \(ArbMat3 m) ->
@@ -57,7 +61,6 @@ testInvert :: Effect Unit
 testInvert =
   quickCheck \(ArbMat3 m) ->
     epsilonEquals (multiply m (invert m)) identity <?> "testInvert " <> show m
-
 
 testMultiply :: Effect Unit
 testMultiply =
@@ -119,6 +122,7 @@ main = do
   testAdd
   testNotEqual
   testAdjoint
+  testDeterminant
   testFrob
   testFromRotation
   testMultiply
