@@ -7,8 +7,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat3 as Mat3
-import GLMatrix.Vec4 (add, ceil, distance, divide, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
+import GLMatrix.Vec4 (add, ceil, distance, divide, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
 import GLMatrix.Vec4 as Vec
 import GLMatrix.Vec4 as Vec4
 import Math as Math
