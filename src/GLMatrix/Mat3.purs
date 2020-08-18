@@ -27,6 +27,7 @@ import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn9, runFn0, runFn1, runFn2,
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
+import Math as Math
 
 foreign import data Mat3 :: Type
 
@@ -71,6 +72,19 @@ foreign import js_fromRotation :: Fn1 Number Mat3
 -- |Creates a matrix from a given angle This is equivalent to (but much faster than): mat3.identity(dest); mat3.rotate(dest, dest, rad);
 fromRotation :: Number -> Mat3
 fromRotation = runFn1 js_fromRotation
+
+-- |Creates a rotation matrix
+rotationX :: Number -> Mat3
+rotationX r =
+  fromValues 1.0
+    0.0
+    0.0
+    0.0
+    (Math.cos r)
+    (Math.sin r)
+    0.0
+    (Prelude.negate $ Math.sin r)
+    (Math.cos r)
 
 foreign import js_fromValues :: Fn9 Number Number Number Number Number Number Number Number Number Mat3
 
