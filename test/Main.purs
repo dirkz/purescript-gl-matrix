@@ -11,6 +11,7 @@ import Test.TestVec2 as TestVec2
 import Test.TestMat3 as TestMat3
 import Test.TestVec3 as TestVec3
 import Test.TestVec4 as TestVec4
+import Test.TestMat4 as TestMat4
 
 -- |Covers `setMatrixArrayType`, `equals` and `toRadian`, so the whole root package
 testToRadian :: Effect Unit
@@ -27,3 +28,4 @@ main = do
     TestMat3.main
     TestVec3.main
     TestVec4.main
+    TestMat4.main
