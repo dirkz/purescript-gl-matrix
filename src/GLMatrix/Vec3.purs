@@ -246,9 +246,8 @@ instance showVec3 :: Prelude.Show Vec3 where
 instance eqVec3 :: Prelude.Eq Vec3 where
   eq = exactEquals
 
--- |Map a function from `Number` to `Number` over it the given vector, producing
--- |a vector.
--- |Note: Since a Vector is not a general container, it cannot be a `Functor`.
+-- |Map a function from `Number` to `Number` over it.
+-- |Note: Since this is not a general container, it cannot be a `Functor`.
 map :: (Number -> Number) -> Vec3 -> Vec3
 map fn v = unsafePartial $ unsafeFromNumbers $ Prelude.map fn $ numbers v
 
