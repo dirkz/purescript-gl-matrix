@@ -7,8 +7,7 @@ import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat2 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose, unsafeFromNumbers)
-import GLMatrix.Mat2.Transform (scale)
-import GLMatrix.Vec2.Transform (fromScaling)
+import GLMatrix.Mat2.Transform (scale, fromScaling)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
