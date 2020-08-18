@@ -150,6 +150,12 @@ exports.js_subtract = (a, b) => {
     return out
 }
 
+exports.js_transformMat3 = (a, mat) => {
+    let out = m.vec3.create()
+    m.vec3.transformMat3(out, a, mat)
+    return out
+}
+
 exports.js_zero = () => {
     let out = m.vec3.create()
     m.vec3.zero(out)
