@@ -5,6 +5,7 @@ import Data.Function.Uncurried (Fn1, runFn1)
 import GLMatrix.Mat3 (Mat3)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat4 (Mat4)
+import GLMatrix.Vec2 (Vec2)
 import GLMatrix.Vec3 (Vec3)
 import GLMatrix.Vec3 as Vec3
 import Partial.Unsafe (unsafePartial)
@@ -18,3 +19,9 @@ foreign import js_fromMat4 :: Fn1 Mat4 Mat3
 
 fromMat4 :: Mat4 -> Mat3
 fromMat4 = runFn1 js_fromMat4
+
+foreign import js_fromScaling :: Fn1 Vec2 Mat3
+
+fromScaling :: Vec2 -> Mat3
+fromScaling = runFn1 js_fromScaling
+
