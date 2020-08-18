@@ -23,7 +23,7 @@ module GLMatrix.Mat2
   ) where
 
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
-import Partial.Unsafe (unsafeCrashWith, unsafePartial)
+import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
 import Data.Array as Array
