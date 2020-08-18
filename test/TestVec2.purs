@@ -8,7 +8,8 @@ import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat2 as Mat2
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.MatVec2 (transformMat2)
+import GLMatrix.Vec2.Transforms (transformMat2)
+
 import GLMatrix.Vec2 (Vec2, add, angle, ceil, cross, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec2 as Vec2
 import GLMatrix.Vec3 as Vec3
