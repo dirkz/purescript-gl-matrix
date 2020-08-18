@@ -26,6 +26,7 @@ module GLMatrix.Vec3
   , squaredDistance
   , squaredLength
   , subtract
+  , transformMat3
   , zero
   , numbers
   , map
@@ -36,7 +37,6 @@ module GLMatrix.Vec3
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn0, runFn1, runFn2, runFn3)
 import GLMatrix.Mat3 (Mat3)
-import GLMatrix.MatVec2 (js_transformMat2)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
