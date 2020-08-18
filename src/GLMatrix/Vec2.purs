@@ -24,6 +24,7 @@ module GLMatrix.Vec2
   , squaredDistance
   , squaredLength
   , subtract
+  , transformMat3
   , zero
   , numbers
   , map
