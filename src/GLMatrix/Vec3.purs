@@ -3,6 +3,7 @@ module GLMatrix.Vec3
   , add
   , angle
   , ceil
+  , cross
   , distance
   , divide
   , dot
@@ -61,7 +62,11 @@ foreign import js_ceil :: Fn1 Vec3 Vec3
 ceil :: Vec3 -> Vec3
 ceil = runFn1 js_ceil
 
--- TODO: (static) cross(out, a, b) → {vec3}
+foreign import js_cross :: Fn2 Vec3 Vec3 Vec3
+
+cross :: Vec3 -> Vec3 -> Vec3
+cross = runFn2 js_cross
+
 foreign import js_distance :: Fn2 Vec3 Vec3 Number
 
 -- |Calculates the euclidian distance between two Vec3's
