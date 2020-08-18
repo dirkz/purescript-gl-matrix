@@ -17,6 +17,7 @@ module GLMatrix.Mat3
   , rotate
   , rotationX
   , rotationY
+  , rotationZ
   , subtract
   , transpose
   , numbers
@@ -75,7 +76,7 @@ foreign import js_fromRotation :: Fn1 Number Mat3
 fromRotation :: Number -> Mat3
 fromRotation = runFn1 js_fromRotation
 
--- |Creates a rotation matrix
+-- |Creates a rotation matrix around the x-axis
 rotationX :: Number -> Mat3
 rotationX r =
   fromValues
@@ -89,7 +90,7 @@ rotationX r =
     (Prelude.negate $ Math.sin r)
     (Math.cos r)
 
--- |Creates a rotation matrix
+-- |Creates a rotation matrix around the y-axis
 rotationY :: Number -> Mat3
 rotationY r =
   fromValues
@@ -102,6 +103,20 @@ rotationY r =
     (Math.sin r)
     0.0
     (Math.cos r)
+
+-- |Creates a rotation matrix around the z-axis
+rotationZ :: Number -> Mat3
+rotationZ r =
+  fromValues
+    (Math.cos r)
+    (Math.sin r)
+    0.0
+    (Prelude.negate $ Math.sin r)
+    (Math.cos r)
+    0.0
+    0.0
+    0.0
+    1.0
 
 foreign import js_fromValues :: Fn9 Number Number Number Number Number Number Number Number Number Mat3
 
