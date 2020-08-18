@@ -154,6 +154,18 @@ foreign import js_rotateX :: Fn3 Vec3 Vec3 Number Vec3
 rotateX :: Vec3 -> Vec3 -> Number -> Vec3
 rotateX = runFn3 js_rotateX
 
+foreign import js_rotateY :: Fn3 Vec3 Vec3 Number Vec3
+
+-- |Rotate a 3D vector around the y-axis
+rotateY :: Vec3 -> Vec3 -> Number -> Vec3
+rotateY = runFn3 js_rotateY
+
+foreign import js_rotateZ :: Fn3 Vec3 Vec3 Number Vec3
+
+-- |Rotate a 3D vector around the z-axis
+rotateZ :: Vec3 -> Vec3 -> Number -> Vec3
+rotateZ = runFn3 js_rotateZ
+
 foreign import js_round :: Fn1 Vec3 Vec3
 
 -- |Math.round the components of a Vec3
