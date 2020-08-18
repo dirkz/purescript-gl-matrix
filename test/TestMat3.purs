@@ -2,7 +2,6 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
-
 import Data.Array (take)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -58,9 +57,13 @@ testFromMat4 :: Effect Unit
 testFromMat4 =
   quickCheck \(ArbMat4 m) ->
     let
-      c1 = take 9 $ numbers $ fromMat4 m
-      c2 = take 9 $ Mat4.numbers m
-    in c1 == c2
+      count = 3
+      
+      c1 = take count $ numbers $ fromMat4 m
+
+      c2 = take count $ Mat4.numbers m
+    in
+      c1 == c2 <?> "testFromMat4 " <> show m <> " c1: " <> show c1 <> " c2: " <> show c2
 
 testFromRotation :: Effect Unit
 testFromRotation =
