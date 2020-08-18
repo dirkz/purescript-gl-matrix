@@ -1,4 +1,4 @@
-module GLMatrix.Vec2.Transforms where
+module GLMatrix.Vec2.Transform where
 
 import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
 import GLMatrix.Mat2 (Mat2)
