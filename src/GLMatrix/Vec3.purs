@@ -18,6 +18,8 @@ module GLMatrix.Vec3
   , negate
   , normalize
   , rotateX
+  , rotateY
+  , rotateZ
   , round
   , scale
   , scaleAndAdd
