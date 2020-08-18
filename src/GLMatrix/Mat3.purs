@@ -15,6 +15,8 @@ module GLMatrix.Mat3
   , multiplyScalar
   , multiplyScalarAndAdd
   , rotate
+  , rotationX
+  , rotationY
   , subtract
   , transpose
   , numbers
@@ -85,6 +87,20 @@ rotationX r =
     (Math.sin r)
     0.0
     (Prelude.negate $ Math.sin r)
+    (Math.cos r)
+
+-- |Creates a rotation matrix
+rotationY :: Number -> Mat3
+rotationY r =
+  fromValues
+    (Math.cos r)
+    0.0
+    (Prelude.negate $ Math.sin r)
+    0.0
+    1.0
+    0.0
+    (Math.sin r)
+    0.0
     (Math.cos r)
 
 foreign import js_fromValues :: Fn9 Number Number Number Number Number Number Number Number Number Mat3
