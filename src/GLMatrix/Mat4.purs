@@ -23,11 +23,10 @@ module GLMatrix.Mat4
   ) where
 
 import Data.Array as Array
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn9, runFn0, runFn1, runFn2, runFn3, runFn9)
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn0, runFn1, runFn2, runFn3)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
-import Math as Math
 
 foreign import data Mat4 :: Type
 
