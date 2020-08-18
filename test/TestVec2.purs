@@ -14,7 +14,7 @@ import GLMatrix.Vec2 as Vec2
 import GLMatrix.Vec3 as Vec3
 import Math as Math
 import Partial.Unsafe (unsafePartial)
-import Prelude (Unit, discard, map, show, ($), (&&), (*), (/), (/=), (<<<), (<>), (==))
+import Prelude (Unit, discard, map, show, ($), (&&), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
 import Test.QuickCheck (quickCheck, (<?>))
 
