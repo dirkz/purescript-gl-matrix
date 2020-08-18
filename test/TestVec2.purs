@@ -82,7 +82,7 @@ testCross =
 
       d2 = Vec3.dot (vec3FromVec2 v2) r1
     in
-      GLMatrix.epsilonEquals d1 0.0 && GLMatrix.epsilonEquals d2 0.0 <?> "testCross " <> show v1 <> " " <> show v2 <> " d1: " <> show d1 <> " d2: " <> show d2 <> " (vec3FromVec2 v1) " <> show (vec3FromVec2 v1)
+      GLMatrix.epsilonEquals d1 0.0 && GLMatrix.epsilonEquals d2 0.0 <?> "testCross " <> show v1 <> " " <> show v2 <> " r1: " <> show r1 <> " d1: " <> show d1 <> " d2: " <> show d2 <> " (vec3FromVec2 v1) " <> show (vec3FromVec2 v1)
 
 testDistance :: Effect Unit
 testDistance =
