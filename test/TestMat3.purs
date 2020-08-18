@@ -53,18 +53,6 @@ testFromRotation =
   quickCheck \r ->
     epsilonEquals (fromRotation r) (rotate identity r) <?> "testFromRotation " <> show r
 
-{-
-testFromScaling :: Effect Unit
-testFromScaling =
-  quickCheck \(ArbVec2 v) ->
-    let
-      m1 = fromScaling v
-
-      m2 = scale identity v
-    in
-      m1 == m2 <?> "testFromScaling " <> show v
-      -}
-
 testInvert :: Effect Unit
 testInvert =
   quickCheck \(ArbMat3 m) ->
@@ -90,30 +78,6 @@ testMultiplyDistributivity =
       resM2 = add (multiply m2 m1) m3
     in
       resM1 /= resM2 <?> "testMultiplyDistributivity " <> show m1 <> ", " <> show m2 <> ", " <> show m3
-
-{-
-testMultiplyScalarAndAdd :: Effect Unit
-testMultiplyScalarAndAdd =
-  quickCheck \r (ArbMat3 m1) (ArbMat3 m2) ->
-    let
-      resM1 = multiplyScalarAndAdd m1 m2 r
-
-      resM2 = add m1 (scale m2 (Vec2.fromValues r r))
-    in
-      epsilonEquals resM1 resM2 <?> "testMultiplyScalarAndAdd " <> show m1 <> " " <> show m2
-      -}
-
-{-
-testMultiplyScalar :: Effect Unit
-testMultiplyScalar =
-  quickCheck \r (ArbMat3 m) ->
-    let
-      resM1 = multiplyScalar m r
-
-      resM2 = scale m (Vec2.fromValues r r)
-    in
-      epsilonEquals resM1 resM2 <?> "testMultiplyScalar " <> show r <> " " <> show m
-      -}
 
 testRotate :: Effect Unit
 testRotate =
@@ -155,16 +119,10 @@ main = do
   testAdd
   testNotEqual
   testAdjoint
-  --testDeterminantZero
-  --testDeterminantNonZero
   testFrob
   testFromRotation
-  --testFromScaling
-  --testLDU
   testMultiply
   testMultiplyDistributivity
-  --testMultiplyScalarAndAdd
-  --testMultiplyScalar
   testRotate
   testSubtract
   testTranspose
