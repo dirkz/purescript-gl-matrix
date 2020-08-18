@@ -121,11 +121,11 @@ foreign import js_multiplyScalarAndAdd :: Fn3 Mat4 Mat4 Number Mat4
 multiplyScalarAndAdd :: Mat4 -> Mat4 -> Number -> Mat4
 multiplyScalarAndAdd = runFn3 js_multiplyScalarAndAdd
 
-foreign import js_rotate :: Fn2 Mat4 Number Mat4
+foreign import js_rotate :: Fn3 Mat4 Number Vec3 Mat4
 
--- |Rotates a Mat4 by the given angle
-rotate :: Mat4 -> Number -> Mat4
-rotate = runFn2 js_rotate
+-- |Rotates a mat4 by the given angle around the given axis
+rotate :: Mat4 -> Number -> Vec3 -> Mat4
+rotate = runFn3 js_rotate
 
 foreign import js_str :: Fn1 Mat4 String
 
