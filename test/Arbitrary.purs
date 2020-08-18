@@ -5,6 +5,8 @@ import GLMatrix.Mat2 (Mat2)
 import GLMatrix.Mat2 as Mat2
 import GLMatrix.Mat3 (Mat3)
 import GLMatrix.Mat3 as Mat3
+import GLMatrix.Mat4 (Mat4)
+import GLMatrix.Mat4 as Mat4
 import GLMatrix.Vec2 (Vec2)
 import GLMatrix.Vec2 as Vec2
 import GLMatrix.Vec3 (Vec3)
@@ -27,6 +29,31 @@ instance arbMat3 :: Arbitrary ArbMat3 where
     ArbMat3
       <$> ( Mat3.fromValues
             <$> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+        )
+
+newtype ArbMat4
+  = ArbMat4 Mat4
+
+instance arbMat4 :: Arbitrary ArbMat4 where
+  arbitrary =
+    ArbMat4
+      <$> ( Mat4.fromValues
+            <$> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
+            <*> arbitrary
             <*> arbitrary
             <*> arbitrary
             <*> arbitrary
