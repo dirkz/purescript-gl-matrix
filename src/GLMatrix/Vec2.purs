@@ -35,6 +35,7 @@ module GLMatrix.Vec2
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn0, runFn1, runFn2, runFn3)
 import GLMatrix.Mat3 (Mat3)
+import GLMatrix.Vec3 (Vec3)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
@@ -59,7 +60,11 @@ foreign import js_ceil :: Fn1 Vec2 Vec2
 ceil :: Vec2 -> Vec2
 ceil = runFn1 js_ceil
 
--- TODO: (static) cross(out, a, b) → {vec3}
+foreign import js_cross :: Fn2 Vec2 Vec2 Vec3
+
+cross :: Vec2 -> Vec2 -> Vec3
+cross = runFn2 js_cross
+
 foreign import js_distance :: Fn2 Vec2 Vec2 Number
 
 -- |Calculates the euclidian distance between two vec2's

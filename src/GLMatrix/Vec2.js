@@ -18,6 +18,12 @@ exports.js_ceil = (a) => {
     return out
 }
 
+exports.js_cross = (a, b) => {
+    let out = m.vec2.create()
+    m.vec2.cross(out, a, b)
+    return out
+}
+
 exports.js_distance = (a, b) => {
     return m.vec2.distance(a, b)
 }
