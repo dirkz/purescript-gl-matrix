@@ -161,9 +161,8 @@ instance showMat4 :: Prelude.Show Mat4 where
 instance eqMat4 :: Prelude.Eq Mat4 where
   eq = exactEquals
 
--- |Map a function from `Number` to `Number` over the given matrix, producing
--- |a matrix.
--- |Note: Since a Matrix is not a general container, it cannot be a `Functor`.
+-- |Map a function from `Number` to `Number` over it.
+-- |Note: Since this is not a general container, it cannot be a `Functor`.
 map :: (Number -> Number) -> Mat4 -> Mat4
 map fn v = unsafePartial $ unsafeFromNumbers $ Prelude.map fn $ numbers v
 
