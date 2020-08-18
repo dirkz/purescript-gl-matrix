@@ -15,9 +15,6 @@ module GLMatrix.Mat4
   , multiplyScalar
   , multiplyScalarAndAdd
   , rotate
-  , rotationX
-  , rotationY
-  , rotationZ
   , subtract
   , transpose
   , numbers
@@ -75,48 +72,6 @@ foreign import js_fromRotation :: Fn1 Number Mat4
 -- |Creates a matrix from a given angle This is equivalent to (but much faster than): Mat4.identity(dest); Mat4.rotate(dest, dest, rad);
 fromRotation :: Number -> Mat4
 fromRotation = runFn1 js_fromRotation
-
--- |Creates a rotation matrix around the x-axis
-rotationX :: Number -> Mat4
-rotationX r =
-  fromValues
-    1.0
-    0.0
-    0.0
-    0.0
-    (Math.cos r)
-    (Math.sin r)
-    0.0
-    (Prelude.negate $ Math.sin r)
-    (Math.cos r)
-
--- |Creates a rotation matrix around the y-axis
-rotationY :: Number -> Mat4
-rotationY r =
-  fromValues
-    (Math.cos r)
-    0.0
-    (Prelude.negate $ Math.sin r)
-    0.0
-    1.0
-    0.0
-    (Math.sin r)
-    0.0
-    (Math.cos r)
-
--- |Creates a rotation matrix around the z-axis
-rotationZ :: Number -> Mat4
-rotationZ r =
-  fromValues
-    (Math.cos r)
-    (Math.sin r)
-    0.0
-    (Prelude.negate $ Math.sin r)
-    (Math.cos r)
-    0.0
-    0.0
-    0.0
-    1.0
 
 foreign import js_fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number ->  Number ->  Number ->  Number ->  Number ->  Number ->  Number -> Mat4
 
@@ -198,7 +153,7 @@ numbers = runFn1 js_numbers
 
 -- |Create a matrix from an array produced by `numbers`.
 unsafeFromNumbers :: Partial => Array Number -> Mat4
-unsafeFromNumbers [ m00, m01, m02, m10, m11, m12, m20, m21, m22 ] = fromValues m00 m01 m02 m10 m11 m12 m20 m21 m22
+unsafeFromNumbers [ m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33 ] = fromValues m00 m01 m02 m03 m10 m11 m12 m13 m20 m21 m22 m23 m30 m31 m32 m33
 
 instance showMat4 :: Prelude.Show Mat4 where
   show = str
