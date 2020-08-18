@@ -7,7 +7,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec3 (Vec3, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
+import GLMatrix.Vec3 (Vec3, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
 import GLMatrix.Vec3 as Vec
 import GLMatrix.Vec3 as Vec3
 import Math as Math
@@ -188,6 +188,15 @@ testNormalize =
     in
       epsilonEquals r1 r2 <?> "testNormalize " <> show v
 
+testRotateX :: Effect Unit
+testRotateX =
+  quickCheck \(ArbVec3 v) r ->
+    let
+      r1 = rotateX v zero r
+      d = angle r1 v
+    in
+      GLMatrix.epsilonEquals r d <?> "testRotateX " <> show v <> " " <> show r
+
 testRound :: Effect Unit
 testRound =
   quickCheck \(ArbVec3 v) ->
@@ -283,6 +292,7 @@ main = do
   testMultiply
   testNegate
   testNormalize
+  testRotateX
   testRound
   testScaleAndAdd
   testSquaredDistance
