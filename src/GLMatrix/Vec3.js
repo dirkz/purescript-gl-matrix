@@ -102,6 +102,18 @@ exports.js_rotateX = (a, b, r) => {
     return out
 }
 
+exports.js_rotateY = (a, b, r) => {
+    let out = m.vec3.create()
+    m.vec3.rotateY(out, a, b, r)
+    return out
+}
+
+exports.js_rotateZ = (a, b, r) => {
+    let out = m.vec3.create()
+    m.vec3.rotateZ(out, a, b, r)
+    return out
+}
+
 exports.js_round = (a) => {
     let out = m.vec3.create()
     m.vec3.round(out, a)
