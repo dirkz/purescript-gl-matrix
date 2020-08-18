@@ -218,15 +218,6 @@ testSubtract =
     in
       epsilonEquals r1 r2 <?> "testSubtract " <> show v1 <> ", " <> show v2
 
-{-
-testTransformMat2 :: Effect Unit
-testTransformMat2 =
-  quickCheck \(ArbVec4 v) ->
-    let
-      r1 = transformMat2 v identity
-    in
-      epsilonEquals r1 v <?> "testTransformMat2 " <> show v
-      -}
 testZero :: Effect Unit
 testZero =
   quickCheck \r ->
@@ -260,5 +251,4 @@ main = do
   testSquaredDistance
   testSquaredLength
   testSubtract
-  --testTransformMat2
   testZero
