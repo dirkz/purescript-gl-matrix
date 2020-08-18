@@ -3,6 +3,7 @@ module GLMatrix.Vec2
   , add
   , angle
   , ceil
+  , cross
   , distance
   , divide
   , dot
