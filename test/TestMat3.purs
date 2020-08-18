@@ -134,6 +134,7 @@ main = do
   testAdjoint
   testDeterminant
   testFrob
+  testFromMat4
   testFromRotation
   testMultiply
   testMultiplyDistributivity
