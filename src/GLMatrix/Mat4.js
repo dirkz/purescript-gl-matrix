@@ -105,9 +105,9 @@ exports.js_multiplyScalarAndAdd = (a, b, scale) => {
     return out
 }
 
-exports.js_rotate = (a, r) => {
+exports.js_rotate = (a, r, axis) => {
     let out = m.mat4.create()
-    m.mat4.rotate(out, a, r)
+    m.mat4.rotate(out, a, r, axis)
     return out
 }
 

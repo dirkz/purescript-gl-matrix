@@ -6,10 +6,10 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (add, adjoint, epsilonEquals, frob, identity, invert, multiply, multiplyScalar, numbers, rotate, subtract, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (add, adjoint, epsilonEquals, frob, identity, invert, multiply, multiplyScalar, numbers, subtract, transpose, unsafeFromNumbers)
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
-import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
+import Prelude (Unit, discard, map, show, ($), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
@@ -73,16 +73,6 @@ testMultiplyDistributivity =
     in
       resM1 /= resM2 <?> "testMultiplyDistributivity " <> show m1 <> ", " <> show m2 <> ", " <> show m3
 
-testRotate :: Effect Unit
-testRotate =
-  quickCheck \r (ArbMat4 m) ->
-    let
-      resM1 = rotate m r
-
-      resM2 = rotate resM1 (negate r)
-    in
-      epsilonEquals m resM2 <?> "testRotate " <> show m
-
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -116,7 +106,6 @@ main = do
   testFrob
   testMultiply
   testMultiplyDistributivity
-  testRotate
   testSubtract
   testTranspose
   testExtractNumbers
