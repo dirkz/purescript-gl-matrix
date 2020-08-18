@@ -36,7 +36,7 @@ module GLMatrix.Vec4
   ) where
 
 import Data.Array as Array
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn0, runFn1, runFn2, runFn3)
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
 import GLMatrix.Mat3 (Mat3)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
@@ -103,11 +103,11 @@ foreign import js_floor :: Fn1 Vec4 Vec4
 floor :: Vec4 -> Vec4
 floor = runFn1 js_floor
 
-foreign import js_fromValues :: Fn3 Number Number Number Vec4
+foreign import js_fromValues :: Fn4 Number Number Number Number Vec4
 
 -- |Creates a new Vec4 initialized with the given values
-fromValues :: Number -> Number -> Number -> Vec4
-fromValues = runFn3 js_fromValues
+fromValues :: Number -> Number -> Number -> Number -> Vec4
+fromValues = runFn4 js_fromValues
 
 foreign import js_inverse :: Fn1 Vec4 Vec4
 
@@ -238,7 +238,7 @@ numbers = runFn1 js_numbers
 
 -- |Create a vector from an array produced by `numbers`.
 unsafeFromNumbers :: Partial => Array Number -> Vec4
-unsafeFromNumbers [ x, y, z ] = fromValues x y z
+unsafeFromNumbers [ x, y, z, h ] = fromValues x y z h
 
 instance showVec4 :: Prelude.Show Vec4 where
   show = str
