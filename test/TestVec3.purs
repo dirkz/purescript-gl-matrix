@@ -193,12 +193,9 @@ testRotateX :: Effect Unit
 testRotateX =
   quickCheck \(ArbVec3 v) r ->
     let
-      -- Rotation matrix
-      mRX = Mat3.rotationX r
-
       r1 = rotateX v zero r
 
-      r2 = transformMat3 v mRX
+      r2 = transformMat3 v (Mat3.rotationX r)
     in
       epsilonEquals r1 r2 <?> "testRotateX " <> show v <> " " <> show r
 
