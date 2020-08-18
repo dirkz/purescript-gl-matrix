@@ -1,7 +1,6 @@
 module GLMatrix.Vec4
   ( Vec4
   , add
-  , angle
   , ceil
   , cross
   , distance
@@ -49,12 +48,6 @@ foreign import js_add :: Fn2 Vec4 Vec4 Vec4
 -- |Adds two Vec4's
 add :: Vec4 -> Vec4 -> Vec4
 add = runFn2 js_add
-
-foreign import js_angle :: Fn2 Vec4 Vec4 Number
-
--- |Get the angle between two 2D vectors
-angle :: Vec4 -> Vec4 -> Number
-angle = runFn2 js_angle
 
 foreign import js_ceil :: Fn1 Vec4 Vec4
 

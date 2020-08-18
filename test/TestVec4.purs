@@ -8,7 +8,7 @@ import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Vec4 (Vec4, add, angle, ceil, cross, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
+import GLMatrix.Vec4 (add, ceil, cross, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec4 as Vec
 import GLMatrix.Vec4 as Vec4
 import Math as Math
@@ -25,32 +25,6 @@ testAdd =
       v2 = scale v 2.0
     in
       epsilonEquals v1 v2 <?> "testAdd " <> show v
-
-testAngleSame :: Effect Unit
-testAngleSame =
-  quickCheck \(ArbVec4 v) ->
-    GLMatrix.epsilonEquals (angle v v) 0.0 <?> "testAngleSame " <> show v
-
-testAngle :: Effect Unit
-testAngle =
-  quickCheck \(ArbVec4 v1) (ArbVec4 v2) ->
-    let
-      a1 = angleViaDotProduct v1 v2
-
-      a2 = angle v1 v2
-    in
-      GLMatrix.epsilonEquals a1 a2 <?> "testAngle " <> show v1 <> " " <> show v2 <> " a1:" <> show a1 <> " a2:" <> show a2
-  where
-  angleViaDotProduct :: Vec4 -> Vec4 -> Number
-  angleViaDotProduct v1 v2 =
-    let
-      dotP = dot v1 v2
-
-      len1 = length v1
-
-      len2 = length v2
-    in
-      Math.acos $ dotP / (len1 * len2)
 
 testCeil :: Effect Unit
 testCeil =
@@ -309,8 +283,6 @@ testZero =
 main :: Effect Unit
 main = do
   testAdd
-  testAngleSame
-  testAngle
   testCeil
   testCross
   testDistance

@@ -8,10 +8,6 @@ exports.js_add = (a, b) => {
     return out
 }
 
-exports.js_angle = (a, b) => {
-    return m.vec4.angle(a, b)
-}
-
 exports.js_ceil = (a) => {
     let out = m.vec4.create()
     m.vec4.ceil(out, a)
