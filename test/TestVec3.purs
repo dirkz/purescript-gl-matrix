@@ -1,15 +1,16 @@
 module Test.TestVec3 where
 
 import Test.Arbitrary
+
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec3 (Vec3, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
+import GLMatrix.Mat3 as Mat3
+import GLMatrix.Vec3 (Vec3, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec3 as Vec
 import GLMatrix.Vec3 as Vec3
-import GLMatrix.Mat3 as Mat3
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
@@ -188,7 +189,6 @@ testNormalize =
     in
       epsilonEquals r1 r2 <?> "testNormalize " <> show v
 
-{-
 testRotateX :: Effect Unit
 testRotateX =
   quickCheck \(ArbVec3 v) r ->
@@ -198,10 +198,9 @@ testRotateX =
 
       r1 = rotateX v zero r
 
-      r2 = multiply
+      r2 = transformMat3 v mRX
     in
-      GLMatrix.epsilonEquals r d <?> "testRotateX " <> show v <> " " <> show r <> " -> " <> show r1
-      -}
+      epsilonEquals r1 r2 <?> "testRotateX " <> show v <> " " <> show r
 
 testRound :: Effect Unit
 testRound =
@@ -298,7 +297,7 @@ main = do
   testMultiply
   testNegate
   testNormalize
-  --testRotateX
+  testRotateX
   testRound
   testScaleAndAdd
   testSquaredDistance
