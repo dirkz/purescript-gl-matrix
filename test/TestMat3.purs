@@ -2,13 +2,15 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
+
+import Data.Array (take)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, subtract, transpose, unsafeFromNumbers)
-import GLMatrix.Mat3.Init (fromVec3)
-import GLMatrix.Vec3 (Vec3)
+import GLMatrix.Mat3.Init (fromMat4, fromVec3)
+import GLMatrix.Mat4 as Mat4
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
@@ -51,6 +53,14 @@ testFrob =
       theSum = sqrt $ sum (map (\n -> n * n) (numbers m))
     in
       GLMatrix.epsilonEquals theFrob theSum <?> "testFrob " <> show m <> " frob " <> show theFrob <> " sum " <> show theSum
+
+testFromMat4 :: Effect Unit
+testFromMat4 =
+  quickCheck \(ArbMat4 m) ->
+    let
+      c1 = take 9 $ numbers $ fromMat4 m
+      c2 = take 9 $ Mat4.numbers m
+    in c1 == c2
 
 testFromRotation :: Effect Unit
 testFromRotation =
