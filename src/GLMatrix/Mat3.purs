@@ -76,7 +76,8 @@ fromRotation = runFn1 js_fromRotation
 -- |Creates a rotation matrix
 rotationX :: Number -> Mat3
 rotationX r =
-  fromValues 1.0
+  fromValues
+    1.0
     0.0
     0.0
     0.0
