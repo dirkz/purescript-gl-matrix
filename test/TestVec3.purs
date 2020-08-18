@@ -8,11 +8,11 @@ import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Vec3 (Vec3, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
+import GLMatrix.Vec3 (Vec3, add, angle, ceil, cross, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec3 as Vec
 import GLMatrix.Vec3 as Vec3
 import Math as Math
-import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
+import Prelude (Unit, discard, map, show, ($), (&&), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
 import Test.QuickCheck (quickCheck, (<?>))
 
@@ -63,6 +63,18 @@ testCeil =
       ceil2 = map Math.ceil (numbers v)
     in
       epsilonEqualArrays ceil1 ceil2 <?> "testCeil " <> show v
+
+testCross :: Effect Unit
+testCross =
+  quickCheck \(ArbVec3 v1) (ArbVec3 v2) ->
+    let
+      r1 = cross v1 v2
+
+      d1 = dot v1 r1
+
+      d2 = dot v2 r1
+    in
+      GLMatrix.epsilonEquals d1 0.0 && GLMatrix.epsilonEquals d2 0.0 <?> "testCross " <> show v1 <> " " <> show v2
 
 testDistance :: Effect Unit
 testDistance =
@@ -300,6 +312,7 @@ main = do
   testAngleSame
   testAngle
   testCeil
+  testCross
   testDistance
   testDivide
   testEquals
