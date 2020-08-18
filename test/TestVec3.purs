@@ -194,7 +194,7 @@ testRotateX =
   quickCheck \(ArbVec3 v) r ->
     let
       -- Rotation matrix
-      mRX = Mat3.fromValues 1.0 0.0 0.0 0.0 (Math.cos r) (Math.sin r) 0.0 (Prelude.negate $ Math.sin r) (Math.cos r)
+      mRX = Mat3.rotationX r
 
       r1 = rotateX v zero r
 
