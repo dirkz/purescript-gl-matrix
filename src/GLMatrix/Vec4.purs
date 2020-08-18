@@ -55,10 +55,10 @@ foreign import js_ceil :: Fn1 Vec4 Vec4
 ceil :: Vec4 -> Vec4
 ceil = runFn1 js_ceil
 
-foreign import js_cross :: Fn2 Vec4 Vec4 Vec4
+foreign import js_cross :: Fn3 Vec4 Vec4 Vec4 Vec4
 
-cross :: Vec4 -> Vec4 -> Vec4
-cross = runFn2 js_cross
+cross :: Vec4 -> Vec4 -> Vec4 -> Vec4
+cross = runFn3 js_cross
 
 foreign import js_distance :: Fn2 Vec4 Vec4 Number
 

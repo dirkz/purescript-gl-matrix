@@ -38,18 +38,6 @@ testCeil =
     in
       epsilonEqualArrays ceil1 ceil2 <?> "testCeil " <> show v
 
-testCross :: Effect Unit
-testCross =
-  quickCheck \(ArbVec4 v1) (ArbVec4 v2) ->
-    let
-      r1 = cross v1 v2
-
-      d1 = dot v1 r1
-
-      d2 = dot v2 r1
-    in
-      GLMatrix.epsilonEquals d1 0.0 && GLMatrix.epsilonEquals d2 0.0 <?> "testCross " <> show v1 <> " " <> show v2 <> " r1: " <> show r1 <> " d1: " <> show d1 <> " d2: " <> show d2
-
 testDistance :: Effect Unit
 testDistance =
   quickCheck \(ArbVec4 v1) (ArbVec4 v2) ->
@@ -284,7 +272,6 @@ main :: Effect Unit
 main = do
   testAdd
   testCeil
-  testCross
   testDistance
   testDivide
   testEquals

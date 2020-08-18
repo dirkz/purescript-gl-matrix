@@ -14,9 +14,9 @@ exports.js_ceil = (a) => {
     return out
 }
 
-exports.js_cross = (a, b) => {
+exports.js_cross = (u, v, w) => {
     let out = m.vec4.create()
-    m.vec4.cross(out, a, b)
+    m.vec4.cross(out, u, v, w)
     return out
 }
 
