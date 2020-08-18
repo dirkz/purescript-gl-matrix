@@ -159,19 +159,19 @@ normalize = runFn1 js_normalize
 
 foreign import js_rotateX :: Fn3 Vec4 Vec4 Number Vec4
 
--- |Rotate a 3D vector around the x-axis
+-- |Rotate a vector around the x-axis
 rotateX :: Vec4 -> Vec4 -> Number -> Vec4
 rotateX = runFn3 js_rotateX
 
 foreign import js_rotateY :: Fn3 Vec4 Vec4 Number Vec4
 
--- |Rotate a 3D vector around the y-axis
+-- |Rotate a vector around the y-axis
 rotateY :: Vec4 -> Vec4 -> Number -> Vec4
 rotateY = runFn3 js_rotateY
 
 foreign import js_rotateZ :: Fn3 Vec4 Vec4 Number Vec4
 
--- |Rotate a 3D vector around the z-axis
+-- |Rotate a vector around the z-axis
 rotateZ :: Vec4 -> Vec4 -> Number -> Vec4
 rotateZ = runFn3 js_rotateZ
 
