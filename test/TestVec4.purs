@@ -8,11 +8,11 @@ import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Vec4 (add, ceil, cross, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
+import GLMatrix.Vec4 (add, ceil, distance, divide, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
 import GLMatrix.Vec4 as Vec
 import GLMatrix.Vec4 as Vec4
 import Math as Math
-import Prelude (Unit, discard, map, show, ($), (&&), (*), (/), (/=), (<>), (==))
+import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
 import Test.QuickCheck (quickCheck, (<?>))
 
@@ -163,36 +163,6 @@ testNormalize =
     in
       epsilonEquals r1 r2 <?> "testNormalize " <> show v
 
-testRotateX :: Effect Unit
-testRotateX =
-  quickCheck \(ArbVec4 v) r ->
-    let
-      r1 = rotateX v zero r
-
-      r2 = transformMat3 v (Mat3.rotationX r)
-    in
-      epsilonEquals r1 r2 <?> "testRotateX " <> show v <> " " <> show r
-
-testRotateY :: Effect Unit
-testRotateY =
-  quickCheck \(ArbVec4 v) r ->
-    let
-      r1 = rotateY v zero r
-
-      r2 = transformMat3 v (Mat3.rotationY r)
-    in
-      epsilonEquals r1 r2 <?> "testRotateY " <> show v <> " " <> show r
-
-testRotateZ :: Effect Unit
-testRotateZ =
-  quickCheck \(ArbVec4 v) r ->
-    let
-      r1 = rotateZ v zero r
-
-      r2 = transformMat3 v (Mat3.rotationZ r)
-    in
-      epsilonEquals r1 r2 <?> "testRotateZ " <> show v <> " " <> show r
-
 testRound :: Effect Unit
 testRound =
   quickCheck \(ArbVec4 v) ->
@@ -286,9 +256,6 @@ main = do
   testMultiply
   testNegate
   testNormalize
-  testRotateX
-  testRotateY
-  testRotateZ
   testRound
   testScaleAndAdd
   testSquaredDistance
