@@ -52,8 +52,8 @@ exports.js_floor = (a) => {
     return out
 }
 
-exports.js_fromValues = (x, y, z) => {
-    return m.vec4.fromValues(x, y, z)
+exports.js_fromValues = (x, y, z, h) => {
+    return m.vec4.fromValues(x, y, z, h)
 }
 
 exports.js_inverse = (a) => {
