@@ -30,9 +30,9 @@ exports.js_frob = (a) => {
     return m.mat4.frob(a)
 }
 
-exports.js_fromRotation = (r) => {
+exports.js_fromRotation = (r, axis) => {
     let out = m.mat4.create()
-    m.mat4.fromRotation(out, r)
+    m.mat4.fromRotation(out, r, axis)
     return out
 }
 

@@ -6,7 +6,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (add, adjoint, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, subtract, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (add, adjoint, epsilonEquals, frob, identity, invert, multiply, multiplyScalar, numbers, rotate, subtract, transpose, unsafeFromNumbers)
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
@@ -46,11 +46,6 @@ testFrob =
       theSum = sqrt $ sum (map (\n -> n * n) (numbers m))
     in
       GLMatrix.epsilonEquals theFrob theSum <?> "testFrob " <> show m <> " frob " <> show theFrob <> " sum " <> show theSum
-
-testFromRotation :: Effect Unit
-testFromRotation =
-  quickCheck \r ->
-    epsilonEquals (fromRotation r) (rotate identity r) <?> "testFromRotation " <> show r
 
 testInvert :: Effect Unit
 testInvert =
@@ -119,7 +114,6 @@ main = do
   testNotEqual
   testAdjoint
   testFrob
-  testFromRotation
   testMultiply
   testMultiplyDistributivity
   testRotate

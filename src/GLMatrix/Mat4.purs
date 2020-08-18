@@ -24,6 +24,7 @@ module GLMatrix.Mat4
 
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn0, runFn1, runFn2, runFn3)
+import GLMatrix.Vec3 (Vec3)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
@@ -66,11 +67,11 @@ foreign import js_frob :: Fn1 Mat4 Number
 frob :: Mat4 -> Number
 frob = runFn1 js_frob
 
-foreign import js_fromRotation :: Fn1 Number Mat4
+foreign import js_fromRotation :: Fn2 Number Vec3 Mat4
 
--- |Creates a matrix from a given angle This is equivalent to (but much faster than): Mat4.identity(dest); Mat4.rotate(dest, dest, rad);
-fromRotation :: Number -> Mat4
-fromRotation = runFn1 js_fromRotation
+-- |Creates a matrix from a given angle around a given axis This is equivalent to (but much faster than): mat4.identity(dest); mat4.rotate(dest, dest, rad, axis);
+fromRotation :: Number -> Vec3 -> Mat4
+fromRotation = runFn2 js_fromRotation
 
 foreign import js_fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number ->  Number ->  Number ->  Number ->  Number ->  Number ->  Number -> Mat4
 
