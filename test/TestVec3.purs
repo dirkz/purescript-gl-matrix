@@ -8,7 +8,7 @@ import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Vec3 (Vec3, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
+import GLMatrix.Vec3 (Vec3, add, angle, ceil, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec3 as Vec
 import GLMatrix.Vec3 as Vec3
 import Math as Math
@@ -199,6 +199,26 @@ testRotateX =
     in
       epsilonEquals r1 r2 <?> "testRotateX " <> show v <> " " <> show r
 
+testRotateY :: Effect Unit
+testRotateY =
+  quickCheck \(ArbVec3 v) r ->
+    let
+      r1 = rotateY v zero r
+
+      r2 = transformMat3 v (Mat3.rotationY r)
+    in
+      epsilonEquals r1 r2 <?> "testRotateY " <> show v <> " " <> show r
+
+testRotateZ :: Effect Unit
+testRotateZ =
+  quickCheck \(ArbVec3 v) r ->
+    let
+      r1 = rotateZ v zero r
+
+      r2 = transformMat3 v (Mat3.rotationZ r)
+    in
+      epsilonEquals r1 r2 <?> "testRotateZ " <> show v <> " " <> show r
+
 testRound :: Effect Unit
 testRound =
   quickCheck \(ArbVec3 v) ->
@@ -295,6 +315,8 @@ main = do
   testNegate
   testNormalize
   testRotateX
+  testRotateY
+  testRotateZ
   testRound
   testScaleAndAdd
   testSquaredDistance
