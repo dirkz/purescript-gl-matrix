@@ -118,11 +118,11 @@ rotationZ r =
     0.0
     1.0
 
-foreign import js_fromValues :: Fn9 Number Number Number Number Number Number Number Number Number Mat4
+foreign import js_fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number ->  Number ->  Number ->  Number ->  Number ->  Number ->  Number -> Mat4
 
 -- |Create a new Mat4 with the given values
-fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Mat4
-fromValues = runFn9 js_fromValues
+fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number ->  Number ->  Number ->  Number ->  Number ->  Number ->  Number -> Mat4
+fromValues = js_fromValues
 
 foreign import js_identity :: Fn0 Mat4
 

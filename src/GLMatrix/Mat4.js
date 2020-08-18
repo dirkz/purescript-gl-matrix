@@ -36,8 +36,42 @@ exports.js_fromRotation = (r) => {
     return out
 }
 
-exports.js_fromValues = (m00, m01, m02, m10, m11, m12, m20, m21, m22) => {
-    return m.mat4.fromValues(m00, m01, m02, m10, m11, m12, m20, m21, m22)
+exports.js_fromValues = function (m00) {
+    return function (m01) {
+        return function (m02) {
+            return function (m03) {
+                return function (m10) {
+                    return function (m11) {
+                        return function (m12) {
+                            return function (m13) {
+                                return function (m20) { 
+                                    return function (m21) {
+                                        return function (m22) {
+                                            return function (m23) {
+                                                return function (m30) {
+                                                    return function (m31) {
+                                                        return function (m32) {
+                                                            return function (m33) {
+                                                                return m.mat4.fromValues(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+};
+  
+exports.js_fromValues = (m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) => {
+    return m.mat4.fromValues(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33)
 }
 
 exports.js_identity = () => {
