@@ -10,6 +10,7 @@ import GLMatrix as GLMatrix
 import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, subtract, transpose, unsafeFromNumbers)
 import GLMatrix.Mat3.Init (fromMat4, fromScaling, fromTranslation, fromVec3)
 import GLMatrix.Mat3.Transform (scale, translate)
+import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat4 as Mat4
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
@@ -106,6 +107,16 @@ testMultiplyDistributivity =
     in
       resM1 /= resM2 <?> "testMultiplyDistributivity " <> show m1 <> ", " <> show m2 <> ", " <> show m3
 
+testMultiplyScalar :: Effect Unit
+testMultiplyScalar =
+  quickCheck \(ArbMat3 m) s ->
+    let
+      resM1 = multiplyScalar m s
+
+      resM2 = Mat3.map (\n -> n * s) m
+    in
+      resM1 == resM2 <?> "testMultiplyScalar " <> show m <> " " <> show s
+
 testRotate :: Effect Unit
 testRotate =
   quickCheck \r (ArbMat3 m) ->
@@ -154,6 +165,7 @@ main = do
   testFromTranslation
   testMultiply
   testMultiplyDistributivity
+  testMultiplyScalar
   testRotate
   testSubtract
   testTranspose
