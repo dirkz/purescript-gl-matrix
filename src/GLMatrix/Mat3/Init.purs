@@ -1,4 +1,6 @@
-module GLMatrix.Mat3.Init where
+module GLMatrix.Mat3.Init
+  ( normalFromMat4
+  ) where
 
 import Prelude
 import Data.Function.Uncurried (Fn1, runFn1)
@@ -25,3 +27,8 @@ foreign import js_fromScaling :: Fn1 Vec2 Mat3
 fromScaling :: Vec2 -> Mat3
 fromScaling = runFn1 js_fromScaling
 
+foreign import js_normalFromMat4 :: Fn1 Mat4 Mat3
+
+-- |Calculates a 3x3 normal matrix (transpose inverse) from the 4x4 matrix
+normalFromMat4 :: Mat4 -> Mat3
+normalFromMat4 = runFn1 js_normalFromMat4
