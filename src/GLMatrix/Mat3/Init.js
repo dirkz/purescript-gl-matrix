@@ -13,3 +13,10 @@ exports.js_fromScaling = (v) => {
     m.mat3.fromScaling(out, v)
     return out
 }
+
+
+exports.js_normalFromMat4 = (m4) => {
+    let out = m.mat3.create()
+    m.mat3.normalFromMat4(out, m4)
+    return out
+}
