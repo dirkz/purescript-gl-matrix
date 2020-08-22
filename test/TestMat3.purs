@@ -2,7 +2,6 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
-
 import Data.Array (slice)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -127,17 +126,15 @@ testMultiplyScalarAndAdd =
     in
       epsilonEquals resM1 resM2 <?> "testMultiplyScalarAndAdd m1: " <> show m1 <> " m2: " <> show m2 <> " " <> show s
 
-{--
-testnormalFromMat4 :: Effect Unit
-testnormalFromMat4 =
+testNormalFromMat4 :: Effect Unit
+testNormalFromMat4 =
   quickCheck \(ArbMat4 m) ->
     let
       resM1 = normalFromMat4 m
 
-      resM2 = transpose $ invert m
+      resM2 = fromMat4 $ Mat4.transpose $ Mat4.invert m
     in
-      epsilonEquals resM1 resM2 <?> "testnormalFromMat4 " <> show m
-      -}
+      epsilonEquals resM1 resM2 <?> "testNormalFromMat4 " <> show m
 
 testRotate :: Effect Unit
 testRotate =
@@ -189,6 +186,7 @@ main = do
   testMultiplyDistributivity
   testMultiplyScalar
   testMultiplyScalarAndAdd
+  testNormalFromMat4
   testRotate
   testSubtract
   testTranspose
