@@ -8,8 +8,8 @@ import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, subtract, transpose, unsafeFromNumbers)
-import GLMatrix.Mat3.Init (fromMat4, fromScaling, fromVec3)
-import GLMatrix.Mat3.Transform (fromTranslation, scale, translate)
+import GLMatrix.Mat3.Init (fromMat4, fromScaling, fromTranslation, fromVec3)
+import GLMatrix.Mat3.Transform (scale, translate)
 import GLMatrix.Mat4 as Mat4
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
