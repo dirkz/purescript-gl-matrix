@@ -2,7 +2,7 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
-import Data.Array (take)
+import Data.Array (length, slice, take)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
@@ -57,11 +57,11 @@ testFromMat4 :: Effect Unit
 testFromMat4 =
   quickCheck \(ArbMat4 m) ->
     let
-      count = 3
-      
-      c1 = take count $ numbers $ fromMat4 m
+      n4 = Mat4.numbers m
 
-      c2 = take count $ Mat4.numbers m
+      c1 = (slice 0 3 n4) <> (slice 4 7 n4) <> (slice 8 11 n4)
+
+      c2 = numbers $ fromMat4 m
     in
       c1 == c2 <?> "testFromMat4 " <> show m <> " c1: " <> show c1 <> " c2: " <> show c2
 
