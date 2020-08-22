@@ -61,7 +61,7 @@ testMultiply =
 
       resM2 = multiply m2 m1
     in
-      resM1 /= resM2 <?> "testMultiply " <> show m1 <> ", " <> show m2
+      resM1 /= resM2 <?> "testMultiply " <> show m1 <> " " <> show m2
 
 testMultiplyDistributivity :: Effect Unit
 testMultiplyDistributivity =
@@ -71,7 +71,7 @@ testMultiplyDistributivity =
 
       resM2 = add (multiply m2 m1) m3
     in
-      resM1 /= resM2 <?> "testMultiplyDistributivity " <> show m1 <> ", " <> show m2 <> ", " <> show m3
+      resM1 /= resM2 <?> "testMultiplyDistributivity " <> show m1 <> " " <> show m2 <> " " <> show m3
 
 testSubtract :: Effect Unit
 testSubtract =

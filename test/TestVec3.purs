@@ -86,7 +86,7 @@ testDistance =
       d2 :: Number
       d2 = length $ subtract v1 v2
     in
-      GLMatrix.epsilonEquals d1 d2 <?> "testDistance " <> show v1 <> ", " <> show v2
+      GLMatrix.epsilonEquals d1 d2 <?> "testDistance " <> show v1 <> " " <> show v2
 
 testDivide :: Effect Unit
 testDivide =
@@ -96,7 +96,7 @@ testDivide =
 
       divided = zipWith (/) (numbers v1) (numbers v2)
     in
-      epsilonEqualArrays divided (numbers v) <?> "testDivide " <> show v1 <> ", " <> show v2
+      epsilonEqualArrays divided (numbers v) <?> "testDivide " <> show v1 <> " " <> show v2
 
 testEquals :: Effect Unit
 testEquals =
@@ -104,7 +104,7 @@ testEquals =
     let
       v3 = add v1 v2
     in
-      v3 /= v1 <?> "testEquals " <> show v1 <> ", " <> show v2
+      v3 /= v1 <?> "testEquals " <> show v1 <> " " <> show v2
 
 testFloor :: Effect Unit
 testFloor =
@@ -146,12 +146,12 @@ testLerpDouble =
 testLerpOriginal :: Effect Unit
 testLerpOriginal =
   quickCheck \(ArbVec3 v1) (ArbVec3 v2) ->
-    epsilonEquals (lerp v1 v2 0.0) v1 <?> "testLerpOriginal " <> show v1 <> ", " <> show v2
+    epsilonEquals (lerp v1 v2 0.0) v1 <?> "testLerpOriginal " <> show v1 <> " " <> show v2
 
 testLerpDifferent :: Effect Unit
 testLerpDifferent =
   quickCheck \(ArbVec3 v1) (ArbVec3 v2) ->
-    epsilonEquals (lerp v1 v2 1.0) v2 <?> "testLerpDifferent " <> show v1 <> ", " <> show v2
+    epsilonEquals (lerp v1 v2 1.0) v2 <?> "testLerpDifferent " <> show v1 <> " " <> show v2
 
 testMaxDouble :: Effect Unit
 testMaxDouble =
@@ -177,7 +177,7 @@ testMultiply =
 
       r2 = Vec.zipWith (*) v1 v2
     in
-      epsilonEquals r1 r2 <?> "testMultiply " <> show v1 <> ", " <> show v2
+      epsilonEquals r1 r2 <?> "testMultiply " <> show v1 <> " " <> show v2
 
 testNegate :: Effect Unit
 testNegate =
@@ -251,7 +251,7 @@ testScaleAndAdd =
 
       r2 = add v1 (scale v2 s)
     in
-      epsilonEquals r1 r2 <?> "testScaleAndAdd " <> show v1 <> ", " <> show v2 <> ", " <> show s
+      epsilonEquals r1 r2 <?> "testScaleAndAdd " <> show v1 <> " " <> show v2 <> " " <> show s
 
 testSquaredDistance :: Effect Unit
 testSquaredDistance =
@@ -263,7 +263,7 @@ testSquaredDistance =
 
       r2 = d * d
     in
-      GLMatrix.epsilonEquals r1 r2 <?> "testSquaredDistance " <> show v1 <> ", " <> show v2
+      GLMatrix.epsilonEquals r1 r2 <?> "testSquaredDistance " <> show v1 <> " " <> show v2
 
 testSquaredLength :: Effect Unit
 testSquaredLength =
@@ -285,7 +285,7 @@ testSubtract =
 
       r2 = add v1 (negate v2)
     in
-      epsilonEquals r1 r2 <?> "testSubtract " <> show v1 <> ", " <> show v2
+      epsilonEquals r1 r2 <?> "testSubtract " <> show v1 <> " " <> show v2
 
 testZero :: Effect Unit
 testZero =
