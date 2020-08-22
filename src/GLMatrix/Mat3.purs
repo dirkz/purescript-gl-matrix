@@ -12,6 +12,7 @@ module GLMatrix.Mat3
   , multiply
   , multiplyScalar
   , multiplyScalarAndAdd
+  , normalFromMat4
   , projection
   , rotate
   , rotationX
@@ -152,6 +153,12 @@ foreign import js_multiplyScalarAndAdd :: Fn3 Mat3 Mat3 Number Mat3
 -- |Adds two Mat3's after multiplying each element of the second operand by a scalar value
 multiplyScalarAndAdd :: Mat3 -> Mat3 -> Number -> Mat3
 multiplyScalarAndAdd = runFn3 js_multiplyScalarAndAdd
+
+foreign import js_normalFromMat4 :: Fn1 Mat3 Mat3
+
+-- |Calculates a 3x3 normal matrix (transpose inverse) from the 4x4 matrix
+normalFromMat4 :: Mat3 -> Mat3
+normalFromMat4 = runFn1 js_normalFromMat4
 
 foreign import js_projection :: Fn2 Number Number Mat3
 
