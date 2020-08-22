@@ -35,7 +35,7 @@ foreign import js_fromTranslation :: Fn1 Vec2 Mat3
 
 -- |Creates a matrix from a vector translation This is equivalent to (but much faster than): mat3.identity(dest); mat3.translate(dest, dest, vec);
 fromTranslation :: Vec2 -> Mat3
-fromTranslation = runFn1 js_fromScaling
+fromTranslation = runFn1 js_fromTranslation
 
 foreign import js_normalFromMat4 :: Fn1 Mat4 Mat3
 
