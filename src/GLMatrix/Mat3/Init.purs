@@ -1,5 +1,8 @@
 module GLMatrix.Mat3.Init
-  ( normalFromMat4
+  ( fromVec3
+  , fromMat4
+  , fromScaling
+  , normalFromMat4
   ) where
 
 import Prelude
