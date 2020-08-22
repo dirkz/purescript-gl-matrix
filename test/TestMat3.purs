@@ -2,6 +2,7 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
+
 import Data.Array (slice)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -69,6 +70,13 @@ testFromRotation :: Effect Unit
 testFromRotation =
   quickCheck \r ->
     epsilonEquals (fromRotation r) (rotate identity r) <?> "testFromRotation " <> show r
+
+{--
+testFromScaling :: Effect Unit
+testFromScaling =
+  quickCheck \(ArbVec2 v) ->
+    epsilonEquals (fromScaling v) (scale identity v) <?> "testFromScaling " <> show v
+    --}
 
 testInvert :: Effect Unit
 testInvert =
