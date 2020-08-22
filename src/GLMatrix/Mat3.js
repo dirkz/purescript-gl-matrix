@@ -50,13 +50,6 @@ exports.js_invert = (a) => {
     return out
 }
 
-exports.js_ldu = (a) => {
-    let l = m.mat3.create()
-    let d = m.mat3.create()
-    let u = m.mat3.create()
-    return m.mat3.LDU(l, d, u, a)
-}
-
 exports.js_multiply = (a, b) => {
     let out = m.mat3.create()
     m.mat3.multiply(out, a, b)
