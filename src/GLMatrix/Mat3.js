@@ -36,6 +36,12 @@ exports.js_fromRotation = (r) => {
     return out
 }
 
+exports.js_fromScaling = (v) => {
+    let out = m.mat3.create()
+    m.mat3.fromScaling(out, v)
+    return out
+}
+
 exports.js_fromValues = (m00, m01, m02, m10, m11, m12, m20, m21, m22) => {
     return m.mat3.fromValues(m00, m01, m02, m10, m11, m12, m20, m21, m22)
 }
