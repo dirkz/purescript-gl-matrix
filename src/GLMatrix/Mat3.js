@@ -68,6 +68,12 @@ exports.js_multiplyScalarAndAdd = (a, b, scale) => {
     return out
 }
 
+exports.js_normalFromMat4 = (a) => {
+    let out = m.mat3.create()
+    m.mat3.normalFromMat4(out, a)
+    return out
+}
+
 exports.js_projection = (w, h) => {
     let out = m.mat3.create()
     m.mat3.projection(out, w, h)
