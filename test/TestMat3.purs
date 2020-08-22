@@ -2,6 +2,7 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
+
 import Data.Array (slice)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -10,7 +11,7 @@ import GLMatrix as GLMatrix
 import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose, unsafeFromNumbers)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat3.Init (fromMat4, fromScaling, fromTranslation, fromVec3)
-import GLMatrix.Mat3.Transform (scale, translate)
+import GLMatrix.Mat3.Transform (normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
@@ -125,7 +126,19 @@ testMultiplyScalarAndAdd =
 
       resM2 = add m1 $ Mat3.map (\n -> n * s) m2
     in
-      epsilonEquals resM1 resM2 <?> "testMultiplyScalarAndAdd m1:" <> show m1 <> " m2: " <> show m2 <> " " <> show s
+      epsilonEquals resM1 resM2 <?> "testMultiplyScalarAndAdd m1: " <> show m1 <> " m2: " <> show m2 <> " " <> show s
+
+{--
+testnormalFromMat4 :: Effect Unit
+testnormalFromMat4 =
+  quickCheck \(ArbMat4 m) ->
+    let
+      resM1 = normalFromMat4 m
+
+      resM2 = transpose $ invert m
+    in
+      epsilonEquals resM1 resM2 <?> "testnormalFromMat4 " <> show m
+      -}
 
 testRotate :: Effect Unit
 testRotate =
