@@ -8,15 +8,15 @@ exports.js_fromMat4 = (mat) => {
     return out
 }
 
-exports.js_fromScaling = (v) => {
+exports.js_fromScaling = (v2) => {
     let out = m.mat3.create()
-    m.mat3.fromScaling(out, v)
+    m.mat3.fromScaling(out, v2)
     return out
 }
 
-exports.js_fromTranslation = (v) => {
+exports.js_fromTranslation = (v2) => {
     let out = m.mat3.create()
-    m.mat3.fromTranslation(out, v)
+    m.mat3.fromTranslation(out, v2)
     return out
 }
 
