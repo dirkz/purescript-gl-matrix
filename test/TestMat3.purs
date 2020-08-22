@@ -2,7 +2,7 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
-import Data.Array (length, slice, take)
+import Data.Array (slice)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
