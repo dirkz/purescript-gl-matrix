@@ -2,6 +2,7 @@ module GLMatrix.Mat3.Transform
   ( fromScaling
   , fromTranslation
   , scale
+  , translate
   ) where
 
 import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
@@ -25,3 +26,9 @@ foreign import js_scale :: Fn2 Mat3 Vec2 Mat3
 -- |Scales the mat3 by the dimensions in the given vec2
 scale :: Mat3 -> Vec2 -> Mat3
 scale = runFn2 js_scale
+
+foreign import js_translate :: Fn2 Mat3 Vec2 Mat3
+
+-- |Translate a mat3 by the given vector
+translate :: Mat3 -> Vec2 -> Mat3
+translate = runFn2 js_translate
