@@ -1,5 +1,6 @@
 module GLMatrix.Mat3.Transform
   ( fromScaling
+  , fromTranslation
   , normalFromMat4
   ) where
 
