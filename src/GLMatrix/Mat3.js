@@ -68,6 +68,12 @@ exports.js_multiplyScalarAndAdd = (a, b, scale) => {
     return out
 }
 
+exports.js_projection = (w, h) => {
+    let out = m.mat3.create()
+    m.mat3.projection(out, w, h)
+    return out
+}
+
 exports.js_rotate = (a, r) => {
     let out = m.mat3.create()
     m.mat3.rotate(out, a, r)

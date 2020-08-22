@@ -12,6 +12,7 @@ module GLMatrix.Mat3
   , multiply
   , multiplyScalar
   , multiplyScalarAndAdd
+  , projection
   , rotate
   , rotationX
   , rotationY
@@ -151,6 +152,12 @@ foreign import js_multiplyScalarAndAdd :: Fn3 Mat3 Mat3 Number Mat3
 -- |Adds two Mat3's after multiplying each element of the second operand by a scalar value
 multiplyScalarAndAdd :: Mat3 -> Mat3 -> Number -> Mat3
 multiplyScalarAndAdd = runFn3 js_multiplyScalarAndAdd
+
+foreign import js_projection :: Fn2 Number Number Mat3
+
+-- |Generates a 2D projection matrix with the given bounds
+projection :: Number -> Number -> Mat3
+projection = runFn2 js_projection
 
 foreign import js_rotate :: Fn2 Mat3 Number Mat3
 
