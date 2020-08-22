@@ -3,12 +3,10 @@ module GLMatrix.Mat3.Init
   , fromMat4
   , fromScaling
   , normalFromMat4
-  , projection
   ) where
 
 import Prelude
-
-import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
+import Data.Function.Uncurried (Fn1, runFn1)
 import GLMatrix.Mat3 (Mat3)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat4 (Mat4)
@@ -37,9 +35,3 @@ foreign import js_normalFromMat4 :: Fn1 Mat4 Mat3
 -- |Calculates a 3x3 normal matrix (transpose inverse) from the 4x4 matrix
 normalFromMat4 :: Mat4 -> Mat3
 normalFromMat4 = runFn1 js_normalFromMat4
-
-foreign import js_projection :: Fn2 Number Number Mat3
-
--- |Generates a 2D projection matrix with the given bounds
-projection :: Number -> Number -> Mat3
-projection = runFn2 js_projection
