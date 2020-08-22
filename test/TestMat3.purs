@@ -125,7 +125,7 @@ testMultiplyScalarAndAdd =
 
       resM2 = add m1 $ Mat3.map (\n -> n * s) m2
     in
-      resM1 == resM2 <?> "testMultiplyScalarAndAdd m1:" <> show m1 <> " m2: " <> show m2 <> " " <> show s
+      epsilonEquals resM1 resM2 <?> "testMultiplyScalarAndAdd m1:" <> show m1 <> " m2: " <> show m2 <> " " <> show s
 
 testRotate :: Effect Unit
 testRotate =
