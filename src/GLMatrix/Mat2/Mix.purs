@@ -1,4 +1,4 @@
-module GLMatrix.Mat2.Transform where
+module GLMatrix.Mat2.Mix where
 
 import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
 import GLMatrix.Mat2 (Mat2)
