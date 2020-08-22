@@ -9,7 +9,7 @@ import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, subtract, transpose, unsafeFromNumbers)
 import GLMatrix.Mat3.Init (fromMat4, fromScaling, fromVec3)
-import GLMatrix.Mat3.Transform (scale)
+import GLMatrix.Mat3.Transform (fromTranslation, scale, translate)
 import GLMatrix.Mat4 as Mat4
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
@@ -75,6 +75,11 @@ testFromScaling :: Effect Unit
 testFromScaling =
   quickCheck \(ArbVec2 v) ->
     epsilonEquals (fromScaling v) (scale identity v) <?> "testFromScaling " <> show v
+
+testFromTranslation :: Effect Unit
+testFromTranslation =
+  quickCheck \(ArbVec2 v) ->
+    epsilonEquals (fromTranslation v) (translate identity v) <?> "testFromTranslation " <> show v
 
 testInvert :: Effect Unit
 testInvert =
@@ -146,6 +151,7 @@ main = do
   testFromMat4
   testFromRotation
   testFromScaling
+  testFromTranslation
   testMultiply
   testMultiplyDistributivity
   testRotate
