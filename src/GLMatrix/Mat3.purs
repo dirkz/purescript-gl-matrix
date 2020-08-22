@@ -27,10 +27,11 @@ module GLMatrix.Mat3
 
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn9, runFn0, runFn1, runFn2, runFn3, runFn9)
+import GLMatrix.Types (Vec2)
+import Math as Math
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
-import Math as Math
 
 foreign import data Mat3 :: Type
 
@@ -75,6 +76,12 @@ foreign import js_fromRotation :: Fn1 Number Mat3
 -- |Creates a matrix from a given angle This is equivalent to (but much faster than): mat3.identity(dest); mat3.rotate(dest, dest, rad);
 fromRotation :: Number -> Mat3
 fromRotation = runFn1 js_fromRotation
+
+foreign import js_fromScaling :: Fn1 Vec2 Mat3
+
+-- |Creates a matrix from a vector scaling This is equivalent to (but much faster than): mat3.identity(dest); mat3.scale(dest, dest, vec);
+fromScaling :: Vec2 -> Mat3
+fromScaling = runFn1 js_fromScaling
 
 -- |Creates a rotation matrix around the x-axis
 rotationX :: Number -> Mat3
