@@ -1,15 +1,17 @@
 module Test.TestMat4 where
 
 import Test.Arbitrary
-import Data.Foldable (sum)
+import Data.Foldable (maximum, sum)
+import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4.Mix (fromVec4)
 import Math (sqrt)
+import Math as Math
 import Partial.Unsafe (unsafePartial)
-import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<>), (==), negate)
+import Prelude (Unit, discard, map, negate, show, ($), (&&), (*), (+), (/), (/=), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
@@ -117,8 +119,14 @@ testInvert =
       m1 = multiply m (invert m)
 
       m2 = multiply (invert m) m
+
+      diff1 :: Number
+      diff1 = maxDiff m1 identity
+
+      diff2 :: Number
+      diff2 = maxDiff m2 identity
     in
-      equals m1 identity
+      diff1 < maxAllowedDiff
         <?> "testInvert "
         <> show m
         <> " "
@@ -127,6 +135,17 @@ testInvert =
         <> show m1
         <> " "
         <> show m2
+        <> " "
+        <> show diff1
+        <> " "
+        <> show diff2
+  where
+  maxAllowedDiff = 0.001
+
+  maxDiff :: Mat4 -> Mat4 -> Number
+  maxDiff m1 m2 = case maximum $ map Math.abs $ numbers $ subtract m1 m2 of
+    Just d -> d
+    Nothing -> maxAllowedDiff
 
 testLookAt :: Effect Unit
 testLookAt =
