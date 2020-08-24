@@ -5,7 +5,7 @@ import GLMatrix.Mat2 (Mat2)
 import GLMatrix.Mat2 as Mat2
 import GLMatrix.Mat3 (Mat3)
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Mat4 (Mat4)
+import GLMatrix.Mat4 (FieldOfView, Mat4, fieldOfView)
 import GLMatrix.Mat4 as Mat4
 import GLMatrix.Vec2 (Vec2)
 import GLMatrix.Vec2 as Vec2
@@ -81,3 +81,11 @@ newtype ArbVec4
 
 instance arbVec4 :: Arbitrary ArbVec4 where
   arbitrary = ArbVec4 <$> (Vec4.fromValues <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
+
+newtype ArbFieldOfView
+  = ArbFieldOfView FieldOfView
+
+instance arbFieldOfView :: Arbitrary ArbFieldOfView where
+  arbitrary =
+    ArbFieldOfView
+      <$> (fieldOfView <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
