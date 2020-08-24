@@ -30,6 +30,7 @@ module GLMatrix.Mat4
   , rotateZ
   , scale
   , subtract
+  , targetTo
   , transpose
   , numbers
   , map
@@ -245,6 +246,12 @@ foreign import js_subtract :: Fn2 Mat4 Mat4 Mat4
 -- |Subtracts matrix b from matrix a
 subtract :: Mat4 -> Mat4 -> Mat4
 subtract = runFn2 js_subtract
+
+foreign import js_targetTo :: Fn3 Vec3 Vec3 Vec3 Mat4
+
+-- |Generates a matrix that makes something look at something else.
+targetTo :: Vec3 -> Vec3 -> Vec3 -> Mat4
+targetTo = runFn3 js_targetTo
 
 foreign import js_transpose :: Fn1 Mat4 Mat4
 
