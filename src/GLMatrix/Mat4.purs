@@ -22,7 +22,8 @@ module GLMatrix.Mat4
   , multiplyScalar
   , multiplyScalarAndAdd
   , ortho
-  , perspetive
+  , perspective
+  , perspectiveFromFieldOfView
   , rotate
   , scale
   , subtract
@@ -35,7 +36,7 @@ module GLMatrix.Mat4
   ) where
 
 import Data.Array as Array
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn6, runFn0, runFn1, runFn2, runFn3, runFn6)
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, Fn6, runFn0, runFn1, runFn2, runFn3, runFn4, runFn6)
 import GLMatrix.Vec3 (Vec3)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
@@ -97,10 +98,10 @@ foreign import js_fromTranslation :: Fn1 Vec3 Mat4
 fromTranslation :: Vec3 -> Mat4
 fromTranslation = runFn1 js_fromTranslation
 
-foreign import js_fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number ->  Number ->  Number ->  Number ->  Number ->  Number ->  Number -> Mat4
+foreign import js_fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Mat4
 
 -- |Create a new Mat4 with the given values
-fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number ->  Number ->  Number ->  Number ->  Number ->  Number ->  Number -> Mat4
+fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Mat4
 fromValues = js_fromValues
 
 foreign import js_fromXRotation :: Fn1 Number Mat4
@@ -186,6 +187,19 @@ foreign import js_perspective :: Fn4 Number Number Number Number Mat4
 -- |Generates a perspective projection matrix with the given bounds. Passing null/undefined/no value for far will generate infinite projection matrix.
 perspective :: Number -> Number -> Number -> Number -> Mat4
 perspective = runFn4 js_perspective
+
+type FieldOfView
+  = { upDegrees :: Number
+    , downDegrees :: Number
+    , leftDegrees :: Number
+    , rightDegrees :: Number
+    }
+
+foreign import js_perspectiveFromFieldOfView :: Fn3 FieldOfView Number Number Mat4
+
+-- |Generates a perspective projection matrix with the given field of view. This is primarily useful for generating projection matrices to be used with the still experiemental WebVR API.
+perspectiveFromFieldOfView :: FieldOfView -> Number -> Number -> Mat4
+perspectiveFromFieldOfView = runFn3 js_perspectiveFromFieldOfView
 
 foreign import js_rotate :: Fn3 Mat4 Number Vec3 Mat4
 

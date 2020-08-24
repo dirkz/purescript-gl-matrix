@@ -164,6 +164,12 @@ exports.js_perspective = (fovy, aspect, near, far) => {
     return out
 }
 
+exports.js_perspectiveFromFieldOfView = (fov, near, far) => {
+    let out = m.mat4.create()
+    m.mat4.perspectiveFromFieldOfView(out, fov, near, far)
+    return out
+}
+
 exports.js_rotate = (a, r, axis) => {
     let out = m.mat4.create()
     m.mat4.rotate(out, a, r, axis)
