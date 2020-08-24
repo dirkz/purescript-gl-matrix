@@ -57,6 +57,13 @@ testFromRotation =
   quickCheck \r (ArbVec3 v) ->
     epsilonEquals (fromRotation r v) (rotate identity r v) <?> "testFromRotation " <> show r
 
+{-
+testFromScaling :: Effect Unit
+testFromScaling =
+  quickCheck \(ArbVec3 v) ->
+    epsilonEquals (fromScaling v) (scale identity v) <?> "testFromScaling " <> show v
+    -}
+
 testInvert :: Effect Unit
 testInvert =
   quickCheck \(ArbMat4 m) ->
@@ -114,6 +121,7 @@ main = do
   testAdjoint
   testFrob
   testFromRotation
+  --testFromScaling
   testMultiply
   testMultiplyDistributivity
   testSubtract
