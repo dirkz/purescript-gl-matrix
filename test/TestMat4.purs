@@ -6,7 +6,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromScaling, identity, invert, multiply, multiplyScalar, numbers, rotate, scale, subtract, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromScaling, fromTranslation, identity, invert, multiply, multiplyScalar, numbers, rotate, scale, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4.Mix (fromVec4)
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
@@ -62,6 +62,11 @@ testFromScaling :: Effect Unit
 testFromScaling =
   quickCheck \(ArbVec3 v) ->
     epsilonEquals (fromScaling v) (scale identity v) <?> "testFromScaling " <> show v
+
+testFromTranslation :: Effect Unit
+testFromTranslation =
+  quickCheck \(ArbVec3 v) ->
+    epsilonEquals (fromTranslation v) (translate identity v) <?> "testFromTranslation " <> show v
 
 testInvert :: Effect Unit
 testInvert =
@@ -121,6 +126,7 @@ main = do
   testFrob
   testFromRotation
   testFromScaling
+  testFromTranslation
   testMultiply
   testMultiplyDistributivity
   testSubtract
