@@ -100,9 +100,9 @@ exports.js_fromZRotation = (r) => {
     return out
 }
 
-exports.js_frustum = (out, left, right, bottom, top, near, far) => {
+exports.js_frustum = (left, right, bottom, top, near, far) => {
     let out = m.mat4.create()
-    m.mat4.frustum(out, out, left, right, bottom, top, near, far)
+    m.mat4.frustum(out, left, right, bottom, top, near, far)
     return out
 }
 
