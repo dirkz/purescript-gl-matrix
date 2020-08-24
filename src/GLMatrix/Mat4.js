@@ -116,6 +116,12 @@ exports.js_getScaling = (mat4) => {
     return out
 }
 
+exports.js_getTranslation = (mat4) => {
+    let out = m.vec3.create()
+    m.mat4.getTranslation(out, mat4)
+    return out
+}
+
 exports.js_invert = (a) => {
     let out = m.mat4.create()
     m.mat4.invert(out, a)
