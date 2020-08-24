@@ -117,6 +117,12 @@ exports.js_rotate = (a, r, axis) => {
     return out
 }
 
+exports.js_scale = (mat4, v) => {
+    let out = m.mat4.create()
+    m.mat4.scale(out, mat4, v)
+    return out
+}
+
 exports.js_str = (a) => {
     return m.mat4.str(a)
 }
