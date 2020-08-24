@@ -128,13 +128,6 @@ exports.js_invert = (a) => {
     return out
 }
 
-exports.js_ldu = (a) => {
-    let l = m.mat4.create()
-    let d = m.mat4.create()
-    let u = m.mat4.create()
-    return m.mat4.LDU(l, d, u, a)
-}
-
 exports.js_multiply = (a, b) => {
     let out = m.mat4.create()
     m.mat4.multiply(out, a, b)
