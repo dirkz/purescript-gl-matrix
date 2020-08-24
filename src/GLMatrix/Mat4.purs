@@ -15,6 +15,7 @@ module GLMatrix.Mat4
   , fromZRotation
   , frustum
   , getScaling
+  , getTranslation
   , identity
   , invert
   , ldu
@@ -130,6 +131,12 @@ foreign import js_getScaling :: Fn1 Mat4 Vec3
 -- |Returns the scaling factor component of a transformation matrix. If a matrix is built with fromRotationTranslationScale with a normalized Quaternion paramter, the returned vector will be the same as the scaling vector originally supplied.
 getScaling :: Mat4 -> Vec3
 getScaling = runFn1 js_getScaling
+
+foreign import js_getTranslation :: Fn1 Mat4 Vec3
+
+-- |Returns the translation vector component of a transformation matrix. If a matrix is built with fromRotationTranslation, the returned vector will be the same as the translation vector originally supplied.
+getTranslation :: Mat4 -> Vec3
+getTranslation = runFn1 js_getTranslation
 
 foreign import js_identity :: Fn0 Mat4
 
