@@ -6,9 +6,9 @@ import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
-import GLMatrix.Mat4.Mix (fromVec4)
+import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4 as Mat4
+import GLMatrix.Mat4.Mix (fromVec4)
 import Math (sqrt)
 import Math as Math
 import Partial.Unsafe (unsafePartial)
@@ -200,6 +200,16 @@ testMultiplyScalar =
     in
       resM1 == resM2 <?> "testMultiplyScalar " <> show m <> " " <> show s
 
+testMultiplyScalarAndAdd :: Effect Unit
+testMultiplyScalarAndAdd =
+  quickCheck \(ArbMat4 m1) (ArbMat4 m2) s ->
+    let
+      resM1 = multiplyScalarAndAdd m1 m2 s
+
+      resM2 = add m1 (multiplyScalar m2 s)
+    in
+      equals resM1 resM2 <?> "testMultiplyScalarAndAdd " <> show m1 <> " " <> show m2 <> " " <> show s
+
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -243,6 +253,7 @@ main = do
   testMultiply
   testMultiplyDistributivity
   testMultiplyScalar
+  testMultiplyScalarAndAdd
   testSubtract
   testTranspose
   testExtractNumbers
