@@ -153,7 +153,13 @@ testLookAt =
     let
       res = lookAt eye center up
     in
-      false
+      slice 3 4 res == [ 0.0 ]
+        && slice 7 8 res
+        == [ 0.0 ]
+        && slice 11 12 res
+        == [ 0.0 ]
+        && slice 15 16 res
+        == [ 1.0 ]
         <?> "testLookAt "
         <> show eye
         <> " "
