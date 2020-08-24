@@ -13,7 +13,7 @@ module GLMatrix.Mat4
   , fromXRotation
   , fromYRotation
   , fromZRotation
-  , fromFrustum
+  , frustum
   , identity
   , invert
   , ldu
@@ -121,8 +121,8 @@ fromZRotation = runFn1 js_fromZRotation
 foreign import js_frustum :: Fn6 Number Number Number Number Number Number Mat4
 
 -- |Generates a frustum matrix with the given bounds
-fromFrustum :: Number -> Number -> Number -> Number -> Number -> Number -> Mat4
-fromFrustum = runFn6 js_frustum
+frustum :: Number -> Number -> Number -> Number -> Number -> Number -> Mat4
+frustum = runFn6 js_frustum
 
 foreign import js_identity :: Fn0 Mat4
 
