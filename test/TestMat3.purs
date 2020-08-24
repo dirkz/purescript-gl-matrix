@@ -7,7 +7,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose, unsafeFromNumbers)
+import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, projection, rotate, subtract, transpose, unsafeFromNumbers)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat3.Mix (fromMat4, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
@@ -136,6 +136,16 @@ testNormalFromMat4 =
     in
       epsilonEquals resM1 resM2 <?> "testNormalFromMat4 " <> show m
 
+testProjection :: Effect Unit
+testProjection =
+  quickCheck \w h ->
+    let
+      resM1 = projection w h
+
+      res = slice 5 10 (numbers resM1)
+    in
+      GLMatrix.epsilonEqualArrays res [ 0.0, -1.0, 1.0, 1.0 ] <?> "testProjection " <> show w <> " " <> show h <> " " <> show resM1 <> " " <> show res
+
 testRotate :: Effect Unit
 testRotate =
   quickCheck \r (ArbMat3 m) ->
@@ -187,6 +197,7 @@ main = do
   testMultiplyScalar
   testMultiplyScalarAndAdd
   testNormalFromMat4
+  testProjection
   testRotate
   testSubtract
   testTranspose
