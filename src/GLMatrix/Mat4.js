@@ -216,6 +216,12 @@ exports.js_targetTo = (eye, center, up) => {
     return out
 }
 
+exports.js_translate = (a, v) => {
+    let out = m.mat4.create()
+    m.mat4.translate(out, a, v)
+    return out
+}
+
 exports.js_transpose = (a) => {
     let out = m.mat4.create()
     m.mat4.transpose(out, a)

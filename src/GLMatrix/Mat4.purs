@@ -31,6 +31,7 @@ module GLMatrix.Mat4
   , scale
   , subtract
   , targetTo
+  , translate
   , transpose
   , numbers
   , map
@@ -150,13 +151,19 @@ foreign import js_identity :: Fn0 Mat4
 identity :: Mat4
 identity = runFn0 js_identity
 
-foreign import js_invert :: Fn1 Mat4 Mat4
-
 foreign import js_lookAt :: Fn3 Vec3 Vec3 Vec3 Mat4
 
 -- |Generates a look-at matrix with the given eye position, focal point, and up axis. If you want a matrix that actually makes an object look at another object, you should use targetTo instead.
 lookAt :: Vec3 -> Vec3 -> Vec3 -> Mat4
 lookAt = runFn3 js_lookAt
+
+foreign import js_translate :: Fn2 Mat4 Vec3 Mat4
+
+-- |Translate a mat4 by the given vector
+translate :: Mat4 -> Vec3 -> Mat4
+translate = runFn2 js_translate
+
+foreign import js_invert :: Fn1 Mat4 Mat4
 
 -- |Inverts a Mat4
 invert :: Mat4 -> Mat4
