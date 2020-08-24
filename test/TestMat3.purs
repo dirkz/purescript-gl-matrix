@@ -175,9 +175,15 @@ testTranslate =
     let
       resM1 = translate m v
 
-      ts = slice 5 6 m
+      startIndex = 0
+
+      endIndex = 6
+
+      ar1 = slice startIndex endIndex m
+
+      ar2 = slice startIndex endIndex resM1
     in
-      ts == Vec2.numbers v <?> "testTranslate " <> show m <> " " <> show v <> " " <> show resM1
+      ar1 == ar2 <?> "testTranslate " <> show ar1 <> " " <> show ar2
 
 testExtractNumbers :: Effect Unit
 testExtractNumbers =
