@@ -22,6 +22,7 @@ module GLMatrix.Mat4
   , multiplyScalar
   , multiplyScalarAndAdd
   , ortho
+  , perspetive
   , rotate
   , scale
   , subtract
@@ -179,6 +180,12 @@ foreign import js_ortho :: Fn6 Number Number Number Number Number Number Mat4
 -- |Generates a orthogonal projection matrix with the given bounds
 ortho :: Number -> Number -> Number -> Number -> Number -> Number -> Mat4
 ortho = runFn6 js_ortho
+
+foreign import js_perspective :: Fn4 Number Number Number Number Mat4
+
+-- |Generates a perspective projection matrix with the given bounds. Passing null/undefined/no value for far will generate infinite projection matrix.
+perspective :: Number -> Number -> Number -> Number -> Mat4
+perspective = runFn4 js_perspective
 
 foreign import js_rotate :: Fn3 Mat4 Number Vec3 Mat4
 
