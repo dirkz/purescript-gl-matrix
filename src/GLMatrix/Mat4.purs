@@ -7,6 +7,7 @@ module GLMatrix.Mat4
   , epsilonEquals
   , frob
   , fromRotation
+  , fromScaling
   , fromValues
   , identity
   , invert
