@@ -10,6 +10,7 @@ module GLMatrix.Mat4
   , fromScaling
   , fromTranslation
   , fromValues
+  , fromXRotation
   , identity
   , invert
   , ldu
@@ -95,6 +96,12 @@ foreign import js_fromValues :: Number -> Number -> Number -> Number -> Number -
 -- |Create a new Mat4 with the given values
 fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number ->  Number ->  Number ->  Number ->  Number ->  Number ->  Number -> Mat4
 fromValues = js_fromValues
+
+foreign import js_fromXRotation :: Fn1 Number Mat4
+
+-- |Creates a matrix from the given angle around the X axis This is equivalent to (but much faster than): mat4.identity(dest); mat4.rotateX(dest, dest, rad);
+fromXRotation :: Number -> Mat4
+fromXRotation = runFn1 js_fromXRotation
 
 foreign import js_identity :: Fn0 Mat4
 
