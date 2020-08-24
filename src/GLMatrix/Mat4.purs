@@ -1,6 +1,5 @@
 module GLMatrix.Mat4
   ( Mat4
-  , LDU
   , add
   , adjoint
   , determinant
@@ -18,7 +17,6 @@ module GLMatrix.Mat4
   , getTranslation
   , identity
   , invert
-  , ldu
   , multiply
   , multiplyScalar
   , multiplyScalarAndAdd
@@ -149,18 +147,6 @@ foreign import js_invert :: Fn1 Mat4 Mat4
 -- |Inverts a Mat4
 invert :: Mat4 -> Mat4
 invert = runFn1 js_invert
-
-type LDU
-  = { l :: Mat4, d :: Mat4, u :: Mat4 }
-
-foreign import js_ldu :: Fn1 Mat4 (Array Mat4)
-
--- |Returns L, D and U matrices (Lower triangular, Diagonal and Upper triangular) by factorizing the input matrix
-ldu :: Mat4 -> LDU
-ldu m = unsafePartial $ array3ToRecord $ runFn1 js_ldu m
-  where
-  array3ToRecord :: Partial => Array Mat4 -> LDU
-  array3ToRecord [ a, b, c ] = { l: a, d: b, u: c }
 
 foreign import js_multiply :: Fn2 Mat4 Mat4 Mat4
 
