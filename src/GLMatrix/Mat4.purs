@@ -136,6 +136,12 @@ foreign import js_rotate :: Fn3 Mat4 Number Vec3 Mat4
 rotate :: Mat4 -> Number -> Vec3 -> Mat4
 rotate = runFn3 js_rotate
 
+foreign import js_scale :: Fn2 Mat4 Vec3 Mat4
+
+-- |Scales the mat4 by the dimensions in the given vec3 not using vectorization
+scale :: Mat4 -> Vec3 -> Mat4
+scale = runFn2 js_scale
+
 foreign import js_str :: Fn1 Mat4 String
 
 -- |Returns a string representation of a Mat4
