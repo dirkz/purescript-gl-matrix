@@ -34,7 +34,7 @@ exports.js_dot = (a, b) => {
     return m.vec4.dot(a, b)
 }
 
-exports.js_epsilonEquals = (a, b) => {
+exports.js_equals = (a, b) => {
     return m.vec4.equals(a, b)
 }
 
