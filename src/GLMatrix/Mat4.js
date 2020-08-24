@@ -88,6 +88,18 @@ exports.js_fromXRotation = (r) => {
     return out
 }
 
+exports.js_fromYRotation = (r) => {
+    let out = m.mat4.create()
+    m.mat4.fromYRotation(out, r)
+    return out
+}
+
+exports.js_fromZRotation = (r) => {
+    let out = m.mat4.create()
+    m.mat4.fromZRotation(out, r)
+    return out
+}
+
 exports.js_identity = () => {
     return m.mat4.create()
 }
