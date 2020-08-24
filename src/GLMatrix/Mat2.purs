@@ -20,13 +20,15 @@ module GLMatrix.Mat2
   , numbers
   , map
   , unsafeFromNumbers
+  , zipWith
+  , slice
   ) where
 
+import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
-import Data.Array as Array
 
 foreign import data Mat2 :: Type
 
@@ -167,3 +169,7 @@ map fn v = unsafePartial $ unsafeFromNumbers $ Prelude.map fn $ numbers v
 
 zipWith :: (Number -> Number -> Number) -> Mat2 -> Mat2 -> Mat2
 zipWith fn v1 v2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
+
+-- |Like `Array.slice`
+slice :: Int -> Int -> Mat2 -> Array Number
+slice a b m = Array.slice a b $ numbers m

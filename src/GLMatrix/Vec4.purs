@@ -32,6 +32,7 @@ module GLMatrix.Vec4
   , map
   , unsafeFromNumbers
   , zipWith
+  , slice
   ) where
 
 import Data.Array as Array
@@ -245,3 +246,7 @@ map fn v = unsafePartial $ unsafeFromNumbers $ Prelude.map fn $ numbers v
 
 zipWith :: (Number -> Number -> Number) -> Vec4 -> Vec4 -> Vec4
 zipWith fn v1 v2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
+
+-- |Like `Array.slice`
+slice :: Int -> Int -> Vec4 -> Array Number
+slice a b m = Array.slice a b $ numbers m
