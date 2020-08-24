@@ -128,6 +128,12 @@ exports.js_invert = (a) => {
     return out
 }
 
+exports.js_lookAt = (eye, center, up) => {
+    let out = m.mat4.create()
+    m.mat4.lookAt(out, eye, center, up)
+    return out
+}
+
 exports.js_multiply = (a, b) => {
     let out = m.mat4.create()
     m.mat4.multiply(out, a, b)
