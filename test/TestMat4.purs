@@ -1,11 +1,12 @@
 module Test.TestMat4 where
 
 import Test.Arbitrary
+
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, scale, subtract, translate, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4.Mix (fromVec4)
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
@@ -77,6 +78,11 @@ testFromYRotation =
   quickCheck \r ->
     epsilonEquals (fromYRotation r) (rotateY identity r) <?> "testFromYRotation " <> show r
 
+testFromZRotation :: Effect Unit
+testFromZRotation =
+  quickCheck \r ->
+    epsilonEquals (fromZRotation r) (rotateZ identity r) <?> "testFromZRotation " <> show r
+
 testInvert :: Effect Unit
 testInvert =
   quickCheck \(ArbMat4 m) ->
@@ -138,6 +144,7 @@ main = do
   testFromTranslation
   testFromXRotation
   testFromYRotation
+  testFromZRotation
   testMultiply
   testMultiplyDistributivity
   testSubtract
