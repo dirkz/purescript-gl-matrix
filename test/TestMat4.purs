@@ -1,13 +1,12 @@
 module Test.TestMat4 where
 
 import Test.Arbitrary
-
 import Data.Foldable (maximum, sum)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4 as Mat4
 import GLMatrix.Mat4.Mix (fromVec4)
 import Math (sqrt)
@@ -243,6 +242,20 @@ testPerspective =
         <> " -> "
         <> show resM1
 
+testPerspectiveFromFieldOfView :: Effect Unit
+testPerspectiveFromFieldOfView =
+  quickCheck \(ArbFieldOfView fov) near far ->
+    let
+      resM1 = perspectiveFromFieldOfView fov near far
+    in
+      slice 1 5 resM1 == [ 0.0, 0.0, 0.0, 0.0 ]
+        && slice 6 8 resM1
+        == [ 0.0, 0.0 ]
+        && slice 11 14 resM1
+        == [ -1.0, 0.0, 0.0 ]
+        <?> "testPerspectiveFromFieldOfView "
+        <> show resM1
+
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -289,6 +302,7 @@ main = do
   testMultiplyScalarAndAdd
   testOrtho
   testPerspective
+  testPerspectiveFromFieldOfView
   testSubtract
   testTranspose
   testExtractNumbers
