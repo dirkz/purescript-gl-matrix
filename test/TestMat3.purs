@@ -41,7 +41,9 @@ testAdjoint =
       epsilonEquals (adjoint m) m2 <?> "testAdjoint " <> show n
 
 testDeterminant :: Effect Unit
-testDeterminant = quickCheck \(ArbVec3 v) -> GLMatrix.epsilonEquals (determinant $ fromVec3 v v v) 0.0
+testDeterminant =
+  quickCheck \(ArbVec3 v) ->
+    GLMatrix.epsilonEquals (determinant $ fromVec3 v v v) 0.0
 
 testFrob :: Effect Unit
 testFrob =
