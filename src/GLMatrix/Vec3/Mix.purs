@@ -1,4 +1,4 @@
-module GLMatrix.Vec3.Init where
+module GLMatrix.Vec3.Mix where
 
 import Prelude
 import GLMatrix.Vec2 as Vec2
