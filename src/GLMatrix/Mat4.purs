@@ -13,6 +13,7 @@ module GLMatrix.Mat4
   , fromXRotation
   , fromYRotation
   , fromZRotation
+  , fromFrustum
   , identity
   , invert
   , ldu
@@ -31,7 +32,7 @@ module GLMatrix.Mat4
   ) where
 
 import Data.Array as Array
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn0, runFn1, runFn2, runFn3)
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn6, runFn0, runFn1, runFn2, runFn3, runFn6)
 import GLMatrix.Vec3 (Vec3)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
@@ -116,6 +117,12 @@ foreign import js_fromZRotation :: Fn1 Number Mat4
 -- |Creates a matrix from the given angle around the Z axis This is equivalent to (but much faster than): mat4.identity(dest); mat4.rotateZ(dest, dest, rad);
 fromZRotation :: Number -> Mat4
 fromZRotation = runFn1 js_fromZRotation
+
+foreign import js_frustum :: Fn6 Number Number Number Number Number Number Mat4
+
+-- |Generates a frustum matrix with the given bounds
+fromFrustum :: Number -> Number -> Number -> Number -> Number -> Number -> Mat4
+fromFrustum = runFn6 js_frustum
 
 foreign import js_identity :: Fn0 Mat4
 
