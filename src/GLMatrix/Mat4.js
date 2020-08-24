@@ -176,6 +176,24 @@ exports.js_rotate = (a, r, axis) => {
     return out
 }
 
+exports.js_rotateX = (a, r) => {
+    let out = m.mat4.create()
+    m.mat4.rotateX(out, a, r)
+    return out
+}
+
+exports.js_rotateY = (a, r) => {
+    let out = m.mat4.create()
+    m.mat4.rotateY(out, a, r)
+    return out
+}
+
+exports.js_rotateZ = (a, r) => {
+    let out = m.mat4.create()
+    m.mat4.rotateZ(out, a, r)
+    return out
+}
+
 exports.js_scale = (mat4, v) => {
     let out = m.mat4.create()
     m.mat4.scale(out, mat4, v)
