@@ -159,16 +159,6 @@ testSubtract =
   quickCheck \(ArbMat3 m1) (ArbMat3 m2) ->
     epsilonEquals m1 (subtract (add m1 m2) m2) <?> "testSubtract " <> show m1 <> " " <> show m2
 
-testTranspose :: Effect Unit
-testTranspose =
-  quickCheck \(ArbMat3 m1) (ArbMat3 m2) ->
-    let
-      resM1 = transpose $ multiply m1 m2
-
-      resM2 = multiply (transpose m2) (transpose m1)
-    in
-      resM1 == resM2 <?> "testTranspose " <> show m1 <> " " <> show m2
-
 testTranslate :: Effect Unit
 testTranslate =
   quickCheck \(ArbMat3 m) (ArbVec2 v) ->
@@ -184,6 +174,16 @@ testTranslate =
       ar2 = slice startIndex endIndex resM1
     in
       ar1 == ar2 <?> "testTranslate " <> show ar1 <> " " <> show ar2
+
+testTranspose :: Effect Unit
+testTranspose =
+  quickCheck \(ArbMat3 m1) (ArbMat3 m2) ->
+    let
+      resM1 = transpose $ multiply m1 m2
+
+      resM2 = multiply (transpose m2) (transpose m1)
+    in
+      resM1 == resM2 <?> "testTranspose " <> show m1 <> " " <> show m2
 
 testExtractNumbers :: Effect Unit
 testExtractNumbers =
@@ -214,6 +214,6 @@ main = do
   testProjection
   testRotate
   testSubtract
-  testTranspose
   testTranslate
+  testTranspose
   testExtractNumbers
