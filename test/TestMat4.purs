@@ -311,6 +311,14 @@ testTargetTo =
         <> " -> "
         <> show res
 
+testTranslate :: Effect Unit
+testTranslate =
+  quickCheck \(ArbMat4 m) (ArbVec3 v) ->
+    let
+      res1 = translate m v
+    in
+      false <?> "testTranslate " <> show m <> " " <> show v <> " -> " <> show res1
+
 testTranspose :: Effect Unit
 testTranspose =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -358,5 +366,6 @@ main = do
   testRotateZ
   testSubtract
   testTargetTo
+  testTranslate
   testTranspose
   testExtractNumbers
