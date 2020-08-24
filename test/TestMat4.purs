@@ -226,6 +226,22 @@ testOrtho =
         <> " -> "
         <> show resM1
 
+testPerspective :: Effect Unit
+testPerspective =
+  quickCheck \left right bottom top near far ->
+    let
+      resM1 = ortho left right bottom top near far
+    in
+      slice 1 5 resM1 == [ 0.0, 0.0, 0.0, 0.0 ]
+        && slice 6 8 resM1
+        == [ 0.0, 0.0 ]
+        && slice 11 14 resM1
+        == [ -1.0, 0.0, 0.0 ]
+        <?> "testPerspective "
+        <> show [ left, right, bottom, top, near, far ]
+        <> " -> "
+        <> show resM1
+
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -271,6 +287,7 @@ main = do
   testMultiplyScalar
   testMultiplyScalarAndAdd
   testOrtho
+  testPerspective
   testSubtract
   testTranspose
   testExtractNumbers
