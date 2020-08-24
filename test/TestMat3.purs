@@ -11,6 +11,7 @@ import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotati
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat3.Mix (fromMat4, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
+import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
@@ -171,6 +172,16 @@ testTranspose =
     in
       resM1 == resM2 <?> "testTranspose " <> show m1 <> " " <> show m2
 
+testTranslate :: Effect Unit
+testTranslate =
+  quickCheck \(ArbMat3 m) (ArbVec2 v) ->
+    let
+      resM1 = translate m v
+
+      ts = slice 5 6 $ numbers m
+    in
+      ts == Vec2.numbers v <?> "testTranslate " <> show m <> " " <> show v <> " " <> show resM1
+
 testExtractNumbers :: Effect Unit
 testExtractNumbers =
   quickCheck \(ArbMat3 m1) ->
@@ -201,4 +212,5 @@ main = do
   testRotate
   testSubtract
   testTranspose
+  testTranslate
   testExtractNumbers
