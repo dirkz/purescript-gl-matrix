@@ -8,6 +8,7 @@ import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4.Mix (fromVec4)
+import GLMatrix.Mat4 as Mat4
 import Math (sqrt)
 import Math as Math
 import Partial.Unsafe (unsafePartial)
@@ -189,6 +190,16 @@ testMultiplyDistributivity =
     in
       resM1 /= resM2 <?> "testMultiplyDistributivity " <> show m1 <> " " <> show m2 <> " " <> show m3
 
+testMultiplyScalar :: Effect Unit
+testMultiplyScalar =
+  quickCheck \(ArbMat4 m) s ->
+    let
+      resM1 = multiplyScalar m s
+
+      resM2 = Mat4.map (\n -> n * s) m
+    in
+      resM1 == resM2 <?> "testMultiplyScalar " <> show m <> " " <> show s
+
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -231,6 +242,7 @@ main = do
   testLookAt
   testMultiply
   testMultiplyDistributivity
+  testMultiplyScalar
   testSubtract
   testTranspose
   testExtractNumbers
