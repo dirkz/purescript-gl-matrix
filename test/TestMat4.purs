@@ -6,7 +6,7 @@ import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, targetTo, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4 as Mat4
 import GLMatrix.Mat4.Mix (fromVec4)
 import GLMatrix.Vec3 as Vec3
@@ -289,6 +289,28 @@ testSubtract =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
     equals m1 (subtract (add m1 m2) m2) <?> "testSubtract " <> show m1 <> " " <> show m2
 
+testTargetTo :: Effect Unit
+testTargetTo =
+  quickCheck \(ArbVec3 eye) (ArbVec3 center) (ArbVec3 up) ->
+    let
+      res = lookAt eye center up
+    in
+      slice 3 4 res == [ 0.0 ]
+        && slice 7 8 res
+        == [ 0.0 ]
+        && slice 11 12 res
+        == [ 0.0 ]
+        && slice 15 16 res
+        == [ 1.0 ]
+        <?> "testTargetTo "
+        <> show eye
+        <> " "
+        <> show center
+        <> " "
+        <> show up
+        <> " -> "
+        <> show res
+
 testTranspose :: Effect Unit
 testTranspose =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -335,5 +357,6 @@ main = do
   testRotateY
   testRotateZ
   testSubtract
+  testTargetTo
   testTranspose
   testExtractNumbers
