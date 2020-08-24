@@ -8,6 +8,7 @@ module GLMatrix.Mat4
   , frob
   , fromRotation
   , fromScaling
+  , fromTranslation
   , fromValues
   , identity
   , invert
@@ -82,6 +83,12 @@ foreign import js_fromScaling :: Fn1 Vec3 Mat4
 -- |Creates a matrix from a vector scaling This is equivalent to (but much faster than): mat4.identity(dest); mat4.scale(dest, dest, vec);
 fromScaling :: Vec3 -> Mat4
 fromScaling = runFn1 js_fromScaling
+
+foreign import js_fromTranslation :: Fn1 Vec3 Mat4
+
+-- |Creates a matrix from a vector translation This is equivalent to (but much faster than): mat4.identity(dest); mat4.translate(dest, dest, vec);
+fromTranslation :: Vec3 -> Mat4
+fromTranslation = runFn1 js_fromTranslation
 
 foreign import js_fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number ->  Number ->  Number ->  Number ->  Number ->  Number ->  Number -> Mat4
 
