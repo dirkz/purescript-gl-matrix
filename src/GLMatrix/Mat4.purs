@@ -75,6 +75,12 @@ foreign import js_fromRotation :: Fn2 Number Vec3 Mat4
 fromRotation :: Number -> Vec3 -> Mat4
 fromRotation = runFn2 js_fromRotation
 
+foreign import js_fromScaling :: Fn1 Vec3 Mat4
+
+-- |Creates a matrix from a vector scaling This is equivalent to (but much faster than): mat4.identity(dest); mat4.scale(dest, dest, vec);
+fromScaling :: Vec3 -> Mat4
+fromScaling = runFn1 js_fromScaling
+
 foreign import js_fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number ->  Number ->  Number ->  Number ->  Number ->  Number ->  Number -> Mat4
 
 -- |Create a new Mat4 with the given values
