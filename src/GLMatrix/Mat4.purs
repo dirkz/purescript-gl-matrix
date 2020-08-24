@@ -25,6 +25,9 @@ module GLMatrix.Mat4
   , perspective
   , perspectiveFromFieldOfView
   , rotate
+  , rotateX
+  , rotateY
+  , rotateZ
   , scale
   , subtract
   , transpose
@@ -206,6 +209,24 @@ foreign import js_rotate :: Fn3 Mat4 Number Vec3 Mat4
 -- |Rotates a mat4 by the given angle around the given axis
 rotate :: Mat4 -> Number -> Vec3 -> Mat4
 rotate = runFn3 js_rotate
+
+foreign import js_rotateX :: Fn2 Mat4 Number Mat4
+
+-- |Rotates a matrix by the given angle around the X axis
+rotateX :: Mat4 -> Number -> Mat4
+rotateX = runFn2 js_rotateX
+
+foreign import js_rotateY :: Fn2 Mat4 Number Mat4
+
+-- |Rotates a matrix by the given angle around the Y axis
+rotateY :: Mat4 -> Number -> Mat4
+rotateY = runFn2 js_rotateY
+
+foreign import js_rotateZ :: Fn2 Mat4 Number Mat4
+
+-- |Rotates a matrix by the given angle around the Z axis
+rotateZ :: Mat4 -> Number -> Mat4
+rotateZ = runFn2 js_rotateZ
 
 foreign import js_scale :: Fn2 Mat4 Vec3 Mat4
 
