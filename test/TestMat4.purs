@@ -1,16 +1,15 @@
 module Test.TestMat4 where
 
 import Test.Arbitrary
-
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, identity, invert, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, subtract, translate, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4.Mix (fromVec4)
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
-import Prelude (Unit, discard, map, show, ($), (*), (+), (/), (/=), (<>), (==))
+import Prelude (Unit, discard, map, show, ($), (&&), (*), (+), (/), (/=), (<>), (==), negate)
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
@@ -83,6 +82,34 @@ testFromZRotation =
   quickCheck \r ->
     epsilonEquals (fromZRotation r) (rotateZ identity r) <?> "testFromZRotation " <> show r
 
+testFrustum :: Effect Unit
+testFrustum =
+  quickCheck \left right bottom top near far ->
+    let
+      theFrustum = frustum left right bottom top near far
+
+      sl15 = slice 1 5 theFrustum
+
+      sl68 = slice 6 8 theFrustum
+
+      sl1114 = slice 11 14 theFrustum
+    in
+      sl15 == [ 0.0, 0.0, 0.0, 0.0 ]
+        && sl68
+        == [ 0.0, 0.0 ]
+        && sl1114
+        == [ -1.0, 0.0, 0.0 ]
+        <?> "testFrustum "
+        <> show [ left, right, bottom, top, near, far ]
+        <> " -> "
+        <> show theFrustum
+        <> " "
+        <> show sl15
+        <> " "
+        <> show sl68
+        <> " "
+        <> show sl1114
+
 testInvert :: Effect Unit
 testInvert =
   quickCheck \(ArbMat4 m) ->
@@ -145,6 +172,7 @@ main = do
   testFromXRotation
   testFromYRotation
   testFromZRotation
+  testFrustum
   testMultiply
   testMultiplyDistributivity
   testSubtract
