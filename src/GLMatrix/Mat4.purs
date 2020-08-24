@@ -21,6 +21,7 @@ module GLMatrix.Mat4
   , multiply
   , multiplyScalar
   , multiplyScalarAndAdd
+  , ortho
   , rotate
   , scale
   , subtract
@@ -172,6 +173,12 @@ foreign import js_multiplyScalarAndAdd :: Fn3 Mat4 Mat4 Number Mat4
 -- |Adds two Mat4's after multiplying each element of the second operand by a scalar value
 multiplyScalarAndAdd :: Mat4 -> Mat4 -> Number -> Mat4
 multiplyScalarAndAdd = runFn3 js_multiplyScalarAndAdd
+
+foreign import js_ortho :: Fn6 Number Number Number Number Number Number Mat4
+
+-- |Generates a orthogonal projection matrix with the given bounds
+ortho :: Number -> Number -> Number -> Number -> Number -> Number -> Mat4
+ortho = runFn6 js_ortho
 
 foreign import js_rotate :: Fn3 Mat4 Number Vec3 Mat4
 

@@ -152,6 +152,12 @@ exports.js_multiplyScalarAndAdd = (a, b, scale) => {
     return out
 }
 
+exports.js_ortho = (left, right, bottom, top, near, far) => {
+    let out = m.mat4.create()
+    m.mat4.frustum(out, left, right, bottom, top, near, far)
+    return out
+}
+
 exports.js_rotate = (a, r, axis) => {
     let out = m.mat4.create()
     m.mat4.rotate(out, a, r, axis)
