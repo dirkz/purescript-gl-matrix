@@ -210,6 +210,12 @@ exports.js_subtract = (a, b) => {
     return out
 }
 
+exports.js_targetTo = (eye, center, up) => {
+    let out = m.mat4.create()
+    m.mat4.targetTo(out, eye, center, up)
+    return out
+}
+
 exports.js_transpose = (a) => {
     let out = m.mat4.create()
     m.mat4.transpose(out, a)
