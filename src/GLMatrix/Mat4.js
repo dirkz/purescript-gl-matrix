@@ -42,6 +42,12 @@ exports.js_fromScaling = (v) => {
     return out
 }
 
+exports.js_fromTranslation = (v) => {
+    let out = m.mat4.create()
+    m.mat4.fromTranslation(out, v)
+    return out
+}
+
 exports.js_fromValues = function (m00) {
     return function (m01) {
         return function (m02) {
