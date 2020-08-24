@@ -14,6 +14,7 @@ module GLMatrix.Mat4
   , fromYRotation
   , fromZRotation
   , frustum
+  , getScaling
   , identity
   , invert
   , ldu
@@ -123,6 +124,12 @@ foreign import js_frustum :: Fn6 Number Number Number Number Number Number Mat4
 -- |Generates a frustum matrix with the given bounds
 frustum :: Number -> Number -> Number -> Number -> Number -> Number -> Mat4
 frustum = runFn6 js_frustum
+
+foreign import js_getScaling :: Fn1 Mat4 Vec3
+
+-- |Returns the scaling factor component of a transformation matrix. If a matrix is built with fromRotationTranslationScale with a normalized Quaternion paramter, the returned vector will be the same as the scaling vector originally supplied.
+getScaling :: Mat4 -> Vec3
+getScaling = runFn1 js_getScaling
 
 foreign import js_identity :: Fn0 Mat4
 
