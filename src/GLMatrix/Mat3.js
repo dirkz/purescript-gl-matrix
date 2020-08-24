@@ -18,7 +18,7 @@ exports.js_determinant = (a) => {
     return m.mat3.determinant(a)
 }
 
-exports.js_epsilonEquals = (a, b) => {
+exports.js_equals = (a, b) => {
     return m.mat3.equals(a, b)
 }
 

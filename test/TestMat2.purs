@@ -4,9 +4,9 @@ import Test.Arbitrary
 
 import Data.Foldable (sum)
 import Effect (Effect)
-import GLMatrix (epsilonEqualArrays)
+import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose, unsafeFromNumbers)
+import GLMatrix.Mat2 (add, adjoint, determinant, equals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose, unsafeFromNumbers)
 import GLMatrix.Mat2.Mix (scale, fromScaling)
 import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
@@ -37,7 +37,7 @@ testAdjoint =
 
       m2 = multiplyScalar (multiplyScalar m n) (1.0 / n) -- somehow utilize n
     in
-      epsilonEquals (adjoint m) m2 <?> "testAdjoint " <> show n
+      equals (adjoint m) m2 <?> "testAdjoint " <> show n
 
 testDeterminantZero :: Effect Unit
 testDeterminantZero =
@@ -57,12 +57,12 @@ testFrob =
 
       theSum = sqrt $ sum (map (\n -> n * n) (numbers m))
     in
-      GLMatrix.epsilonEquals theFrob theSum <?> "testFrob " <> show m <> " frob " <> show theFrob <> " sum " <> show theSum
+      GLMatrix.equals theFrob theSum <?> "testFrob " <> show m <> " frob " <> show theFrob <> " sum " <> show theSum
 
 testFromRotation :: Effect Unit
 testFromRotation =
   quickCheck \r ->
-    epsilonEquals (fromRotation r) (rotate identity r) <?> "testFromRotation " <> show r
+    equals (fromRotation r) (rotate identity r) <?> "testFromRotation " <> show r
 
 testFromScaling :: Effect Unit
 testFromScaling =
@@ -77,7 +77,7 @@ testFromScaling =
 testInvert :: Effect Unit
 testInvert =
   quickCheck \(ArbMat2 m) ->
-    epsilonEquals (multiply m (invert m)) identity <?> "testInvert " <> show m
+    equals (multiply m (invert m)) identity <?> "testInvert " <> show m
 
 testLDU :: Effect Unit
 testLDU =
@@ -115,7 +115,7 @@ testMultiplyScalarAndAdd =
 
       resM2 = add m1 (scale m2 (Vec2.fromValues r r))
     in
-      epsilonEquals resM1 resM2 <?> "testMultiplyScalarAndAdd " <> show m1 <> " " <> show m2
+      equals resM1 resM2 <?> "testMultiplyScalarAndAdd " <> show m1 <> " " <> show m2
 
 testMultiplyScalar :: Effect Unit
 testMultiplyScalar =
@@ -125,7 +125,7 @@ testMultiplyScalar =
 
       resM2 = scale m (Vec2.fromValues r r)
     in
-      epsilonEquals resM1 resM2 <?> "testMultiplyScalar " <> show r <> " " <> show m
+      equals resM1 resM2 <?> "testMultiplyScalar " <> show r <> " " <> show m
 
 testRotate :: Effect Unit
 testRotate =
@@ -135,12 +135,12 @@ testRotate =
 
       resM2 = rotate resM1 (negate r)
     in
-      epsilonEquals m resM2 <?> "testRotate " <> show m
+      equals m resM2 <?> "testRotate " <> show m
 
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat2 m1) (ArbMat2 m2) ->
-    epsilonEquals m1 (subtract (add m1 m2) m2) <?> "testSubtract " <> show m1 <> " " <> show m2
+    equals m1 (subtract (add m1 m2) m2) <?> "testSubtract " <> show m1 <> " " <> show m2
 
 testTranspose :: Effect Unit
 testTranspose =
@@ -160,7 +160,7 @@ testExtractNumbers =
 
       m2 = unsafePartial $ unsafeFromNumbers ns
     in
-      epsilonEqualArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
+      equalArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
 
 main :: Effect Unit
 main = do

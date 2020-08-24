@@ -7,7 +7,7 @@ module GLMatrix.Vec2
   , distance
   , divide
   , dot
-  , epsilonEquals
+  , equals
   , floor
   , fromValues
   , inverse
@@ -85,11 +85,11 @@ foreign import js_dot :: Fn2 Vec2 Vec2 Number
 dot :: Vec2 -> Vec2 -> Number
 dot = runFn2 js_dot
 
-foreign import js_epsilonEquals :: Fn2 Vec2 Vec2 Boolean
+foreign import js_equals :: Fn2 Vec2 Vec2 Boolean
 
 -- |Returns whether or not the vectors have approximately the same elements in the same position
-epsilonEquals :: Vec2 -> Vec2 -> Boolean
-epsilonEquals = runFn2 js_epsilonEquals
+equals :: Vec2 -> Vec2 -> Boolean
+equals = runFn2 js_equals
 
 foreign import js_exactEquals :: Fn2 Vec2 Vec2 Boolean
 

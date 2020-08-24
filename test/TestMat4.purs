@@ -3,9 +3,9 @@ module Test.TestMat4 where
 import Test.Arbitrary
 import Data.Foldable (sum)
 import Effect (Effect)
-import GLMatrix (epsilonEqualArrays)
+import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4.Mix (fromVec4)
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
@@ -35,12 +35,12 @@ testAdjoint =
 
       m2 = multiplyScalar (multiplyScalar m n) (1.0 / n) -- somehow utilize n
     in
-      epsilonEquals (adjoint m) m2 <?> "testAdjoint " <> show n
+      equals (adjoint m) m2 <?> "testAdjoint " <> show n
 
 testDeterminant :: Effect Unit
 testDeterminant =
   quickCheck \(ArbVec4 v) ->
-    GLMatrix.epsilonEquals (determinant $ fromVec4 v v v v) 0.0
+    GLMatrix.equals (determinant $ fromVec4 v v v v) 0.0
 
 testFrob :: Effect Unit
 testFrob =
@@ -50,37 +50,37 @@ testFrob =
 
       theSum = sqrt $ sum (map (\n -> n * n) (numbers m))
     in
-      GLMatrix.epsilonEquals theFrob theSum <?> "testFrob " <> show m <> " frob " <> show theFrob <> " sum " <> show theSum
+      GLMatrix.equals theFrob theSum <?> "testFrob " <> show m <> " frob " <> show theFrob <> " sum " <> show theSum
 
 testFromRotation :: Effect Unit
 testFromRotation =
   quickCheck \r (ArbVec3 v) ->
-    epsilonEquals (fromRotation r v) (rotate identity r v) <?> "testFromRotation " <> show r
+    equals (fromRotation r v) (rotate identity r v) <?> "testFromRotation " <> show r
 
 testFromScaling :: Effect Unit
 testFromScaling =
   quickCheck \(ArbVec3 v) ->
-    epsilonEquals (fromScaling v) (scale identity v) <?> "testFromScaling " <> show v
+    equals (fromScaling v) (scale identity v) <?> "testFromScaling " <> show v
 
 testFromTranslation :: Effect Unit
 testFromTranslation =
   quickCheck \(ArbVec3 v) ->
-    epsilonEquals (fromTranslation v) (translate identity v) <?> "testFromTranslation " <> show v
+    equals (fromTranslation v) (translate identity v) <?> "testFromTranslation " <> show v
 
 testFromXRotation :: Effect Unit
 testFromXRotation =
   quickCheck \r ->
-    epsilonEquals (fromXRotation r) (rotateX identity r) <?> "testFromXRotation " <> show r
+    equals (fromXRotation r) (rotateX identity r) <?> "testFromXRotation " <> show r
 
 testFromYRotation :: Effect Unit
 testFromYRotation =
   quickCheck \r ->
-    epsilonEquals (fromYRotation r) (rotateY identity r) <?> "testFromYRotation " <> show r
+    equals (fromYRotation r) (rotateY identity r) <?> "testFromYRotation " <> show r
 
 testFromZRotation :: Effect Unit
 testFromZRotation =
   quickCheck \r ->
-    epsilonEquals (fromZRotation r) (rotateZ identity r) <?> "testFromZRotation " <> show r
+    equals (fromZRotation r) (rotateZ identity r) <?> "testFromZRotation " <> show r
 
 testFrustum :: Effect Unit
 testFrustum =
@@ -118,7 +118,7 @@ testInvert =
 
       m2 = multiply (invert m) m
     in
-      epsilonEquals m1 identity
+      equals m1 identity
         <?> "testInvert "
         <> show m
         <> " "
@@ -167,7 +167,7 @@ testMultiplyDistributivity =
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
-    epsilonEquals m1 (subtract (add m1 m2) m2) <?> "testSubtract " <> show m1 <> " " <> show m2
+    equals m1 (subtract (add m1 m2) m2) <?> "testSubtract " <> show m1 <> " " <> show m2
 
 testTranspose :: Effect Unit
 testTranspose =
@@ -187,7 +187,7 @@ testExtractNumbers =
 
       m2 = unsafePartial $ unsafeFromNumbers ns
     in
-      epsilonEqualArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
+      equalArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
 
 main :: Effect Unit
 main = do

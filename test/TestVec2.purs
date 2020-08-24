@@ -4,13 +4,12 @@ import Test.Arbitrary
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
-import GLMatrix (epsilonEqualArrays)
+import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat2 as Mat2
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Vec2.Mix (transformMat2)
-
-import GLMatrix.Vec2 (Vec2, add, angle, ceil, cross, distance, divide, dot, epsilonEquals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
+import GLMatrix.Vec2 (Vec2, add, angle, ceil, cross, distance, divide, dot, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec2 as Vec2
 import GLMatrix.Vec3 as Vec3
 import GLMatrix.Vec3.Mix (fromVec2)
@@ -28,12 +27,12 @@ testAdd =
 
       v2 = scale v 2.0
     in
-      epsilonEquals v1 v2 <?> "testAdd " <> show v
+      equals v1 v2 <?> "testAdd " <> show v
 
 testAngleSame :: Effect Unit
 testAngleSame =
   quickCheck \(ArbVec2 v) ->
-    GLMatrix.epsilonEquals (angle v v) 0.0 <?> "testAngleSame " <> show v
+    GLMatrix.equals (angle v v) 0.0 <?> "testAngleSame " <> show v
 
 testAngle :: Effect Unit
 testAngle =
@@ -43,7 +42,7 @@ testAngle =
 
       a2 = angle v1 v2
     in
-      GLMatrix.epsilonEquals a1 a2 <?> "testAngle " <> show v1 <> " " <> show v2 <> " a1:" <> show a1 <> " a2:" <> show a2
+      GLMatrix.equals a1 a2 <?> "testAngle " <> show v1 <> " " <> show v2 <> " a1:" <> show a1 <> " a2:" <> show a2
   where
   angleViaDotProduct :: Vec2 -> Vec2 -> Number
   angleViaDotProduct v1 v2 =
@@ -66,7 +65,7 @@ testCeil =
       ceil2 :: Array Number
       ceil2 = map Math.ceil (numbers v)
     in
-      epsilonEqualArrays ceil1 ceil2 <?> "testCeil " <> show v
+      equalArrays ceil1 ceil2 <?> "testCeil " <> show v
 
 testCross :: Effect Unit
 testCross =
@@ -78,7 +77,7 @@ testCross =
 
       d2 = Vec3.dot (fromVec2 v2) r1
     in
-      GLMatrix.epsilonEquals d1 0.0 && GLMatrix.epsilonEquals d2 0.0 <?> "testCross " <> show v1 <> " " <> show v2
+      GLMatrix.equals d1 0.0 && GLMatrix.equals d2 0.0 <?> "testCross " <> show v1 <> " " <> show v2
 
 testDistance :: Effect Unit
 testDistance =
@@ -90,7 +89,7 @@ testDistance =
       d2 :: Number
       d2 = length $ subtract v1 v2
     in
-      GLMatrix.epsilonEquals d1 d2 <?> "testDistance " <> show v1 <> " " <> show v2
+      GLMatrix.equals d1 d2 <?> "testDistance " <> show v1 <> " " <> show v2
 
 testDivide :: Effect Unit
 testDivide =
@@ -100,7 +99,7 @@ testDivide =
 
       divided = zipWith (/) (numbers v1) (numbers v2)
     in
-      epsilonEqualArrays divided (numbers v) <?> "testDivide " <> show v1 <> " " <> show v2
+      equalArrays divided (numbers v) <?> "testDivide " <> show v1 <> " " <> show v2
 
 testEquals :: Effect Unit
 testEquals =
@@ -120,7 +119,7 @@ testFloor =
       floor2 :: Array Number
       floor2 = map Math.floor (numbers v)
     in
-      epsilonEqualArrays floor1 floor2 <?> "testFloor " <> show v
+      equalArrays floor1 floor2 <?> "testFloor " <> show v
 
 testInverse :: Effect Unit
 testInverse =
@@ -135,7 +134,7 @@ testInverse =
 testLength :: Effect Unit
 testLength =
   quickCheck \(ArbVec2 v) ->
-    GLMatrix.epsilonEquals (length v) (manualLength v) <?> "testLength " <> show v <> " -> " <> show (manualLength v)
+    GLMatrix.equals (length v) (manualLength v) <?> "testLength " <> show v <> " -> " <> show (manualLength v)
   where
   manualLength v = Math.sqrt $ sum $ map (\n -> n * n) (numbers v)
 
@@ -145,17 +144,17 @@ testLerpDouble =
     let
       vDouble = scale v 2.0
     in
-      epsilonEquals (lerp v vDouble 1.0) vDouble <?> "testLerpDouble " <> show v
+      equals (lerp v vDouble 1.0) vDouble <?> "testLerpDouble " <> show v
 
 testLerpOriginal :: Effect Unit
 testLerpOriginal =
   quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
-    epsilonEquals (lerp v1 v2 0.0) v1 <?> "testLerpOriginal " <> show v1 <> " " <> show v2
+    equals (lerp v1 v2 0.0) v1 <?> "testLerpOriginal " <> show v1 <> " " <> show v2
 
 testLerpDifferent :: Effect Unit
 testLerpDifferent =
   quickCheck \(ArbVec2 v1) (ArbVec2 v2) ->
-    epsilonEquals (lerp v1 v2 1.0) v2 <?> "testLerpDifferent " <> show v1 <> " " <> show v2
+    equals (lerp v1 v2 1.0) v2 <?> "testLerpDifferent " <> show v1 <> " " <> show v2
 
 testMaxDouble :: Effect Unit
 testMaxDouble =
@@ -163,7 +162,7 @@ testMaxDouble =
     let
       vDouble = scale v 2.0
     in
-      epsilonEquals (max v vDouble) vDouble <?> "testMaxDouble " <> show v
+      equals (max v vDouble) vDouble <?> "testMaxDouble " <> show v
 
 testMinDouble :: Effect Unit
 testMinDouble =
@@ -171,7 +170,7 @@ testMinDouble =
     let
       vDouble = scale v 2.0
     in
-      epsilonEquals (min v vDouble) v <?> "testMinDouble " <> show v
+      equals (min v vDouble) v <?> "testMinDouble " <> show v
 
 testMultiply :: Effect Unit
 testMultiply =
@@ -181,7 +180,7 @@ testMultiply =
 
       r2 = Vec2.zipWith (*) v1 v2
     in
-      epsilonEquals r1 r2 <?> "testMultiply " <> show v1 <> " " <> show v2
+      equals r1 r2 <?> "testMultiply " <> show v1 <> " " <> show v2
 
 testNegate :: Effect Unit
 testNegate =
@@ -191,7 +190,7 @@ testNegate =
 
       r2 = Vec2.map Prelude.negate v
     in
-      epsilonEquals r1 r2 <?> "testNegate " <> show v
+      equals r1 r2 <?> "testNegate " <> show v
 
 testNormalize :: Effect Unit
 testNormalize =
@@ -203,7 +202,7 @@ testNormalize =
 
       r2 = scale v (1.0 / len)
     in
-      epsilonEquals r1 r2 <?> "testNormalize " <> show v
+      equals r1 r2 <?> "testNormalize " <> show v
 
 testRotate :: Effect Unit
 testRotate =
@@ -211,7 +210,7 @@ testRotate =
     let
       r1 = rotate v v r
     in
-      epsilonEquals r1 v <?> "testRotate " <> show v <> " " <> show r
+      equals r1 v <?> "testRotate " <> show v <> " " <> show r
 
 testRound :: Effect Unit
 testRound =
@@ -223,7 +222,7 @@ testRound =
       round2 :: Array Number
       round2 = map Math.round (numbers v)
     in
-      epsilonEqualArrays round1 round2 <?> "testRound " <> show v
+      equalArrays round1 round2 <?> "testRound " <> show v
 
 testScaleAndAdd :: Effect Unit
 testScaleAndAdd =
@@ -233,7 +232,7 @@ testScaleAndAdd =
 
       r2 = add v1 (scale v2 s)
     in
-      epsilonEquals r1 r2 <?> "testScaleAndAdd " <> show v1 <> " " <> show v2 <> " " <> show s
+      equals r1 r2 <?> "testScaleAndAdd " <> show v1 <> " " <> show v2 <> " " <> show s
 
 testSquaredDistance :: Effect Unit
 testSquaredDistance =
@@ -245,7 +244,7 @@ testSquaredDistance =
 
       r2 = d * d
     in
-      GLMatrix.epsilonEquals r1 r2 <?> "testSquaredDistance " <> show v1 <> " " <> show v2
+      GLMatrix.equals r1 r2 <?> "testSquaredDistance " <> show v1 <> " " <> show v2
 
 testSquaredLength :: Effect Unit
 testSquaredLength =
@@ -257,7 +256,7 @@ testSquaredLength =
 
       r2 = l * l
     in
-      GLMatrix.epsilonEquals r1 r2 <?> "testSquaredLength " <> show v
+      GLMatrix.equals r1 r2 <?> "testSquaredLength " <> show v
 
 testSubtract :: Effect Unit
 testSubtract =
@@ -267,7 +266,7 @@ testSubtract =
 
       r2 = add v1 (negate v2)
     in
-      epsilonEquals r1 r2 <?> "testSubtract " <> show v1 <> " " <> show v2
+      equals r1 r2 <?> "testSubtract " <> show v1 <> " " <> show v2
 
 testTransformMat2 :: Effect Unit
 testTransformMat2 =
@@ -275,7 +274,7 @@ testTransformMat2 =
     let
       r1 = transformMat2 v Mat2.identity
     in
-      epsilonEquals r1 v <?> "testTransformMat2 " <> show v
+      equals r1 v <?> "testTransformMat2 " <> show v
 
 testTransformMat3 :: Effect Unit
 testTransformMat3 =
@@ -289,7 +288,7 @@ testTransformMat3 =
 
       r2 = transformMat3 v m2
     in
-      epsilonEquals r1 r2 <?> "testTransformMat3 " <> show v <> " " <> show m1
+      equals r1 r2 <?> "testTransformMat3 " <> show v <> " " <> show m1
   where
   extractNumbers :: Partial => Array Number -> Array Number
   extractNumbers [ m00, m01, _, m10, m11, _, m20, m21, _ ] = [ m00, m01, 1.0, m10, m11, 1.0, m20, m21, 1.0 ]
@@ -302,7 +301,7 @@ testZero =
 
       r1 = scale v r
     in
-      epsilonEquals r1 v <?> "testZero " <> show r
+      equals r1 v <?> "testZero " <> show r
 
 main :: Effect Unit
 main = do

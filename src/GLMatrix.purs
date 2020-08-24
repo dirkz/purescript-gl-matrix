@@ -8,11 +8,11 @@ import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, runEffectFn1)
 
-foreign import js_epsilonEquals :: Fn2 Number Number Boolean
+foreign import js_equals :: Fn2 Number Number Boolean
 
 -- |Tests whether or not the arguments have approximately the same value, within an absolute or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less than or equal to 1.0, and a relative tolerance is used for larger values)
-epsilonEquals :: Number -> Number -> Boolean
-epsilonEquals = runFn2 js_epsilonEquals
+equals :: Number -> Number -> Boolean
+equals = runFn2 js_equals
 
 data MatrixArrayType
   = MatrixArrayTypeArray
@@ -40,5 +40,6 @@ foreign import js_toRadian :: Fn1 Number Number
 toRadian :: Number -> Number
 toRadian = runFn1 js_toRadian
 
-epsilonEqualArrays :: Array Number -> Array Number -> Boolean
-epsilonEqualArrays ns1 ns2 = and $ zipWith epsilonEquals ns1 ns2
+-- |Uses `equal` to check that all numbers in the given arrays are approximately the same.
+equalArrays :: Array Number -> Array Number -> Boolean
+equalArrays ns1 ns2 = and $ zipWith equals ns1 ns2

@@ -3,7 +3,7 @@ module GLMatrix.Mat3
   , add
   , adjoint
   , determinant
-  , epsilonEquals
+  , equals
   , frob
   , fromRotation
   , fromValues
@@ -53,11 +53,11 @@ foreign import js_determinant :: Fn1 Mat3 Number
 determinant :: Mat3 -> Number
 determinant = runFn1 js_determinant
 
-foreign import js_epsilonEquals :: Fn2 Mat3 Mat3 Boolean
+foreign import js_equals :: Fn2 Mat3 Mat3 Boolean
 
 -- |Returns whether or not the matrices have approximately the same elements in the same position
-epsilonEquals :: Mat3 -> Mat3 -> Boolean
-epsilonEquals = runFn2 js_epsilonEquals
+equals :: Mat3 -> Mat3 -> Boolean
+equals = runFn2 js_equals
 
 foreign import js_exactEquals :: Fn2 Mat3 Mat3 Boolean
 
