@@ -1,5 +1,7 @@
 module GLMatrix.Mat4
   ( Mat4
+  , FieldOfView
+  , fieldOfView
   , add
   , adjoint
   , determinant
@@ -205,6 +207,19 @@ type FieldOfView
     , leftDegrees :: Number
     , rightDegrees :: Number
     }
+
+fieldOfView ::
+  Number ->
+  Number ->
+  Number ->
+  Number ->
+  FieldOfView
+fieldOfView upDegrees downDegrees leftDegrees rightDegrees =
+  { upDegrees
+  , downDegrees
+  , leftDegrees
+  , rightDegrees
+  }
 
 foreign import js_perspectiveFromFieldOfView :: Fn3 FieldOfView Number Number Mat4
 
