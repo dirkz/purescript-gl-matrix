@@ -81,7 +81,13 @@ exports.js_fromValues = function (m00) {
         };
     };
 };
-  
+ 
+exports.js_fromXRotation = (r) => {
+    let out = m.mat4.create()
+    m.mat4.fromXRotation(out, r)
+    return out
+}
+
 exports.js_identity = () => {
     return m.mat4.create()
 }
