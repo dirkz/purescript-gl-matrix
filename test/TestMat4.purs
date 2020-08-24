@@ -5,7 +5,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, numbers, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4.Mix (fromVec4)
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
@@ -115,6 +115,22 @@ testInvert =
   quickCheck \(ArbMat4 m) ->
     epsilonEquals (multiply m (invert m)) identity <?> "testInvert " <> show m
 
+testLookAt :: Effect Unit
+testLookAt =
+  quickCheck \(ArbVec3 eye) (ArbVec3 center) (ArbVec3 up) ->
+    let
+      res = lookAt eye center up
+    in
+      false
+        <?> "testLookAt "
+        <> show eye
+        <> " "
+        <> show center
+        <> " "
+        <> show up
+        <> " -> "
+        <> show res
+
 testMultiply :: Effect Unit
 testMultiply =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -173,6 +189,8 @@ main = do
   testFromYRotation
   testFromZRotation
   testFrustum
+  testInvert
+  testLookAt
   testMultiply
   testMultiplyDistributivity
   testSubtract
