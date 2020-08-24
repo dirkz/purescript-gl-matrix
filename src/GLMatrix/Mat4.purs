@@ -11,6 +11,8 @@ module GLMatrix.Mat4
   , fromTranslation
   , fromValues
   , fromXRotation
+  , fromYRotation
+  , fromZRotation
   , identity
   , invert
   , ldu
@@ -102,6 +104,18 @@ foreign import js_fromXRotation :: Fn1 Number Mat4
 -- |Creates a matrix from the given angle around the X axis This is equivalent to (but much faster than): mat4.identity(dest); mat4.rotateX(dest, dest, rad);
 fromXRotation :: Number -> Mat4
 fromXRotation = runFn1 js_fromXRotation
+
+foreign import js_fromYRotation :: Fn1 Number Mat4
+
+-- |Creates a matrix from the given angle around the Y axis This is equivalent to (but much faster than): mat4.identity(dest); mat4.rotateY(dest, dest, rad);
+fromYRotation :: Number -> Mat4
+fromYRotation = runFn1 js_fromYRotation
+
+foreign import js_fromZRotation :: Fn1 Number Mat4
+
+-- |Creates a matrix from the given angle around the Z axis This is equivalent to (but much faster than): mat4.identity(dest); mat4.rotateZ(dest, dest, rad);
+fromZRotation :: Number -> Mat4
+fromZRotation = runFn1 js_fromZRotation
 
 foreign import js_identity :: Fn0 Mat4
 
