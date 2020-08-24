@@ -113,7 +113,20 @@ testFrustum =
 testInvert :: Effect Unit
 testInvert =
   quickCheck \(ArbMat4 m) ->
-    epsilonEquals (multiply m (invert m)) identity <?> "testInvert " <> show m
+    let
+      m1 = multiply m (invert m)
+
+      m2 = multiply (invert m) m
+    in
+      epsilonEquals m1 identity
+        <?> "testInvert "
+        <> show m
+        <> " "
+        <> show identity
+        <> " -> "
+        <> show m1
+        <> " "
+        <> show m2
 
 testLookAt :: Effect Unit
 testLookAt =
