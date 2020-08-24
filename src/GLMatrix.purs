@@ -1,7 +1,6 @@
 module GLMatrix where
 
 import Prelude
-
 import Data.Array (zipWith)
 import Data.Foldable (and)
 import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
@@ -32,6 +31,7 @@ setMatrixArrayTypeFloat32Array = runEffectFn1 js_setMatrixArrayTypeFloat32Array
 
 setMatrixArrayType :: MatrixArrayType -> Effect Unit
 setMatrixArrayType MatrixArrayTypeArray = runEffectFn1 js_setMatrixArrayTypeArray unit
+
 setMatrixArrayType MatrixArrayTypeFloat32Array = runEffectFn1 js_setMatrixArrayTypeFloat32Array unit
 
 foreign import js_toRadian :: Fn1 Number Number
