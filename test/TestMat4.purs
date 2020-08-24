@@ -9,6 +9,7 @@ import GLMatrix as GLMatrix
 import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4 as Mat4
 import GLMatrix.Mat4.Mix (fromVec4)
+import GLMatrix.Vec3 as Vec3
 import Math (sqrt)
 import Math as Math
 import Partial.Unsafe (unsafePartial)
@@ -256,6 +257,15 @@ testPerspectiveFromFieldOfView =
         <?> "testPerspectiveFromFieldOfView "
         <> show resM1
 
+testRotateX :: Effect Unit
+testRotateX =
+  quickCheck \(ArbMat4 m) r ->
+    rotateX m r == rotate m r (Vec3.fromValues 1.0 0.0 0.0)
+      <?> "testRotateX "
+      <> show m
+      <> " "
+      <> show r
+
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -303,6 +313,7 @@ main = do
   testOrtho
   testPerspective
   testPerspectiveFromFieldOfView
+  testRotateX
   testSubtract
   testTranspose
   testExtractNumbers
