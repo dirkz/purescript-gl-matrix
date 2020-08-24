@@ -16,6 +16,7 @@ module GLMatrix.Mat4
   , multiplyScalar
   , multiplyScalarAndAdd
   , rotate
+  , scale
   , subtract
   , transpose
   , numbers
