@@ -1,7 +1,6 @@
 module Test.TestMat2 where
 
 import Test.Arbitrary
-
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (equalArrays)

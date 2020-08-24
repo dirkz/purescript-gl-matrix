@@ -219,7 +219,6 @@ subtract :: Vec3 -> Vec3 -> Vec3
 subtract = runFn2 js_subtract
 
 -- TODO: (static) transformMat2d(out, a, m) → {Vec3}
-
 foreign import js_transformMat3 :: Fn2 Vec3 Mat3 Vec3
 
 transformMat3 :: Vec3 -> Mat3 -> Vec3
