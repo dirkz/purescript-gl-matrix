@@ -158,6 +158,12 @@ exports.js_ortho = (left, right, bottom, top, near, far) => {
     return out
 }
 
+exports.js_perspective = (fovy, aspect, near, far) => {
+    let out = m.mat4.create()
+    m.mat4.perspective(out, fovy, aspect, near, far)
+    return out
+}
+
 exports.js_rotate = (a, r, axis) => {
     let out = m.mat4.create()
     m.mat4.rotate(out, a, r, axis)
