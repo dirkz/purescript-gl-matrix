@@ -2,12 +2,11 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
-import Data.Array (slice)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (epsilonEqualArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, projection, rotate, subtract, transpose, unsafeFromNumbers)
+import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotation, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, projection, rotate, slice, subtract, transpose, unsafeFromNumbers)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat3.Mix (fromMat4, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
@@ -59,9 +58,7 @@ testFromMat4 :: Effect Unit
 testFromMat4 =
   quickCheck \(ArbMat4 m) ->
     let
-      n4 = Mat4.numbers m
-
-      c1 = (slice 0 3 n4) <> (slice 4 7 n4) <> (slice 8 11 n4)
+      c1 = (Mat4.slice 0 3 m) <> (Mat4.slice 4 7 m) <> (Mat4.slice 8 11 m)
 
       c2 = numbers $ fromMat4 m
     in
@@ -143,7 +140,7 @@ testProjection =
     let
       resM1 = projection w h
 
-      res = slice 5 10 (numbers resM1)
+      res = slice 5 10 resM1
     in
       GLMatrix.epsilonEqualArrays res [ 0.0, -1.0, 1.0, 1.0 ] <?> "testProjection " <> show w <> " " <> show h <> " " <> show resM1 <> " " <> show res
 
@@ -178,7 +175,7 @@ testTranslate =
     let
       resM1 = translate m v
 
-      ts = slice 5 6 $ numbers m
+      ts = slice 5 6 m
     in
       ts == Vec2.numbers v <?> "testTranslate " <> show m <> " " <> show v <> " " <> show resM1
 
