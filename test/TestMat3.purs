@@ -10,7 +10,6 @@ import GLMatrix.Mat3 (add, adjoint, determinant, epsilonEquals, frob, fromRotati
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat3.Mix (fromMat4, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
-import GLMatrix.Vec2 as Vec2
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
