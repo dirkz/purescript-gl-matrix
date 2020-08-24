@@ -266,6 +266,24 @@ testRotateX =
       <> " "
       <> show r
 
+testRotateY :: Effect Unit
+testRotateY =
+  quickCheck \(ArbMat4 m) r ->
+    rotateY m r == rotate m r (Vec3.fromValues 0.0 1.0 0.0)
+      <?> "testRotateY "
+      <> show m
+      <> " "
+      <> show r
+
+testRotateZ :: Effect Unit
+testRotateZ =
+  quickCheck \(ArbMat4 m) r ->
+    rotateZ m r == rotate m r (Vec3.fromValues 0.0 0.0 1.0)
+      <?> "testRotateZ "
+      <> show m
+      <> " "
+      <> show r
+
 testSubtract :: Effect Unit
 testSubtract =
   quickCheck \(ArbMat4 m1) (ArbMat4 m2) ->
@@ -314,6 +332,8 @@ main = do
   testPerspective
   testPerspectiveFromFieldOfView
   testRotateX
+  testRotateY
+  testRotateZ
   testSubtract
   testTranspose
   testExtractNumbers
