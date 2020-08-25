@@ -1,6 +1,6 @@
 module GLMatrix.Quat where
 
-import Data.Function.Uncurried (Fn1, Fn2, Fn4, runFn1, runFn2, runFn4)
+import Data.Function.Uncurried (Fn1, Fn2, Fn4, Fn5, runFn1, runFn2, runFn4, runFn5)
 
 foreign import data Quat :: Type
 
@@ -22,11 +22,11 @@ foreign import js_length :: Fn1 Quat Number
 length :: Quat -> Number
 length = runFn1 js_length
 
-foreign import js_sqlerp :: Fn4 Number Number Number Number Quat
+foreign import js_sqlerp :: Fn5 Quat Quat Quat Quat Number Quat
 
 -- |Sets the specified quaternion with values corresponding to the given axes. Each axis is a vec3 and is expected to be unit length and perpendicular to all other specified axes.
-sqlerp :: Number -> Number -> Number -> Number -> Quat
-sqlerp = runFn4 js_sqlerp
+sqlerp :: Quat -> Quat -> Quat -> Quat -> Number -> Quat
+sqlerp = runFn5 js_sqlerp
 
 foreign import js_add :: Fn2 Quat Quat Quat
 
