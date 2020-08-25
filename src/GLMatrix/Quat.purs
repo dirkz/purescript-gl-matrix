@@ -51,3 +51,10 @@ foreign import js_dot :: Fn2 Quat Quat Quat
 -- |Calculates the dot product of two quat's
 dot :: Quat -> Quat -> Quat
 dot = runFn2 js_dot
+
+foreign import js_exp :: Fn1 Quat Quat
+
+-- |Calculate the exponential of a unit quaternion.
+exp :: Quat -> Quat
+exp = runFn1 js_exp
+

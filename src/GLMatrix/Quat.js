@@ -43,3 +43,9 @@ exports.js_dot = (a, b) => {
     m.quat.dot(out, a, b)
     return out
 }
+
+exports.js_exp = (a) => {
+    let out = m.quat.create()
+    m.quat.exp(out, a)
+    return out
+}
