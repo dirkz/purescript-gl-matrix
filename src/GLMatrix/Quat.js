@@ -132,3 +132,8 @@ exports.js_scale = (a, s) => {
     return out
 }
 
+exports.js_slerp = (a, b, t) => {
+    let out = m.quat.create()
+    m.quat.slerp(out, a, b, t)
+    return out
+}

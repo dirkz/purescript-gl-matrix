@@ -142,3 +142,9 @@ foreign import js_scale :: Fn2 Quat Number Quat
 scale :: Quat -> Number -> Quat
 scale = runFn2 js_scale
 
+foreign import js_slerp :: Fn3 Quat Quat Number Quat
+
+-- |Performs a spherical linear interpolation between two quat
+slerp :: Quat -> Quat -> Number -> Quat
+slerp = runFn3 js_slerp
+
