@@ -33,3 +33,9 @@ foreign import js_add :: Fn2 Quat Quat Quat
 -- |Adds two quat's
 add :: Quat -> Quat -> Quat
 add = runFn2 js_add
+
+foreign import js_calculateW :: Fn1 Quat Quat
+
+-- |Calculates the W component of a quat from the X, Y, and Z components. Assumes that quaternion is 1 unit in length. Any existing W component will be ignored.
+calculateW :: Quat -> Quat
+calculateW = runFn1 js_calculateW

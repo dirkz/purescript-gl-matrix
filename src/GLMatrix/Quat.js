@@ -25,3 +25,9 @@ exports.js_add = (a, b) => {
     m.quat.add(out, a, b)
     return out
 }
+
+exports.js_calculateW = (a) => {
+    let out = m.quat.create()
+    m.quat.calculateW(out, a)
+    return out
+}
