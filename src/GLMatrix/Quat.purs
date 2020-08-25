@@ -106,3 +106,9 @@ foreign import js_multiply :: Fn2 Quat Quat Quat
 multiply :: Quat -> Quat -> Quat
 multiply = runFn2 js_multiply
 
+foreign import js_normalize :: Fn1 Quat Quat
+
+-- |Normalize a quat
+normalize :: Quat -> Quat
+normalize = runFn1 js_normalize
+
