@@ -26,6 +26,7 @@ module GLMatrix.Quat
   , slerp
   , squaredLength
   , numbers
+  , unsafeFromNumbers
   , map
   , zipWith
   , slice
