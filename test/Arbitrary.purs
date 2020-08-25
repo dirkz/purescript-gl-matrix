@@ -1,6 +1,7 @@
 module Test.Arbitrary where
 
 import Prelude
+
 import GLMatrix.Mat2 (Mat2)
 import GLMatrix.Mat2 as Mat2
 import GLMatrix.Mat2d (Mat2d)
@@ -9,6 +10,8 @@ import GLMatrix.Mat3 (Mat3)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat4 (FieldOfView, Mat4, fieldOfView)
 import GLMatrix.Mat4 as Mat4
+import GLMatrix.Quat (Quat)
+import GLMatrix.Quat as Quat
 import GLMatrix.Vec2 (Vec2)
 import GLMatrix.Vec2 as Vec2
 import GLMatrix.Vec3 (Vec3)
@@ -97,3 +100,9 @@ instance arbFieldOfView :: Arbitrary ArbFieldOfView where
   arbitrary =
     ArbFieldOfView
       <$> (fieldOfView <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
+
+newtype ArbQuat
+  = ArbQuat Quat
+
+instance arbQuat :: Arbitrary ArbQuat where
+  arbitrary = ArbQuat <$> (Quat.fromValues <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
