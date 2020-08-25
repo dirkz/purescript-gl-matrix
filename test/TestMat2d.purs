@@ -1,7 +1,7 @@
 module Test.TestMat2d where
 
 import Test.Arbitrary
-import Data.Array (catMaybes, unsafeIndex, (!!))
+import Data.Array (unsafeIndex)
 import Data.Foldable (maximum, sum)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
@@ -13,7 +13,7 @@ import GLMatrix.Mat2d.Mix (fromScaling, fromTranslation, fromVec2, scale, transl
 import Math (sqrt)
 import Math as Math
 import Partial.Unsafe (unsafePartial)
-import Prelude (Unit, discard, map, show, ($), (*), (+), (/=), (<), (<<<), (<>), (==))
+import Prelude (Unit, discard, map, show, ($), (*), (+), (/=), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
