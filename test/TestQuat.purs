@@ -3,7 +3,6 @@ module Test.TestQuat where
 import Test.Arbitrary
 import Data.Array (unsafeIndex)
 import Effect (Effect)
-import GLMatrix.Mat3 (Mat3)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Quat (Quat, add, conjugate, equals, exp, getAngle, invert, length, lerp, ln, normalize, numbers, scale, slerp)
 import GLMatrix.Quat.Mix (fromMat3, getAxisAngle, setAxes, setAxisAngle)
