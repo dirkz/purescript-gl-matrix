@@ -1,6 +1,6 @@
 module GLMatrix.Quat where
 
-import Data.Function.Uncurried (Fn1, Fn2, Fn3, Fn4, Fn5, runFn1, runFn2, runFn3, runFn4, runFn5)
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, Fn5, runFn0, runFn1, runFn2, runFn3, runFn4, runFn5)
 
 foreign import data Quat :: Type
 
@@ -75,4 +75,10 @@ foreign import js_getAngle :: Fn2 Quat Quat Number
 -- |Gets the angular distance between two unit quaternions
 getAngle :: Quat -> Quat -> Number
 getAngle = runFn2 js_getAngle
+
+foreign import js_identity :: Fn0 Quat
+
+-- |Gets the angular distance between two unit quaternions
+identity :: Quat
+identity = runFn0 js_identity
 

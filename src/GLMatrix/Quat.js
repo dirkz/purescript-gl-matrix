@@ -66,3 +66,8 @@ exports.js_getAngle = (a, b) => {
     return m.quat.getAngle(a, b)
 }
 
+exports.js_identity = () => {
+    let out = m.quat.create()
+    m.quat.identity(out)
+    return out
+}
