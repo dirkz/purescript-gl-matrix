@@ -94,3 +94,9 @@ foreign import js_lerp :: Fn3 Quat Quat Number Quat
 lerp :: Quat -> Quat -> Number -> Quat
 lerp = runFn3 js_lerp
 
+foreign import js_ln :: Fn1 Quat Quat
+
+-- |Calculate the natural logarithm of a unit quaternion.
+ln :: Quat -> Quat
+ln = runFn1 js_ln
+

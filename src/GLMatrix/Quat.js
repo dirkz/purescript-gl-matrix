@@ -84,3 +84,9 @@ exports.js_lerp = (a, b, t) => {
     return out
 }
 
+exports.js_ln = (a) => {
+    let out = m.quat.create()
+    m.quat.ln(out, a)
+    return out
+}
+
