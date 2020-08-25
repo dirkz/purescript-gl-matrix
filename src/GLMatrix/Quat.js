@@ -31,3 +31,9 @@ exports.js_calculateW = (a) => {
     m.quat.calculateW(out, a)
     return out
 }
+
+exports.js_conjugate = (a) => {
+    let out = m.quat.create()
+    m.quat.conjugate(out, a)
+    return out
+}
