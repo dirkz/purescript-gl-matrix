@@ -1,12 +1,11 @@
 module Test.TestQuat where
 
 import Test.Arbitrary
-
 import Effect (Effect)
-import GLMatrix as GLMatrix
 import GLMatrix.Quat (add, conjugate, equals, invert, lerp, normalize)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
-import Prelude (Unit, discard, show, (&&), (<>), (==))
+import Math as Math
+import Prelude (Unit, discard, show, (&&), (-), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
@@ -30,7 +29,9 @@ testGetAxisAngle =
 
       r2 = getAxisAngle v q1
     in
-      GLMatrix.equals r1 r2 <?> "testGetAxisAngle " <> show r1 <> " " <> show r2
+      Math.abs (r1 - r2) < maxAllowedDiff <?> "testGetAxisAngle " <> show r1 <> " " <> show r2
+  where
+  maxAllowedDiff = 0.001
 
 testLerp :: Effect Unit
 testLerp =
