@@ -49,3 +49,9 @@ exports.js_exp = (a) => {
     m.quat.exp(out, a)
     return out
 }
+
+exports.js_fromEuler = (x, y, z) => {
+    let out = m.quat.create()
+    m.quat.fromEuler(out, x, y, z)
+    return out
+}
