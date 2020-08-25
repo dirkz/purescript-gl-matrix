@@ -120,3 +120,9 @@ exports.js_rotateY = (a, r) => {
     return out
 }
 
+exports.js_rotateZ = (a, r) => {
+    let out = m.quat.create()
+    m.quat.rotateZ(out, a, r)
+    return out
+}
+
