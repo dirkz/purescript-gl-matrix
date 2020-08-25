@@ -70,3 +70,9 @@ foreign import js_fromValues :: Fn4 Number Number Number Number Quat
 fromValues :: Number -> Number -> Number -> Number -> Quat
 fromValues = runFn4 js_fromValues
 
+foreign import js_getAngle :: Fn2 Quat Quat Number
+
+-- |Gets the angular distance between two unit quaternions
+getAngle :: Quat -> Quat -> Number
+getAngle = runFn2 js_getAngle
+
