@@ -1,6 +1,6 @@
 module GLMatrix.Quat where
 
-import Data.Function.Uncurried (Fn1, Fn2, Fn3, Fn5, runFn1, runFn2, runFn3, runFn5)
+import Data.Function.Uncurried (Fn1, Fn2, Fn3, Fn4, Fn5, runFn1, runFn2, runFn3, runFn4, runFn5)
 
 foreign import data Quat :: Type
 
@@ -63,4 +63,10 @@ foreign import js_fromEuler :: Fn3 Number Number Number Quat
 -- |Creates a quaternion from the given euler angle x, y, z.
 fromEuler :: Number -> Number -> Number -> Quat
 fromEuler = runFn3 js_fromEuler
+
+foreign import js_fromValues :: Fn4 Number Number Number Number Quat
+
+-- |Creates a new quat initialized with the given values
+fromValues :: Number -> Number -> Number -> Number -> Quat
+fromValues = runFn4 js_fromValues
 
