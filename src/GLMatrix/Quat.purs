@@ -124,3 +124,9 @@ foreign import js_rotateX :: Fn2 Quat Number Quat
 rotateX :: Quat -> Number -> Quat
 rotateX = runFn2 js_rotateX
 
+foreign import js_rotateY :: Fn2 Quat Number Quat
+
+-- |Rotates a quaternion by the given angle about the Y axis
+rotateY :: Quat -> Number -> Quat
+rotateY = runFn2 js_rotateY
+
