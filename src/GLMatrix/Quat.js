@@ -90,3 +90,9 @@ exports.js_ln = (a) => {
     return out
 }
 
+exports.js_multiply = (a, b) => {
+    let out = m.quat.create()
+    m.quat.multiply(out, a, b)
+    return out
+}
+

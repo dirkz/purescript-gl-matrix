@@ -100,3 +100,9 @@ foreign import js_ln :: Fn1 Quat Quat
 ln :: Quat -> Quat
 ln = runFn1 js_ln
 
+foreign import js_multiply :: Fn2 Quat Quat Quat
+
+-- |Multiplies two quat's
+multiply :: Quat -> Quat -> Quat
+multiply = runFn2 js_multiply
+
