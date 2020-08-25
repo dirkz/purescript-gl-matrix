@@ -61,3 +61,8 @@ exports.js_fromValues = (x, y, z, w) => {
     m.quat.fromValues(out, x, y, z, w)
     return out
 }
+
+exports.js_getAngle = (a, b) => {
+    return m.quat.getAngle(a, b)
+}
+
