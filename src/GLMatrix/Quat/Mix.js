@@ -13,9 +13,3 @@ exports.js_setAxes = (view, right, up) => {
     m.quat.setAxes(out, view, right, up)
     return out
 }
-
-exports.js_sqlerp = (a, b, c, d, t) => {
-    let out = m.quat.create()
-    m.quat.sqlerp(out, a, b, c, d, t)
-    return out
-}
