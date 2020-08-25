@@ -1,14 +1,14 @@
 module Test.TestQuat where
 
 import Test.Arbitrary
-
 import Effect (Effect)
-import GLMatrix.Quat (Quat, add, conjugate, equals, exp, getAngle, invert, lerp, ln, normalize, scale, slerp)
+import GLMatrix.Quat (Quat, add, conjugate, equals, exp, getAngle, invert, length, lerp, ln, normalize, numbers, scale, slerp)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
 import Math as Math
-import Prelude (Unit, discard, show, (&&), (-), (<), (<<<), (<>), (==))
+import Partial.Unsafe (unsafePartial)
+import Prelude (Unit, discard, show, ($), (&&), (-), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
@@ -66,19 +66,20 @@ testPow =
     in
       equals q3 q <?> "testPow " <> show q <> " " <> show q3
 
-vec4FromQuat = Vec4.unsafeFromNumbers <<< numbers
+vec4FromQuat :: Quat -> Vec4
+vec4FromQuat q = unsafePartial $ Vec4.unsafeFromNumbers $ numbers q
 
 testLength :: Effect Unit
 testLength =
   quickCheck \(ArbQuat q) ->
     let
-      q1 = ln q
+      v = vec4FromQuat q
 
-      q2 = scale q1 s
+      l1 = length q
 
-      q3 = exp q2
+      l2 = Vec4.length v
     in
-      equals q3 q <?> "testLength " <> show q <> " " <> show q3
+      l1 == l2 <?> "testLength " <> show q <> " " <> show v
 
 main :: Effect Unit
 main = do
