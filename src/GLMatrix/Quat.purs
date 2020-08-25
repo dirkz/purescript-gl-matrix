@@ -112,3 +112,9 @@ foreign import js_normalize :: Fn1 Quat Quat
 normalize :: Quat -> Quat
 normalize = runFn1 js_normalize
 
+foreign import js_pow :: Fn1 Quat Number
+
+-- |Calculate the scalar power of a unit quaternion.
+pow :: Quat -> Number
+pow = runFn1 js_pow
+
