@@ -28,7 +28,7 @@ length = runFn1 js_length
 
 foreign import js_sqlerp :: Fn5 Quat Quat Quat Quat Number Quat
 
--- |Sets the specified quaternion with values corresponding to the given axes. Each axis is a vec3 and is expected to be unit length and perpendicular to all other specified axes.
+-- |Performs a spherical linear interpolation with two control points
 sqlerp :: Quat -> Quat -> Quat -> Quat -> Number -> Quat
 sqlerp = runFn5 js_sqlerp
 
