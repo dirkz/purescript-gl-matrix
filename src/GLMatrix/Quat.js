@@ -19,3 +19,9 @@ exports.js_sqlerp = (a, b, c, d, t) => {
     m.quat.sqlerp(out, a, b, c, d, t)
     return out
 }
+
+exports.js_add = (a, b) => {
+    let out = m.quat.create()
+    m.quat.add(out, a, b)
+    return out
+}

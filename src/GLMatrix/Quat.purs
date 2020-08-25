@@ -27,3 +27,9 @@ foreign import js_sqlerp :: Fn4 Number Number Number Number Quat
 -- |Sets the specified quaternion with values corresponding to the given axes. Each axis is a vec3 and is expected to be unit length and perpendicular to all other specified axes.
 sqlerp :: Number -> Number -> Number -> Number -> Quat
 sqlerp = runFn4 js_sqlerp
+
+foreign import js_add :: Fn2 Quat Quat Quat
+
+-- |Adds two quat's
+add :: Quat -> Quat -> Quat
+add = runFn2 js_add
