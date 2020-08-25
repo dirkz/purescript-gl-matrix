@@ -13,3 +13,9 @@ exports.js_setAxes = (view, right, up) => {
     m.quat.setAxes(out, view, right, up)
     return out
 }
+
+exports.js_fromMat3 = (mat3) => {
+    let out = m.quat.create()
+    m.quat.fromMat3(out, mat3)
+    return out
+}
