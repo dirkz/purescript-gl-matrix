@@ -6,7 +6,7 @@ import GLMatrix.Vec2 (Vec2)
 
 foreign import js_fromScaling :: Fn1 Vec2 Mat2d
 
--- |Creates a matrix from a vector scaling This is equivalent to (but much faster than): Mat2d.identity(dest); Mat2d.scale(dest, dest, vec);
+-- |Creates a matrix from a vector scaling This is equivalent to (but much faster than): mat2d.identity(dest); mat2d.scale(dest, dest, vec);
 fromScaling :: Vec2 -> Mat2d
 fromScaling = runFn1 js_fromScaling
 
