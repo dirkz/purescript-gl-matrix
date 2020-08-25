@@ -3,6 +3,7 @@ module Test.TestQuat where
 import Test.Arbitrary
 import Effect (Effect)
 import GLMatrix.Quat (add, calculateW, conjugate, fromValues, invert, normalize)
+import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import Prelude (Unit, show, (<>), (==), discard)
 import Test.QuickCheck (quickCheck, (<?>))
 
@@ -19,16 +20,18 @@ testConjugate =
     in
       conjugate n == invert n <?> "testConjugate " <> show q
 
-testCalculateW :: Effect Unit
-testCalculateW =
-  quickCheck \x y z w ->
+testGetAxisAngle :: Effect Unit
+testGetAxisAngle =
+  quickCheck \(ArbVec3 v) r ->
     let
-      q = fromValues x y z w
+      q1 = setAxisAngle v r
+
+      r2 = getAxisAngle v q1
     in
-      calculateW q == w <?> "testCalculateW " <> show [ x, y, z, w ]
+      r == r2 <?> "testGetAxisAngle " <> show v <> " " <> show r
 
 main :: Effect Unit
 main = do
   testAdd
   testConjugate
-  testCalculateW
+  testGetAxisAngle
