@@ -1,4 +1,3 @@
--- |Tests for Mat3. Missing: `determinant`, `ldu`
 module Test.TestMat3 where
 
 import Test.Arbitrary
