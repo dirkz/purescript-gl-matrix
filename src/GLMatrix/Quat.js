@@ -145,3 +145,7 @@ exports.js_squaredLength = (a) => {
 exports.js_str = (a) => {
     return m.quat.str(a)
 }
+
+exports.js_numbers = (ar) => {
+    return Array.prototype.slice.call(ar)
+}

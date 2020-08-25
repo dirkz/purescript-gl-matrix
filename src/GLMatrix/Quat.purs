@@ -1,6 +1,10 @@
 module GLMatrix.Quat where
 
+import Prelude
+import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, Fn5, runFn0, runFn1, runFn2, runFn3, runFn4, runFn5)
+import Partial.Unsafe (unsafePartial)
+import Prelude as Prelude
 
 foreign import data Quat :: Type
 
@@ -159,3 +163,31 @@ foreign import js_str :: Fn1 Quat String
 -- |Returns a string representation of a quatenion
 str :: Quat -> String
 str = runFn1 js_str
+
+foreign import js_numbers :: Fn1 Quat (Array Number)
+
+-- |Extract a number array
+numbers :: Quat -> Array Number
+numbers = runFn1 js_numbers
+
+-- |Create a vector from an array produced by `numbers`.
+unsafeFromNumbers :: Partial => Array Number -> Quat
+unsafeFromNumbers [ x, y, z, h ] = fromValues x y z h
+
+instance showQuat :: Prelude.Show Quat where
+  show = str
+
+instance eqQuat :: Prelude.Eq Quat where
+  eq = exactEquals
+
+-- |Map a function from `Number` to `Number` over it.
+-- |Note: Since this is not a general container, it cannot be a `Functor`.
+map :: (Number -> Number) -> Quat -> Quat
+map fn v = unsafePartial $ unsafeFromNumbers $ Prelude.map fn $ numbers v
+
+zipWith :: (Number -> Number -> Number) -> Quat -> Quat -> Quat
+zipWith fn v1 v2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
+
+-- |Like `Array.slice`
+slice :: Int -> Int -> Quat -> Array Number
+slice a b m = Array.slice a b $ numbers m
