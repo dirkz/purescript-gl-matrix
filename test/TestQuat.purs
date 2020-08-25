@@ -2,7 +2,7 @@ module Test.TestQuat where
 
 import Test.Arbitrary
 import Effect (Effect)
-import GLMatrix.Quat (add, calculateW, conjugate, fromValues, invert, normalize)
+import GLMatrix.Quat (add, conjugate, invert, normalize)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import Prelude (Unit, show, (<>), (==), discard)
 import Test.QuickCheck (quickCheck, (<?>))
