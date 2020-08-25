@@ -1,6 +1,6 @@
 module GLMatrix.Quat where
 
-import Data.Function.Uncurried (Fn1, Fn2, Fn4, Fn5, runFn1, runFn2, runFn4, runFn5)
+import Data.Function.Uncurried (Fn1, Fn2, Fn5, runFn1, runFn2, runFn5)
 
 foreign import data Quat :: Type
 
@@ -39,3 +39,9 @@ foreign import js_calculateW :: Fn1 Quat Quat
 -- |Calculates the W component of a quat from the X, Y, and Z components. Assumes that quaternion is 1 unit in length. Any existing W component will be ignored.
 calculateW :: Quat -> Quat
 calculateW = runFn1 js_calculateW
+
+foreign import js_conjugate :: Fn1 Quat Quat
+
+-- |Calculates the conjugate of a quat If the quaternion is normalized, this function is faster than quat.inverse and produces the same result.
+conjugate :: Quat -> Quat
+conjugate = runFn1 js_conjugate
