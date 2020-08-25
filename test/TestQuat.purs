@@ -6,11 +6,11 @@ import Effect (Effect)
 import GLMatrix.Mat3 (Mat3)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Quat (Quat, add, conjugate, equals, exp, getAngle, invert, length, lerp, ln, normalize, numbers, scale, slerp)
-import GLMatrix.Quat.Mix (fromMat3, getAxisAngle, setAxisAngle)
-import GLMatrix.Vec4 (Vec4)
-import GLMatrix.Vec4 as Vec4
+import GLMatrix.Quat.Mix (fromMat3, getAxisAngle, setAxes, setAxisAngle)
 import GLMatrix.Vec3 (Vec3)
 import GLMatrix.Vec3 as Vec3
+import GLMatrix.Vec4 (Vec4)
+import GLMatrix.Vec4 as Vec4
 import Math as Math
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, negate, show, ($), (&&), (-), (<), (<>), (==))
@@ -103,6 +103,16 @@ mySetAxes right up view =
   in
     normalize $ fromMat3 m
 
+testSetAxes :: Effect Unit
+testSetAxes =
+  quickCheck \(ArbVec3 v1) (ArbVec3 v2) (ArbVec3 v3) ->
+    let
+      r1 = setAxes v1 v2 v3
+
+      r2 = mySetAxes v1 v2 v3
+    in
+      equals r1 r2 <?> "testSetAxes " <> show r1 <> " " <> show r2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -113,3 +123,4 @@ main = do
   testGetAngle
   testPow
   testLength
+  testSetAxes
