@@ -1,18 +1,15 @@
 module Test.TestQuat where
 
 import Test.Arbitrary
-import Data.Array (zipWith)
-import Data.Foldable (sum)
 import Effect (Effect)
-import GLMatrix (equalArrays)
-import GLMatrix as GLMatrix
-import GLMatrix.Vec4 (add, ceil, distance, divide, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
-import GLMatrix.Vec4 as Vec
-import GLMatrix.Vec4 as Vec4
-import Math as Math
-import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
-import Prelude as Prelude
+import GLMatrix.Quat (add)
+import Prelude (Unit, show, (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
+
+testAdd :: Effect Unit
+testAdd =
+  quickCheck \(ArbQuat q1) (ArbQuat q2) ->
+    add q1 q2 == add q2 q1 <?> "testAdd " <> show q1 <> " " <> show q2
 
 main :: Effect Unit
 main = do
