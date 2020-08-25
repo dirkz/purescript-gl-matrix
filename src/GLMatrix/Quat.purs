@@ -25,6 +25,10 @@ module GLMatrix.Quat
   , scale
   , slerp
   , squaredLength
+  , numbers
+  , map
+  , zipWith
+  , slice
   ) where
 
 import Prelude
