@@ -2,7 +2,6 @@ module GLMatrix.Mat2d
   ( Mat2d
   , LDU
   , add
-  , adjoint
   , determinant
   , equals
   , frob
@@ -37,12 +36,6 @@ foreign import js_add :: Fn2 Mat2d Mat2d Mat2d
 -- |Adds two Mat2d's
 add :: Mat2d -> Mat2d -> Mat2d
 add = runFn2 js_add
-
-foreign import js_adjoint :: Fn1 Mat2d Mat2d
-
--- |Calculates the adjugate of a Mat2d
-adjoint :: Mat2d -> Mat2d
-adjoint = runFn1 js_adjoint
 
 foreign import js_determinant :: Fn1 Mat2d Number
 

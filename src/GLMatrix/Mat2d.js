@@ -8,12 +8,6 @@ exports.js_add = (a, b) => {
     return out
 }
 
-exports.js_adjoint = (a) => {
-    let out = m.mat2d.create()
-    m.mat2d.adjoint(out, a)
-    return out
-}
-
 exports.js_determinant = (a) => {
     return m.mat2d.determinant(a)
 }
