@@ -114,9 +114,15 @@ testSetAxes :: Effect Unit
 testSetAxes =
   quickCheck \(ArbVec3 v1) (ArbVec3 v2) (ArbVec3 v3) ->
     let
-      r1 = setAxes v1 v2 v3
+      nv1 = Vec3.normalize v1
 
-      r2 = mySetAxes v1 v2 v3
+      nv2 = Vec3.normalize v2
+
+      nv3 = Vec3.normalize v3
+
+      r1 = setAxes nv1 nv2 nv3
+
+      r2 = mySetAxes nv1 nv2 nv3
     in
       equals r1 r2 <?> "testSetAxes " <> show r1 <> " " <> show r2
 
