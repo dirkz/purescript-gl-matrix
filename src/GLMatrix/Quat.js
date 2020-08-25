@@ -102,3 +102,9 @@ exports.js_normalize = (a) => {
     return out
 }
 
+exports.js_pow = (a, b) => {
+    let out = m.quat.create()
+    m.quat.pow(out, a, b)
+    return out
+}
+
