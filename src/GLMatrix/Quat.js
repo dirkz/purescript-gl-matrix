@@ -126,3 +126,9 @@ exports.js_rotateZ = (a, r) => {
     return out
 }
 
+exports.js_scale = (a, s) => {
+    let out = m.quat.create()
+    m.quat.scale(out, a, s)
+    return out
+}
+

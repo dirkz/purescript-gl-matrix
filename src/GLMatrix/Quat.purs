@@ -136,3 +136,9 @@ foreign import js_rotateZ :: Fn2 Quat Number Quat
 rotateZ :: Quat -> Number -> Quat
 rotateZ = runFn2 js_rotateZ
 
+foreign import js_scale :: Fn2 Quat Number Quat
+
+-- |Scales a quat by a scalar number
+scale :: Quat -> Number -> Quat
+scale = runFn2 js_scale
+
