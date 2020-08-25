@@ -1,18 +1,19 @@
 module Test.TestMat2d where
 
 import Test.Arbitrary
+import Data.Array (catMaybes, unsafeIndex, (!!))
 import Data.Foldable (maximum, sum)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat2d (Mat2d, add, determinant, equals, frob, fromRotation, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, unsafeFromNumbers)
-import GLMatrix.Mat2d.Mix (fromScaling, fromTranslation, fromVec2, scale, translate)
+import GLMatrix.Mat2d (Mat2d, add, determinant, equals, frob, fromRotation, fromValues, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, unsafeFromNumbers)
 import GLMatrix.Mat2d as Mat2d
+import GLMatrix.Mat2d.Mix (fromScaling, fromTranslation, fromVec2, scale, translate)
 import Math (sqrt)
 import Math as Math
 import Partial.Unsafe (unsafePartial)
-import Prelude (Unit, discard, map, show, ($), (*), (+), (/=), (<), (<>), (==))
+import Prelude (Unit, discard, map, show, ($), (*), (+), (/=), (<), (<<<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
@@ -59,6 +60,18 @@ testFromTranslation :: Effect Unit
 testFromTranslation =
   quickCheck \(ArbVec2 v) ->
     equals (fromTranslation v) (translate identity v) <?> "testFromTranslation " <> show v
+
+testFromValues :: Effect Unit
+testFromValues =
+  quickCheck \(ArbMat2d m) ->
+    let
+      ns = numbers m
+
+      r = fromValues (ind ns 0) (ind ns 1) (ind ns 2) (ind ns 3)
+    in
+      r == m <?> "testFromValues " <> show m
+  where
+  ind xs n = unsafePartial $ unsafeIndex xs n
 
 testInvert :: Effect Unit
 testInvert =
@@ -158,6 +171,7 @@ main = do
   testFromRotation
   testFromScaling
   testFromTranslation
+  testFromValues
   testInvert
   testMultiply
   testMultiplyDistributivity
