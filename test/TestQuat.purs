@@ -89,19 +89,27 @@ testLength =
 mySetAxes :: Vec3 -> Vec3 -> Vec3 -> Quat
 mySetAxes right up view =
   let
+    nright = Vec3.numbers right
+
+    nup = Vec3.numbers up
+
+    nview = Vec3.numbers view
+
     m =
       Mat3.fromValues
-        (unsafePartial $ unsafeIndex (Vec3.numbers right) 0)
-        (unsafePartial $ unsafeIndex (Vec3.numbers up) 0)
-        (unsafePartial $ negate (unsafeIndex (Vec3.numbers view) 0))
-        (unsafePartial $ unsafeIndex (Vec3.numbers right) 1)
-        (unsafePartial $ unsafeIndex (Vec3.numbers up) 1)
-        (unsafePartial $ negate (unsafeIndex (Vec3.numbers view) 1))
-        (unsafePartial $ unsafeIndex (Vec3.numbers right) 2)
-        (unsafePartial $ unsafeIndex (Vec3.numbers up) 2)
-        (unsafePartial $ negate (unsafeIndex (Vec3.numbers view) 2))
+        (ind nright 0)
+        (ind nup 0)
+        (-(ind nview 0))
+        (ind nright 1)
+        (ind nup 1)
+        (-(ind nview 1))
+        (ind nright 2)
+        (ind nup 2)
+        (-(ind nview 2))
   in
     normalize $ fromMat3 m
+  where
+  ind ar i = unsafePartial $ unsafeIndex ar i
 
 testSetAxes :: Effect Unit
 testSetAxes =
