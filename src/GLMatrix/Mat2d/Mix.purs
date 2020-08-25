@@ -10,6 +10,12 @@ foreign import js_fromScaling :: Fn1 Vec2 Mat2d
 fromScaling :: Vec2 -> Mat2d
 fromScaling = runFn1 js_fromScaling
 
+foreign import js_fromTranslation :: Fn1 Vec2 Mat2d
+
+-- |Creates a matrix from a vector translation This is equivalent to (but much faster than): mat2d.identity(dest); mat2d.translate(dest, dest, vec);
+fromTranslation :: Vec2 -> Mat2d
+fromTranslation = runFn1 js_fromTranslation
+
 foreign import js_scale :: Fn2 Mat2d Vec2 Mat2d
 
 -- |Scales the Mat2d by the dimensions in the given vec2
