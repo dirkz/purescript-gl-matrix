@@ -29,8 +29,8 @@ foreign import js_getAxisAngle :: Fn2 Vec3 Quat Number
 getAxisAngle :: Vec3 -> Quat -> Number
 getAxisAngle = runFn2 js_getAxisAngle
 
-foreign import js_setAxisAngle :: Fn2 Vec3 Quat Quat
+foreign import js_setAxisAngle :: Fn2 Vec3 Number Quat
 
 -- |Sets a quat from the given angle and rotation axis, then returns it.
-setAxisAngle :: Vec3 -> Quat -> Quat
+setAxisAngle :: Vec3 -> Number -> Quat
 setAxisAngle = runFn2 js_setAxisAngle
