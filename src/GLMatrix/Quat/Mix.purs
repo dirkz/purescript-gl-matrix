@@ -22,3 +22,9 @@ foreign import js_fromMat3 :: Fn1 Mat3 Quat
 -- |Sets the specified quaternion with values corresponding to the given axes. Each axis is a vec3 and is expected to be unit length and perpendicular to all other specified axes.
 fromMat3 :: Mat3 -> Quat
 fromMat3 = runFn1 js_fromMat3
+
+foreign import js_getAxisAngle :: Fn2 Vec3 Quat Number
+
+-- |Sets the specified quaternion with values corresponding to the given axes. Each axis is a vec3 and is expected to be unit length and perpendicular to all other specified axes.
+getAxisAngle :: Vec3 -> Quat -> Number
+getAxisAngle = runFn2 js_getAxisAngle

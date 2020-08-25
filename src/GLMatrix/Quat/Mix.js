@@ -19,3 +19,7 @@ exports.js_fromMat3 = (mat3) => {
     m.quat.fromMat3(out, mat3)
     return out
 }
+
+exports.js_getAxisAngle = (v3, a) => {
+    return m.quat.getAxisAngle(v3, a)
+}
