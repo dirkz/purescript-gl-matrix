@@ -148,3 +148,8 @@ foreign import js_slerp :: Fn3 Quat Quat Number Quat
 slerp :: Quat -> Quat -> Number -> Quat
 slerp = runFn3 js_slerp
 
+foreign import js_squaredLength :: Fn1 Quat Number
+
+-- |Calculates the squared length of a quat
+squaredLength :: Quat -> Number
+squaredLength = runFn1 js_squaredLength
