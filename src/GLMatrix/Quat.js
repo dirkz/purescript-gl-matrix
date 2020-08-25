@@ -37,3 +37,9 @@ exports.js_conjugate = (a) => {
     m.quat.conjugate(out, a)
     return out
 }
+
+exports.js_dot = (a, b) => {
+    let out = m.quat.create()
+    m.quat.dot(out, a, b)
+    return out
+}
