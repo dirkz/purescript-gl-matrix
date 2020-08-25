@@ -1,2 +1,17 @@
 module GLMatrix.Quat where
 
+import Data.Function.Uncurried (Fn2, runFn2)
+
+foreign import data Quat :: Type
+
+foreign import js_equals :: Fn2 Quat Quat Boolean
+
+-- |Returns whether or not the matrices have approximately the same elements in the same position
+equals :: Quat -> Quat -> Boolean
+equals = runFn2 js_equals
+
+foreign import js_exactEquals :: Fn2 Quat Quat Boolean
+
+-- |Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
+exactEquals :: Quat -> Quat -> Boolean
+exactEquals = runFn2 js_exactEquals
