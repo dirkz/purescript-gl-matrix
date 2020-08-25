@@ -108,3 +108,9 @@ exports.js_pow = (a, b) => {
     return out
 }
 
+exports.js_rotateX = (a, r) => {
+    let out = m.quat.create()
+    m.quat.rotateX(out, a, r)
+    return out
+}
+
