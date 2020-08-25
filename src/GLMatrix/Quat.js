@@ -77,3 +77,10 @@ exports.js_invert = (a) => {
     m.quat.invert(out, a)
     return out
 }
+
+exports.js_lerp = (a, b, t) => {
+    let out = m.quat.create()
+    m.quat.lerp(out, a, b, t)
+    return out
+}
+

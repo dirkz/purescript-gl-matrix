@@ -88,3 +88,9 @@ foreign import js_invert :: Fn1 Quat Quat
 invert :: Quat -> Quat
 invert = runFn1 js_invert
 
+foreign import js_lerp :: Fn3 Quat Quat Number Quat
+
+-- |Performs a linear interpolation between two quat's
+lerp :: Quat -> Quat -> Number -> Quat
+lerp = runFn3 js_lerp
+
