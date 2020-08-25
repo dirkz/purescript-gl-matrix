@@ -153,3 +153,9 @@ foreign import js_squaredLength :: Fn1 Quat Number
 -- |Calculates the squared length of a quat
 squaredLength :: Quat -> Number
 squaredLength = runFn1 js_squaredLength
+
+foreign import js_str :: Fn1 Quat String
+
+-- |Returns a string representation of a quatenion
+str :: Quat -> String
+str = runFn1 js_str
