@@ -82,3 +82,9 @@ foreign import js_identity :: Fn0 Quat
 identity :: Quat
 identity = runFn0 js_identity
 
+foreign import js_invert :: Fn1 Quat Quat
+
+-- |Calculates the inverse of a quat
+invert :: Quat -> Quat
+invert = runFn1 js_invert
+

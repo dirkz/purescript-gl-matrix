@@ -71,3 +71,9 @@ exports.js_identity = () => {
     m.quat.identity(out)
     return out
 }
+
+exports.js_invert = (a) => {
+    let out = m.quat.create()
+    m.quat.invert(out, a)
+    return out
+}
