@@ -1,9 +1,8 @@
 module Test.TestQuat where
 
 import Test.Arbitrary
-
 import Effect (Effect)
-import GLMatrix.Quat (Quat, add, conjugate, equals, invert, lerp, normalize, slerp)
+import GLMatrix.Quat (Quat, add, conjugate, equals, getAngle, invert, lerp, normalize, slerp)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import Math as Math
 import Prelude (Unit, discard, show, (&&), (-), (<), (<>), (==))
@@ -44,6 +43,14 @@ testLerp fn =
     in
       equals r1 q1 && equals r2 q2 <?> "testLerp " <> show q1 <> " " <> show q2
 
+testGetAngle :: Effect Unit
+testGetAngle =
+  quickCheck \(ArbQuat q) ->
+    let
+      q1 = normalize q
+    in
+      getAngle q q == 0.0 <?> "testGetAngle " <> show q
+
 main :: Effect Unit
 main = do
   testAdd
@@ -51,3 +58,4 @@ main = do
   testGetAxisAngle
   testLerp lerp
   testLerp slerp
+  testGetAngle
