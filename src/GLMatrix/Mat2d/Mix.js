@@ -19,3 +19,9 @@ exports.js_scale = (a, v) => {
     m.mat2d.scale(out, a, v)
     return out
 }
+
+exports.js_translate = (a, v) => {
+    let out = m.mat2d.create()
+    m.mat2d.translate(out, a, v)
+    return out
+}

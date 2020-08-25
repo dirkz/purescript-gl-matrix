@@ -13,7 +13,6 @@ module GLMatrix.Mat2d
   , multiplyScalarAndAdd
   , rotate
   , subtract
-  , transpose
   , numbers
   , map
   , unsafeFromNumbers
@@ -118,12 +117,6 @@ foreign import js_subtract :: Fn2 Mat2d Mat2d Mat2d
 -- |Subtracts matrix b from matrix a
 subtract :: Mat2d -> Mat2d -> Mat2d
 subtract = runFn2 js_subtract
-
-foreign import js_transpose :: Fn1 Mat2d Mat2d
-
--- |Transpose the values of a Mat2d
-transpose :: Mat2d -> Mat2d
-transpose = runFn1 js_transpose
 
 foreign import js_numbers :: Fn1 Mat2d (Array Number)
 
