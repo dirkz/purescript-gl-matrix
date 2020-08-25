@@ -78,12 +78,6 @@ exports.js_subtract = (a, b) => {
     return out
 }
 
-exports.js_transpose = (a) => {
-    let out = m.mat2d.create()
-    m.mat2d.transpose(out, a)
-    return out
-}
-
 exports.js_numbers = (ar) => {
     return Array.prototype.slice.call(ar)
 }

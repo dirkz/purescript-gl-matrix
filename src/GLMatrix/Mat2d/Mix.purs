@@ -21,3 +21,9 @@ foreign import js_scale :: Fn2 Mat2d Vec2 Mat2d
 -- |Scales the Mat2d by the dimensions in the given vec2
 scale :: Mat2d -> Vec2 -> Mat2d
 scale = runFn2 js_scale
+
+foreign import js_translate :: Fn2 Mat2d Vec2 Mat2d
+
+-- |Translate a mat2d by the given vector
+translate :: Mat2d -> Vec2 -> Mat2d
+translate = runFn2 js_translate
