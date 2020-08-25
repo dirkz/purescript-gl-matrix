@@ -1,6 +1,6 @@
 module GLMatrix.Quat where
 
-import Data.Function.Uncurried (Fn1, Fn2, Fn5, runFn1, runFn2, runFn5)
+import Data.Function.Uncurried (Fn1, Fn2, Fn3, Fn5, runFn1, runFn2, runFn3, runFn5)
 
 foreign import data Quat :: Type
 
@@ -57,4 +57,10 @@ foreign import js_exp :: Fn1 Quat Quat
 -- |Calculate the exponential of a unit quaternion.
 exp :: Quat -> Quat
 exp = runFn1 js_exp
+
+foreign import js_fromEuler :: Fn3 Number Number Number Quat
+
+-- |Creates a quaternion from the given euler angle x, y, z.
+fromEuler :: Number -> Number -> Number -> Quat
+fromEuler = runFn3 js_fromEuler
 
