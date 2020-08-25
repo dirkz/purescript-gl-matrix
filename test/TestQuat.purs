@@ -2,7 +2,7 @@ module Test.TestQuat where
 
 import Test.Arbitrary
 import Effect (Effect)
-import GLMatrix.Quat (add, conjugate, invert, normalize)
+import GLMatrix.Quat (add, calculateW, conjugate, fromValues, invert, normalize)
 import Prelude (Unit, show, (<>), (==), discard)
 import Test.QuickCheck (quickCheck, (<?>))
 
@@ -13,13 +13,22 @@ testAdd =
 
 testConjugate :: Effect Unit
 testConjugate =
-  quickCheck \(ArbQuat q1) ->
+  quickCheck \(ArbQuat q) ->
     let
-      n1 = normalize q1
+      n = normalize q
     in
-      conjugate n1 == invert n1 <?> "testConjugate " <> show q1
+      conjugate n == invert n <?> "testConjugate " <> show q
+
+testCalculateW :: Effect Unit
+testCalculateW =
+  quickCheck \x y z w ->
+    let
+      q = fromValues x y z w
+    in
+      calculateW q == w <?> "testCalculateW " <> show [ x, y, z, w ]
 
 main :: Effect Unit
 main = do
   testAdd
   testConjugate
+  testCalculateW
