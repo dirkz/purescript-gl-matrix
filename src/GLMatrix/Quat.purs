@@ -45,3 +45,9 @@ foreign import js_conjugate :: Fn1 Quat Quat
 -- |Calculates the conjugate of a quat If the quaternion is normalized, this function is faster than quat.inverse and produces the same result.
 conjugate :: Quat -> Quat
 conjugate = runFn1 js_conjugate
+
+foreign import js_dot :: Fn2 Quat Quat Quat
+
+-- |Calculates the dot product of two quat's
+dot :: Quat -> Quat -> Quat
+dot = runFn2 js_dot
