@@ -96,3 +96,9 @@ exports.js_multiply = (a, b) => {
     return out
 }
 
+exports.js_normalize = (a) => {
+    let out = m.quat.create()
+    m.quat.normalize(out, a)
+    return out
+}
+
