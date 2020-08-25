@@ -137,3 +137,7 @@ exports.js_slerp = (a, b, t) => {
     m.quat.slerp(out, a, b, t)
     return out
 }
+
+exports.js_squaredLength = (a) => {
+    return m.quat.squaredLength(a)
+}
