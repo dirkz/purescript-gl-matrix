@@ -23,3 +23,9 @@ exports.js_fromMat3 = (mat3) => {
 exports.js_getAxisAngle = (v3, a) => {
     return m.quat.getAxisAngle(v3, a)
 }
+
+exports.js_setAxisAngle = (v3, a) => {
+    let out = m.quat.create()
+    m.quat.setAxisAngle(out, v3, a)
+    return out
+}

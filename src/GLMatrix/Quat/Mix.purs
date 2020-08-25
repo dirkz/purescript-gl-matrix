@@ -28,3 +28,9 @@ foreign import js_getAxisAngle :: Fn2 Vec3 Quat Number
 -- |Sets the specified quaternion with values corresponding to the given axes. Each axis is a vec3 and is expected to be unit length and perpendicular to all other specified axes.
 getAxisAngle :: Vec3 -> Quat -> Number
 getAxisAngle = runFn2 js_getAxisAngle
+
+foreign import js_setAxisAngle :: Fn2 Vec3 Quat Quat
+
+-- |Sets a quat from the given angle and rotation axis, then returns it.
+setAxisAngle :: Vec3 -> Quat -> Quat
+setAxisAngle = runFn2 js_setAxisAngle
