@@ -1,14 +1,19 @@
 module Test.TestQuat where
 
 import Test.Arbitrary
+import Data.Array (unsafeIndex)
 import Effect (Effect)
+import GLMatrix.Mat3 (Mat3)
+import GLMatrix.Mat3 as Mat3
 import GLMatrix.Quat (Quat, add, conjugate, equals, exp, getAngle, invert, length, lerp, ln, normalize, numbers, scale, slerp)
-import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
+import GLMatrix.Quat.Mix (fromMat3, getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
+import GLMatrix.Vec3 (Vec3)
+import GLMatrix.Vec3 as Vec3
 import Math as Math
 import Partial.Unsafe (unsafePartial)
-import Prelude (Unit, discard, show, ($), (&&), (-), (<), (<>), (==))
+import Prelude (Unit, discard, negate, show, ($), (&&), (-), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 testAdd :: Effect Unit
@@ -80,6 +85,23 @@ testLength =
       l2 = Vec4.length v
     in
       l1 == l2 <?> "testLength " <> show q <> " " <> show v
+
+mySetAxes :: Vec3 -> Vec3 -> Vec3 -> Quat
+mySetAxes right up view =
+  let
+    m =
+      Mat3.fromValues
+        (unsafePartial $ unsafeIndex (Vec3.numbers right) 0)
+        (unsafePartial $ unsafeIndex (Vec3.numbers up) 0)
+        (unsafePartial $ negate (unsafeIndex (Vec3.numbers view) 0))
+        (unsafePartial $ unsafeIndex (Vec3.numbers right) 1)
+        (unsafePartial $ unsafeIndex (Vec3.numbers up) 1)
+        (unsafePartial $ negate (unsafeIndex (Vec3.numbers view) 1))
+        (unsafePartial $ unsafeIndex (Vec3.numbers right) 2)
+        (unsafePartial $ unsafeIndex (Vec3.numbers up) 2)
+        (unsafePartial $ negate (unsafeIndex (Vec3.numbers view) 2))
+  in
+    normalize $ fromMat3 m
 
 main :: Effect Unit
 main = do
