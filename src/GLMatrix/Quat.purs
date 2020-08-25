@@ -1,8 +1,43 @@
-module GLMatrix.Quat where
+module GLMatrix.Quat
+  ( equals
+  , exactEquals
+  , length
+  , rotationTo
+  , setAxes
+  , sqlerp
+  , add
+  , calculateW
+  , conjugate
+  , dot
+  , exp
+  , fromEuler
+  , fromMat3
+  , fromValues
+  , getAngle
+  , getAxisAngle
+  , identity
+  , invert
+  , lerp
+  , ln
+  , multiply
+  , normalize
+  , pow
+  , rotateX
+  , rotateY
+  , rotateZ
+  , scale
+  , set
+  , setAxisAngle
+  , slerp
+  , squaredLength
+  ) where
 
+import GLMatrix.Quat.Mix
 import Prelude
+
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, Fn5, runFn0, runFn1, runFn2, runFn3, runFn4, runFn5)
+import GLMatrix.ArrayType (exactEquals)
 import Partial.Unsafe (unsafePartial)
 import Prelude as Prelude
 
