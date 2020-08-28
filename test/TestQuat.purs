@@ -13,6 +13,10 @@ import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, show, ($), (&&), (-), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
+-- |In case an equals is not coarse enough, use this for comparing yourself
+maxAllowedDeviation :: Number
+maxAllowedDeviation = 0.001
+
 testAdd :: Effect Unit
 testAdd =
   quickCheck \(ArbQuat q1) (ArbQuat q2) ->
@@ -33,8 +37,6 @@ testGetAxisAngle =
       q1 = setAxisAngle v r1
 
       r2 = getAxisAngle v q1
-
-      maxAllowedDeviation = 0.001
     in
       Math.abs (r1 - r2) < maxAllowedDeviation <?> "testGetAxisAngle " <> show r1 <> " " <> show r2
 
@@ -138,8 +140,6 @@ testEulerVsChainedRotates =
       q2 = rotateZ qt2 (toRadian dz)
 
       qDiff = subtract q1 q2
-
-      maxAllowedDeviation = 0.001
     in
       all (\n -> Math.abs n < maxAllowedDeviation) qDiff <?> "testEulerVsChainedRotates "
         <> show q1
@@ -165,8 +165,6 @@ testEulerVsMultipliedRotates =
       q2 = multiply qtm qtz
 
       qDiff = subtract q1 q2
-
-      maxAllowedDeviation = 0.001
     in
       all (\n -> Math.abs n < maxAllowedDeviation) qDiff <?> "testEulerVsMultipliedRotates "
         <> show q1
