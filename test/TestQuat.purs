@@ -170,7 +170,7 @@ testEulerVsMultipliedRotates =
 
       qDiff = subtract q1 q2
 
-      maxDev = 0.01
+      maxDev = 0.001
     in
       all (\n -> Math.abs n < maxDev) qDiff <?> "testEulerVsMultipliedRotates "
         <> show q1
