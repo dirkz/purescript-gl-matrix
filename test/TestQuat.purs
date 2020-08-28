@@ -33,10 +33,10 @@ testGetAxisAngle =
       q1 = setAxisAngle v r1
 
       r2 = getAxisAngle v q1
+
+      maxAllowedDeviation = 0.001
     in
-      Math.abs (r1 - r2) < maxAllowedDiff <?> "testGetAxisAngle " <> show r1 <> " " <> show r2
-  where
-  maxAllowedDiff = 0.001
+      Math.abs (r1 - r2) < maxAllowedDeviation <?> "testGetAxisAngle " <> show r1 <> " " <> show r2
 
 testLerp :: (Quat -> Quat -> Number -> Quat) -> Effect Unit
 testLerp fn =
@@ -139,9 +139,9 @@ testEulerVsChainedRotates =
 
       qDiff = subtract q1 q2
 
-      maxDev = 0.001
+      maxAllowedDeviation = 0.001
     in
-      all (\n -> Math.abs n < maxDev) qDiff <?> "testEulerVsChainedRotates "
+      all (\n -> Math.abs n < maxAllowedDeviation) qDiff <?> "testEulerVsChainedRotates "
         <> show q1
         <> " "
         <> show q2
@@ -166,9 +166,9 @@ testEulerVsMultipliedRotates =
 
       qDiff = subtract q1 q2
 
-      maxDev = 0.001
+      maxAllowedDeviation = 0.001
     in
-      all (\n -> Math.abs n < maxDev) qDiff <?> "testEulerVsMultipliedRotates "
+      all (\n -> Math.abs n < maxAllowedDeviation) qDiff <?> "testEulerVsMultipliedRotates "
         <> show q1
         <> " "
         <> show q2
