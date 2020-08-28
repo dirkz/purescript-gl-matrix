@@ -30,8 +30,8 @@ exports.js_fromRotation = (r) => {
     return out
 }
 
-exports.js_fromValues = (m00, m01, m10, m11) => {
-    return m.mat2d.fromValues(m00, m01, m10, m11)
+exports.js_fromValues = (a, b, c, d, tx, ty) => {
+    return m.mat2d.fromValues(a, b, c, d, tx, ty)
 }
 
 exports.js_identity = () => {

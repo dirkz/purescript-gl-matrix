@@ -68,7 +68,14 @@ testFromValues =
     let
       ns = numbers m
 
-      r = fromValues (ind ns 0) (ind ns 1) (ind ns 2) (ind ns 3)
+      r =
+        fromValues
+          (ind ns 0)
+          (ind ns 1)
+          (ind ns 2)
+          (ind ns 3)
+          (ind ns 4)
+          (ind ns 5)
     in
       r == m <?> "testFromValues " <> show m
   where
