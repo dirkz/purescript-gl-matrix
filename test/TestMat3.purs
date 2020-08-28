@@ -11,7 +11,7 @@ import GLMatrix.Mat3 (add, adjoint, determinant, equals, frob, fromRotation, ide
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat3.Mix (fromMat2d, fromMat4, fromQuat, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
-import GLMatrix.Quat.Mix (fromMat3)
+import GLMatrix.Quat.Mix as Quat
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
@@ -219,7 +219,7 @@ testFromQuat =
     let
       m = fromQuat q
 
-      q1 = fromMat3 m
+      q1 = Quat.fromMat3 m
     in
       Quat.equals q q1 <?> "testFromQuat " <> show q <> " " <> show q1
 
