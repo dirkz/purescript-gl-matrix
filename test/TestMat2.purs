@@ -1,3 +1,4 @@
+-- |All supported functions are tested (see http://glmatrix.net/docs/module-mat2.html).
 module Test.TestMat2 where
 
 import Test.Arbitrary
