@@ -1,6 +1,7 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
+
 import Data.Array (unsafeIndex)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -11,12 +12,13 @@ import GLMatrix.Mat3 (add, adjoint, determinant, equals, frob, fromRotation, ide
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat3.Mix (fromMat2d, fromMat4, fromQuat, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
+import GLMatrix.Quat (normalize)
+import GLMatrix.Quat as Quat
 import GLMatrix.Quat.Mix as Quat
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
-import GLMatrix.Quat as Quat
 
 testAdd :: Effect Unit
 testAdd =
@@ -217,11 +219,13 @@ testFromQuat :: Effect Unit
 testFromQuat =
   quickCheck \(ArbQuat q) ->
     let
-      m = fromQuat q
+      nq = normalize q
+      
+      m = fromQuat nq
 
-      q1 = Quat.fromMat3 m
+      q1 = normalize $ Quat.fromMat3 m
     in
-      Quat.equals q q1 <?> "testFromQuat " <> show q <> " " <> show q1
+      Quat.equals nq q1 <?> "testFromQuat " <> show nq <> " " <> show q1
 
 main :: Effect Unit
 main = do
