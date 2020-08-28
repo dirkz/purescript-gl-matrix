@@ -3,8 +3,8 @@
 const m = require("gl-matrix")
 
 exports.js_fromMat2d = (m2) => {
-    let out = m.mat2.create()
-    return m.mat2.fromMat2d(out, m2)
+    let out = m.mat3.create()
+    return m.mat3.fromMat2d(out, m2)
     return out
 }
 
