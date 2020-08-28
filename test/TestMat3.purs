@@ -1,18 +1,20 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
+import Data.Array (unsafeIndex)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat3 (add, adjoint, determinant, equals, frob, fromRotation, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, projection, rotate, slice, subtract, transpose, unsafeFromNumbers)
+import GLMatrix.Mat3 (add, adjoint, determinant, equals, frob, fromRotation, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, projection, rotate, slice, subtract, transpose, unsafeFromNumbers, fromValues)
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Mat3.Mix (fromMat4, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
+import GLMatrix.Mat3.Mix (fromMat2d, fromMat4, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
+import GLMatrix.Mat2d as Mat2d
 
 testAdd :: Effect Unit
 testAdd =
@@ -195,6 +197,20 @@ testExtractNumbers =
     in
       equalArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
 
+testFromMat2d :: Effect Unit
+testFromMat2d =
+  quickCheck \(ArbMat2d m) ->
+    let
+      r1 = fromMat2d m
+
+      ns = Mat2d.numbers m
+
+      r2 = fromValues (ind ns 0) (ind ns 1) 0.0 (ind ns 2) (ind ns 3) 0.0 (ind ns 4) (ind ns 5) 1.0
+    in
+      equals r1 r2 <?> "testFromMat2d " <> show r1 <> " " <> show r2
+  where
+  ind ar i = unsafePartial $ unsafeIndex ar i
+
 main :: Effect Unit
 main = do
   testAdd
@@ -217,3 +233,4 @@ main = do
   testTranslate
   testTranspose
   testExtractNumbers
+  testFromMat2d
