@@ -1,5 +1,6 @@
 module GLMatrix.Quat
   ( Quat
+  , all
   , equals
   , exactEquals
   , length
@@ -25,6 +26,7 @@ module GLMatrix.Quat
   , scale
   , slerp
   , squaredLength
+  , subtract
   , numbers
   , unsafeFromNumbers
   , map
