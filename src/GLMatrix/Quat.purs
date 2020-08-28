@@ -215,11 +215,11 @@ instance eqQuat :: Prelude.Eq Quat where
 -- |Map a function from `Number` to `Number` over it.
 -- |Note: Since this is not a general container, it cannot be a `Functor`.
 map :: (Number -> Number) -> Quat -> Quat
-map fn v = unsafePartial $ unsafeFromNumbers $ Prelude.map fn $ numbers v
+map fn q = unsafePartial $ unsafeFromNumbers $ Prelude.map fn $ numbers q
 
 zipWith :: (Number -> Number -> Number) -> Quat -> Quat -> Quat
-zipWith fn v1 v2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers v1) (numbers v2)
+zipWith fn q1 q2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers q1) (numbers q2)
 
 -- |Like `Array.slice`
 slice :: Int -> Int -> Quat -> Array Number
-slice a b m = Array.slice a b $ numbers m
+slice a b q = Array.slice a b $ numbers q
