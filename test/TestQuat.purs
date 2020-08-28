@@ -6,7 +6,7 @@ import Data.Foldable (all)
 import Effect (Effect)
 import GLMatrix (toRadian)
 import GLMatrix as GLMatrix
-import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, getAngle, identity, invert, length, lerp, ln, normalize, numbers, rotateX, rotateY, rotateZ, scale, slerp, zipWith, fromValues, unsafeFromNumbers)
+import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, fromValues, identity, invert, length, lerp, ln, normalize, numbers, rotateX, rotateY, rotateZ, scale, slerp, unsafeFromNumbers, zipWith)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
@@ -49,14 +49,6 @@ testLerp fn =
       r2 = fn q1 q2 1.0
     in
       equals r1 q1 && equals r2 q2 <?> "testLerp " <> show q1 <> " " <> show q2
-
-testGetAngle :: Effect Unit
-testGetAngle =
-  quickCheck \(ArbQuat q) ->
-    let
-      q1 = normalize q
-    in
-      getAngle q q == 0.0 <?> "testGetAngle " <> show q
 
 testPow :: Effect Unit
 testPow =
@@ -181,7 +173,6 @@ main = do
   testGetAxisAngle
   testLerp lerp
   testLerp slerp
-  --testGetAngle
   --testPow
   testLength
   testRotateX
