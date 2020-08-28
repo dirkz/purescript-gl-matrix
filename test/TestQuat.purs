@@ -3,7 +3,7 @@ module Test.TestQuat where
 import Test.Arbitrary
 import Effect (Effect)
 import GLMatrix (toRadian)
-import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, getAngle, identity, invert, length, lerp, ln, normalize, numbers, rotateX, scale, slerp)
+import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, getAngle, identity, invert, length, lerp, ln, normalize, numbers, rotateX, rotateY, scale, slerp)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
@@ -92,6 +92,16 @@ testRotateX =
     in
       equals q1 q2 <?> "testEuler " <> show q1 <> " " <> show q2
 
+testRotateY :: Effect Unit
+testRotateY =
+  quickCheck \d ->
+    let
+      q1 = fromEuler 0.0 d 0.0
+
+      q2 = rotateY identity (toRadian d)
+    in
+      equals q1 q2 <?> "testRotateY " <> show q1 <> " " <> show q2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -103,3 +113,4 @@ main = do
   testPow
   testLength
   testRotateX
+  testRotateY
