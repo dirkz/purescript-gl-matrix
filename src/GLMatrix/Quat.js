@@ -57,9 +57,7 @@ exports.js_fromEuler = (x, y, z) => {
 }
 
 exports.js_fromValues = (x, y, z, w) => {
-    let out = m.quat.create()
-    m.quat.fromValues(out, x, y, z, w)
-    return out
+    return m.quat.fromValues(x, y, z, w)
 }
 
 exports.js_getAngle = (a, b) => {
