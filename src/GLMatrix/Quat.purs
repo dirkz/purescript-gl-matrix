@@ -197,6 +197,10 @@ foreign import js_str :: Fn1 Quat String
 str :: Quat -> String
 str = runFn1 js_str
 
+-- |Subtracts from Quat from the other
+subtract :: Quat -> Quat -> Quat
+subtract = zipWith (-)
+
 foreign import js_numbers :: Fn1 Quat (Array Number)
 
 -- |Extract a number array
