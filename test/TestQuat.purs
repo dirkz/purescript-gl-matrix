@@ -90,15 +90,13 @@ testEuler =
 
       qx = rotateX identity rx
 
-      qy = rotateY identity ry
+      qy = rotateY qx ry
 
-      qz = rotateZ identity rz
+      qz = rotateZ qy rz
 
       q2 = multiply qx qy
-
-      q3 = multiply q2 qz
     in
-      equals q1 q3 <?> "testEuler " <> show rx <> " " <> show ry <> " " <> show rz
+      equals q1 qz <?> "testEuler " <> show qx <> " " <> show qz
 
 main :: Effect Unit
 main = do
