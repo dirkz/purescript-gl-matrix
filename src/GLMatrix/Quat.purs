@@ -34,6 +34,7 @@ module GLMatrix.Quat
 
 import Prelude
 import Data.Array as Array
+import Data.Foldable (and)
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, Fn5, runFn0, runFn1, runFn2, runFn3, runFn4, runFn5)
 import Partial.Unsafe (unsafePartial)
 import Prelude as Prelude
@@ -223,3 +224,6 @@ zipWith fn q1 q2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers
 -- |Like `Array.slice`
 slice :: Int -> Int -> Quat -> Array Number
 slice a b q = Array.slice a b $ numbers q
+
+all :: forall a. HeytingAlgebra a => (Number -> a) -> Quat -> a
+all f = and <<< Prelude.map f <<< numbers
