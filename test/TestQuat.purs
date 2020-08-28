@@ -145,7 +145,7 @@ testEulerVsChainedRotates =
 
       maxDev = 0.01
     in
-      all (\n -> n < maxDev) qDiff <?> "testEulerVsChainedRotates "
+      all (\n -> Math.abs n < maxDev) qDiff <?> "testEulerVsChainedRotates "
         <> show q1
         <> " "
         <> show q2
@@ -167,8 +167,12 @@ testEulerVsMultipliedRotates =
       qtm = multiply qtx qty
 
       q2 = multiply qtm qtz
+
+      qDiff = subtract q1 q2
+
+      maxDev = 0.01
     in
-      equals q1 q2 <?> "testEulerVsMultipliedRotates "
+      all (\n -> Math.abs n < maxDev) qDiff <?> "testEulerVsMultipliedRotates "
         <> show q1
         <> " "
         <> show q2
@@ -187,4 +191,4 @@ main = do
   testRotateZ
   testFromNumbers
   testEulerVsChainedRotates
- --testEulerVsMultipliedRotates
+  testEulerVsMultipliedRotates
