@@ -131,7 +131,7 @@ testFromNumbers =
         <?> "testFromNumbers "
         <> show q1
         <> " "
-        <> show n1
+        <> show q2
 
 testEulerVsChainedRotates :: Effect Unit
 testEulerVsChainedRotates =
