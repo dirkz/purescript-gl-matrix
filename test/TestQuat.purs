@@ -4,6 +4,8 @@
 -- |* setAxes
 -- |* sqlerp
 -- |* calculateW
+-- |* fromMat3
+-- |* getAngle
 module Test.TestQuat where
 
 import Test.Arbitrary
