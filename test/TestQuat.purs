@@ -1,8 +1,9 @@
 module Test.TestQuat where
 
 import Test.Arbitrary
+
 import Effect (Effect)
-import GLMatrix.Quat (Quat, add, conjugate, equals, exp, getAngle, invert, length, lerp, ln, normalize, numbers, scale, slerp)
+import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, getAngle, identity, invert, length, lerp, ln, multiply, normalize, numbers, rotateX, rotateY, rotateZ, scale, slerp)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
@@ -81,6 +82,24 @@ testLength =
     in
       l1 == l2 <?> "testLength " <> show q <> " " <> show v
 
+testEuler :: Effect Unit
+testEuler =
+  quickCheck \rx ry rz ->
+    let
+      q1 = fromEuler rx ry rz
+
+      qx = rotateX identity rx
+
+      qy = rotateY identity ry
+
+      qz = rotateZ identity rz
+
+      q2 = multiply qx qy
+
+      q3 = multiply q2 qz
+    in
+      equals q1 q3 <?> "testEuler " <> show rx <> " " <> show ry <> " " <> show rz
+
 main :: Effect Unit
 main = do
   testAdd
@@ -91,3 +110,4 @@ main = do
   testGetAngle
   testPow
   testLength
+  testEuler
