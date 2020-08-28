@@ -137,10 +137,6 @@ testEulerVsChainedRotates =
 
       q2 = rotateZ identity (toRadian dz)
 
-      n1 = numbers q1
-
-      n2 = numbers q2
-
       qDiff = subtract q1 q2
 
       maxDev = 0.01
