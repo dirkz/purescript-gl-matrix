@@ -133,13 +133,13 @@ testEulerVsChainedRotates =
 
       qt1 = rotateX identity (toRadian dx)
 
-      qt2 = rotateY identity (toRadian dy)
+      qt2 = rotateY qt1 (toRadian dy)
 
-      q2 = rotateZ identity (toRadian dz)
+      q2 = rotateZ qt2 (toRadian dz)
 
       qDiff = subtract q1 q2
 
-      maxDev = 0.01
+      maxDev = 0.001
     in
       all (\n -> Math.abs n < maxDev) qDiff <?> "testEulerVsChainedRotates "
         <> show q1
