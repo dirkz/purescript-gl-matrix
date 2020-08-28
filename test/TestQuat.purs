@@ -26,7 +26,7 @@ testConjugate =
     let
       n = normalize q
     in
-      conjugate n == invert n <?> "testConjugate " <> show q
+      equals (conjugate n) (invert n) <?> "testConjugate " <> show q
 
 testGetAxisAngle :: Effect Unit
 testGetAxisAngle =
@@ -177,7 +177,7 @@ testEulerVsChainedRotates =
 main :: Effect Unit
 main = do
   testAdd
-  --testConjugate
+  testConjugate
   testGetAxisAngle
   testLerp lerp
   testLerp slerp
