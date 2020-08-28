@@ -1,9 +1,11 @@
 module Test.TestQuat where
 
 import Test.Arbitrary
+import Data.Array as Array
+import Data.Foldable (all)
 import Effect (Effect)
 import GLMatrix (toRadian)
-import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, getAngle, identity, invert, length, lerp, ln, normalize, numbers, rotateX, rotateY, rotateZ, scale, slerp)
+import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, getAngle, identity, invert, length, lerp, ln, normalize, numbers, rotateX, rotateY, rotateZ, scale, slerp, zipWith, fromValues, unsafeFromNumbers)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
@@ -112,6 +114,47 @@ testRotateZ =
     in
       equals q1 q2 <?> "testRotateZ " <> show q1 <> " " <> show q2
 
+testEulerVsChainedRotates :: Effect Unit
+testEulerVsChainedRotates =
+  quickCheck \dx dy dz ->
+    let
+      q1 = fromEuler dx dy dz
+
+      qt1 = rotateX identity (toRadian dx)
+
+      qt2 = rotateY identity (toRadian dy)
+
+      q2 = rotateZ identity (toRadian dz)
+
+      n1 = numbers q1
+
+      n2 = numbers q2
+
+      qDiff1 = Array.zipWith (-) n1 n2
+
+      qDiff = zipWith (-) q1 q2
+
+      ns = numbers qDiff
+
+      maxDev = 0.01
+    in
+      all (\n -> n < maxDev) ns <?> "testEulerVsChainedRotates "
+        <> show q1
+        <> " "
+        <> show q2
+        <> " "
+        <> show qDiff
+        <> " "
+        <> show ns
+        <> " "
+        <> show n1
+        <> " "
+        <> show n2
+        <> " "
+        <> show qDiff1
+        <> " "
+        <> show ns
+
 main :: Effect Unit
 main = do
   testAdd
@@ -125,3 +168,4 @@ main = do
   testRotateX
   testRotateY
   testRotateZ
+  testEulerVsChainedRotates
