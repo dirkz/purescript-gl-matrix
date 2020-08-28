@@ -6,7 +6,7 @@ import Data.Foldable (all)
 import Effect (Effect)
 import GLMatrix (toRadian)
 import GLMatrix as GLMatrix
-import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, fromValues, identity, invert, length, lerp, ln, normalize, numbers, rotateX, rotateY, rotateZ, scale, slerp, unsafeFromNumbers, zipWith)
+import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, fromValues, identity, invert, length, lerp, ln, normalize, numbers, pow, rotateX, rotateY, rotateZ, scale, slerp, unsafeFromNumbers, zipWith)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
@@ -59,8 +59,10 @@ testPow =
       q2 = scale q1 s
 
       q3 = exp q2
+
+      q4 = pow q s
     in
-      equals q3 q <?> "testPow " <> show q <> " " <> show q3
+      equals q3 q4 <?> "testPow " <> show q3 <> " " <> show q4
 
 vec4FromQuat :: Quat -> Vec4
 vec4FromQuat q = unsafePartial $ Vec4.unsafeFromNumbers $ numbers q
@@ -173,7 +175,7 @@ main = do
   testGetAxisAngle
   testLerp lerp
   testLerp slerp
-  --testPow
+  testPow
   testLength
   testRotateX
   testRotateY
