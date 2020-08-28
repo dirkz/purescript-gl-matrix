@@ -2,6 +2,7 @@ module GLMatrix.Mat3.Mix
   ( fromVec3
   , fromMat2d
   , fromMat4
+  , fromQuat
   , fromScaling
   , fromTranslation
   , normalFromMat4
