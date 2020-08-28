@@ -1,3 +1,9 @@
+-- |TODO:
+-- |Untested:
+-- |* rotationTo
+-- |* setAxes
+-- |* sqlerp
+-- |* calculateW
 module Test.TestQuat where
 
 import Test.Arbitrary
@@ -181,6 +187,14 @@ testSquaredLength =
     in
       GLMatrix.equals l1 l2 <?> "testLength " <> show l1 <> " " <> show l2
 
+testDot :: Effect Unit
+testDot =
+  quickCheck \(ArbQuat q) ->
+    let
+      v = unsafePartial $ Vec4.unsafeFromNumbers $ numbers q
+    in
+      length q == (Vec4.length v)
+
 main :: Effect Unit
 main = do
   testAdd
@@ -197,3 +211,4 @@ main = do
   testEulerVsChainedRotates
   testEulerVsMultipliedRotates
   testSquaredLength
+  testDot
