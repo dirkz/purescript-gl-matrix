@@ -16,6 +16,7 @@ import GLMatrix.Mat2d (Mat2d)
 import GLMatrix.Mat3 (Mat3)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat4 (Mat4)
+import GLMatrix.Quat (Quat)
 import GLMatrix.Vec2 (Vec2)
 import GLMatrix.Vec3 (Vec3)
 import GLMatrix.Vec3 as Vec3
@@ -34,8 +35,15 @@ fromMat2d = runFn1 js_fromMat2d
 
 foreign import js_fromMat4 :: Fn1 Mat4 Mat3
 
+-- |Copies the upper-left 3x3 values into the given mat3.
 fromMat4 :: Mat4 -> Mat3
 fromMat4 = runFn1 js_fromMat4
+
+foreign import js_fromQuat :: Fn1 Quat Mat3
+
+-- |Calculates a 3x3 matrix from the given quaternion
+fromQuat :: Quat -> Mat3
+fromQuat = runFn1 js_fromQuat
 
 foreign import js_fromScaling :: Fn1 Vec2 Mat3
 

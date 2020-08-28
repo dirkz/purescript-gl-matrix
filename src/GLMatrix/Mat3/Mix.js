@@ -14,6 +14,12 @@ exports.js_fromMat4 = (mat) => {
     return out
 }
 
+exports.js_fromQuat = (q) => {
+    let out = m.mat3.create()
+    m.mat3.fromQuat(out, q)
+    return out
+}
+
 exports.js_fromScaling = (v2) => {
     let out = m.mat3.create()
     m.mat3.fromScaling(out, v2)
