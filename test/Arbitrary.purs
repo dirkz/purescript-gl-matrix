@@ -30,7 +30,7 @@ newtype ArbMat2d
   = ArbMat2d Mat2d
 
 instance arbMat2d :: Arbitrary ArbMat2d where
-  arbitrary = ArbMat2d <$> (Mat2d.fromValues <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
+  arbitrary = ArbMat2d <$> (Mat2d.fromValues <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary)
 
 newtype ArbMat3
   = ArbMat3 Mat3

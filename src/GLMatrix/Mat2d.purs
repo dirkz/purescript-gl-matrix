@@ -21,7 +21,7 @@ module GLMatrix.Mat2d
   ) where
 
 import Data.Array as Array
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn6, runFn0, runFn1, runFn2, runFn3, runFn6)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
@@ -64,11 +64,11 @@ foreign import js_fromRotation :: Fn1 Number Mat2d
 fromRotation :: Number -> Mat2d
 fromRotation = runFn1 js_fromRotation
 
-foreign import js_fromValues :: Fn4 Number Number Number Number Mat2d
+foreign import js_fromValues :: Fn6 Number Number Number Number Number Number Mat2d
 
 -- |Create a new Mat2d with the given values
-fromValues :: Number -> Number -> Number -> Number -> Mat2d
-fromValues = runFn4 js_fromValues
+fromValues :: Number -> Number -> Number -> Number -> Number -> Number -> Mat2d
+fromValues = runFn6 js_fromValues
 
 foreign import js_identity :: Fn0 Mat2d
 
@@ -126,7 +126,7 @@ numbers = runFn1 js_numbers
 
 -- |Create a matrix from an array produced by `numbers`.
 unsafeFromNumbers :: Partial => Array Number -> Mat2d
-unsafeFromNumbers [ m00, m01, m10, m11 ] = fromValues m00 m01 m10 m11
+unsafeFromNumbers [ a, b, c, d, tx, ty ] = fromValues a b c d tx ty
 
 instance showMat2d :: Prelude.Show Mat2d where
   show = str
