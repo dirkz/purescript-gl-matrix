@@ -13,8 +13,8 @@ import GLMatrix.Mat3 as Mat3
 import GLMatrix.Mat3.Mix (fromMat2d, fromMat4, fromQuat, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
 import GLMatrix.Quat (normalize)
-import GLMatrix.Quat as Quat
-import GLMatrix.Quat.Mix as Quat
+import GLMatrix.Quat (equals) as Quat
+import GLMatrix.Quat.Mix (fromMat3) as Quat
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
