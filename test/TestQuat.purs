@@ -1,12 +1,10 @@
 module Test.TestQuat where
 
 import Test.Arbitrary
-import Data.Array as Array
-import Data.Foldable (all)
 import Effect (Effect)
 import GLMatrix (toRadian)
 import GLMatrix as GLMatrix
-import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, fromValues, identity, invert, length, lerp, ln, normalize, numbers, pow, rotateX, rotateY, rotateZ, scale, slerp, unsafeFromNumbers, zipWith)
+import GLMatrix.Quat (Quat, add, all, conjugate, equals, exp, fromEuler, fromValues, identity, invert, length, lerp, ln, multiply, normalize, numbers, pow, rotateX, rotateY, rotateZ, scale, slerp, subtract, unsafeFromNumbers)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
@@ -143,30 +141,37 @@ testEulerVsChainedRotates =
 
       n2 = numbers q2
 
-      qDiff1 = Array.zipWith (-) n1 n2
-
-      qDiff = zipWith (-) q1 q2
-
-      ns = numbers qDiff
+      qDiff = subtract q1 q2
 
       maxDev = 0.01
     in
-      all (\n -> n < maxDev) ns <?> "testEulerVsChainedRotates "
+      all (\n -> n < maxDev) qDiff <?> "testEulerVsChainedRotates "
         <> show q1
         <> " "
         <> show q2
         <> " "
         <> show qDiff
+
+testEulerVsMultipliedRotates :: Effect Unit
+testEulerVsMultipliedRotates =
+  quickCheck \dx dy dz ->
+    let
+      q1 = fromEuler dx dy dz
+
+      qtx = rotateX identity (toRadian dx)
+
+      qty = rotateY identity (toRadian dy)
+
+      qtz = rotateZ identity (toRadian dz)
+
+      qtm = multiply qtx qty
+
+      q2 = multiply qtm qtz
+    in
+      equals q1 q2 <?> "testEulerVsMultipliedRotates "
+        <> show q1
         <> " "
-        <> show ns
-        <> " "
-        <> show n1
-        <> " "
-        <> show n2
-        <> " "
-        <> show qDiff1
-        <> " "
-        <> show ns
+        <> show q2
 
 main :: Effect Unit
 main = do
@@ -182,3 +187,4 @@ main = do
   testRotateZ
   testFromNumbers
   testEulerVsChainedRotates
+ --testEulerVsMultipliedRotates
