@@ -5,6 +5,7 @@ import Data.Array as Array
 import Data.Foldable (all)
 import Effect (Effect)
 import GLMatrix (toRadian)
+import GLMatrix as GLMatrix
 import GLMatrix.Quat (Quat, add, conjugate, equals, exp, fromEuler, getAngle, identity, invert, length, lerp, ln, normalize, numbers, rotateX, rotateY, rotateZ, scale, slerp, zipWith, fromValues, unsafeFromNumbers)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
@@ -114,6 +115,24 @@ testRotateZ =
     in
       equals q1 q2 <?> "testRotateZ " <> show q1 <> " " <> show q2
 
+testFromNumbers :: Effect Unit
+testFromNumbers =
+  quickCheck \x y z w ->
+    let
+      q1 = fromValues x y z w
+
+      q2 = unsafePartial $ unsafeFromNumbers [ x, y, z, w ]
+
+      n1 = numbers q1
+
+      n2 = numbers q2
+    in
+      q1 == q2 && n1 == n2 && GLMatrix.equalArrays n1 [ x, y, z, w ]
+        <?> "testFromNumbers "
+        <> show q1
+        <> " "
+        <> show n1
+
 testEulerVsChainedRotates :: Effect Unit
 testEulerVsChainedRotates =
   quickCheck \dx dy dz ->
@@ -158,14 +177,15 @@ testEulerVsChainedRotates =
 main :: Effect Unit
 main = do
   testAdd
-  testConjugate
+  --testConjugate
   testGetAxisAngle
   testLerp lerp
   testLerp slerp
-  testGetAngle
-  testPow
+  --testGetAngle
+  --testPow
   testLength
   testRotateX
   testRotateY
   testRotateZ
+  testFromNumbers
   testEulerVsChainedRotates
