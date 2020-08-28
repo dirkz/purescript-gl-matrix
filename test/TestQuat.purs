@@ -5,7 +5,7 @@ import Data.Array (unsafeIndex)
 import Effect (Effect)
 import GLMatrix.Mat3 as Mat3
 import GLMatrix.Quat (Quat, add, conjugate, equals, exp, getAngle, invert, length, lerp, ln, normalize, numbers, scale, slerp)
-import GLMatrix.Quat.Mix (fromMat3, getAxisAngle, setAxes, setAxisAngle)
+import GLMatrix.Quat.Mix (fromMat3, getAxisAngle, setAxisAngle)
 import GLMatrix.Vec3 (Vec3)
 import GLMatrix.Vec3 as Vec3
 import GLMatrix.Vec4 (Vec4)
@@ -110,22 +110,6 @@ mySetAxes right up view =
   where
   ind ar i = unsafePartial $ unsafeIndex ar i
 
-testSetAxes :: Effect Unit
-testSetAxes =
-  quickCheck \(ArbVec3 v1) (ArbVec3 v2) (ArbVec3 v3) ->
-    let
-      nv1 = Vec3.normalize v1
-
-      nv2 = Vec3.normalize v2
-
-      nv3 = Vec3.normalize v3
-
-      r1 = setAxes nv1 nv2 nv3
-
-      r2 = mySetAxes nv1 nv2 nv3
-    in
-      equals r1 r2 <?> "testSetAxes " <> show r1 <> " " <> show r2
-
 main :: Effect Unit
 main = do
   testAdd
@@ -136,4 +120,3 @@ main = do
   testGetAngle
   testPow
   testLength
-  testSetAxes
