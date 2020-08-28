@@ -6,15 +6,17 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
+import GLMatrix.Mat2d as Mat2d
 import GLMatrix.Mat3 (add, adjoint, determinant, equals, frob, fromRotation, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, projection, rotate, slice, subtract, transpose, unsafeFromNumbers, fromValues)
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Mat3.Mix (fromMat2d, fromMat4, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
+import GLMatrix.Mat3.Mix (fromMat2d, fromMat4, fromQuat, fromScaling, fromTranslation, fromVec3, normalFromMat4, scale, translate)
 import GLMatrix.Mat4 as Mat4
+import GLMatrix.Quat.Mix (fromMat3)
 import Math (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
-import GLMatrix.Mat2d as Mat2d
+import GLMatrix.Quat as Quat
 
 testAdd :: Effect Unit
 testAdd =
@@ -211,6 +213,16 @@ testFromMat2d =
   where
   ind ar i = unsafePartial $ unsafeIndex ar i
 
+testFromQuat :: Effect Unit
+testFromQuat =
+  quickCheck \(ArbQuat q) ->
+    let
+      m = fromQuat q
+
+      q1 = fromMat3 m
+    in
+      Quat.equals q q1 <?> "testFromQuat " <> show q <> " " <> show q1
+
 main :: Effect Unit
 main = do
   testAdd
@@ -234,3 +246,4 @@ main = do
   testTranspose
   testExtractNumbers
   testFromMat2d
+  testFromQuat
