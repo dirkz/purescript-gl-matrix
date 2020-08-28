@@ -4,13 +4,13 @@ import Test.Arbitrary
 import Effect (Effect)
 import GLMatrix (toRadian)
 import GLMatrix as GLMatrix
-import GLMatrix.Quat (Quat, add, all, conjugate, equals, exp, fromEuler, fromValues, identity, invert, length, lerp, ln, multiply, normalize, numbers, pow, rotateX, rotateY, rotateZ, scale, slerp, subtract, unsafeFromNumbers)
+import GLMatrix.Quat (Quat, add, all, conjugate, equals, exp, fromEuler, fromValues, identity, invert, length, lerp, ln, multiply, normalize, numbers, pow, rotateX, rotateY, rotateZ, scale, slerp, squaredLength, subtract, unsafeFromNumbers)
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
 import Math as Math
 import Partial.Unsafe (unsafePartial)
-import Prelude (Unit, discard, show, ($), (&&), (-), (<), (<>), (==))
+import Prelude (Unit, discard, show, ($), (&&), (*), (-), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
 
 -- |In case an equals is not coarse enough, use this for comparing yourself
@@ -171,6 +171,16 @@ testEulerVsMultipliedRotates =
         <> " "
         <> show q2
 
+testSquaredLength :: Effect Unit
+testSquaredLength =
+  quickCheck \(ArbQuat q) ->
+    let
+      l1 = (length q) * (length q)
+
+      l2 = squaredLength q
+    in
+      GLMatrix.equals l1 l2 <?> "testLength " <> show l1 <> " " <> show l2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -186,3 +196,4 @@ main = do
   testFromNumbers
   testEulerVsChainedRotates
   testEulerVsMultipliedRotates
+  testSquaredLength
