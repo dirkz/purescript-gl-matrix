@@ -6,7 +6,7 @@ import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import GLMatrix (equalArrays, toRadian)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, getScaling, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4 as Mat4
 import GLMatrix.Mat4.Mix (fromQuat, fromRotationTranslation, fromRotationTranslationScale, fromRotationTranslationScaleOrigin, fromVec4, getRotation)
 import GLMatrix.Quat as Quat
@@ -426,6 +426,20 @@ testGetRotation =
     in
       Quat.equals qn q1 <?> "testGetRotation " <> show q <> " " <> show q1
 
+testGetScaling :: Effect Unit
+testGetScaling =
+  quickCheck \(ArbQuat q) (ArbVec3 v) (ArbVec3 s) ->
+    let
+      qn = Quat.normalize q
+
+      vn = Vec3.normalize s
+
+      m1 = fromRotationTranslationScale qn vn s
+
+      v1 = Vec3.normalize $ getScaling m1
+    in
+      Vec3.equals vn v1 <?> "testGetScaling " <> show vn <> " " <> show v1
+
 main :: Effect Unit
 main = do
   testAdd
@@ -462,3 +476,4 @@ main = do
   testFromRotationTranslationScale
   testFromRotationTranslationScaleOrigin
   testGetRotation
+  testGetScaling
