@@ -332,8 +332,8 @@ testExtractNumbers =
     in
       equalArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
 
-testFromQuat :: Effect Unit
-testFromQuat =
+testFromQuatWithXRotation :: Effect Unit
+testFromQuatWithXRotation =
   quickCheck \d ->
     let
       q = Quat.fromEuler d 0.0 0.0
@@ -342,7 +342,7 @@ testFromQuat =
 
       m2 = fromQuat q
     in
-      equals m1 m2 <?> "testFromQuat " <> show m1 <> " " <> show m2
+      equals m1 m2 <?> "testFromQuatWithXRotation " <> show m1 <> " " <> show m2
 
 main :: Effect Unit
 main = do
@@ -373,4 +373,4 @@ main = do
   testTargetTo
   testTranspose
   testExtractNumbers
-  testFromQuat
+  testFromQuatWithXRotation
