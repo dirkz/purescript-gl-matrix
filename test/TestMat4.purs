@@ -1,13 +1,12 @@
 module Test.TestMat4 where
 
 import Test.Arbitrary
-
 import Data.Foldable (maximum, sum)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import GLMatrix (equalArrays, toRadian)
 import GLMatrix as GLMatrix
-import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, getScaling, getTranslation, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
+import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, getScaling, getTranslation, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, targetTo, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4 as Mat4
 import GLMatrix.Mat4.Mix (fromQuat, fromRotationTranslation, fromRotationTranslationScale, fromRotationTranslationScaleOrigin, fromVec4, getRotation)
 import GLMatrix.Quat as Quat
@@ -295,7 +294,7 @@ testTargetTo :: Effect Unit
 testTargetTo =
   quickCheck \(ArbVec3 eye) (ArbVec3 center) (ArbVec3 up) ->
     let
-      res = lookAt eye center up
+      res = targetTo eye center up
     in
       slice 3 4 res == [ 0.0 ]
         && slice 7 8 res
