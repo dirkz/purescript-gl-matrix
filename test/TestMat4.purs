@@ -8,7 +8,7 @@ import GLMatrix (equalArrays, toRadian)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4 as Mat4
-import GLMatrix.Mat4.Mix (fromQuat, fromRotationTranslation, fromRotationTranslationScale, fromVec4)
+import GLMatrix.Mat4.Mix (fromQuat, fromRotationTranslation, fromRotationTranslationScale, fromRotationTranslationScaleOrigin, fromVec4)
 import GLMatrix.Quat as Quat
 import GLMatrix.Vec3 as Vec3
 import Math (sqrt)
@@ -398,6 +398,22 @@ testFromRotationTranslationScale =
     in
       equals r1 r2 <?> "testFromRotationTranslationScale " <> show r1 <> " " <> show r2
 
+testFromRotationTranslationScaleOrigin :: Effect Unit
+testFromRotationTranslationScaleOrigin =
+  quickCheck \(ArbQuat q) (ArbVec3 v) (ArbVec3 s) (ArbVec3 o) ->
+    let
+      r1 = fromRotationTranslationScaleOrigin q v s o
+
+      mTranslation = translate (translate identity v) o
+
+      mRotation = fromQuat q
+
+      mRotationTranslation = multiply mTranslation mRotation
+
+      r2 = translate (scale mRotationTranslation s) (Vec3.negate o)
+    in
+      equals r1 r2 <?> "testFromRotationTranslationScaleOrigin " <> show r1 <> " " <> show r2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -432,3 +448,4 @@ main = do
   testFromQuatWithZRotation
   testFromRotationTranslation
   testFromRotationTranslationScale
+  testFromRotationTranslationScaleOrigin
