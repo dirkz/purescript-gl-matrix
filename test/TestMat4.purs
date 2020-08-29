@@ -4,11 +4,12 @@ import Test.Arbitrary
 import Data.Foldable (maximum, sum)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
-import GLMatrix (equalArrays)
+import GLMatrix (equalArrays, toRadian)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4 as Mat4
-import GLMatrix.Mat4.Mix (fromVec4)
+import GLMatrix.Mat4.Mix (fromQuat, fromVec4)
+import GLMatrix.Quat as Quat
 import GLMatrix.Vec3 as Vec3
 import Math (sqrt)
 import Math as Math
@@ -331,6 +332,18 @@ testExtractNumbers =
     in
       equalArrays (numbers m1) ns <?> "testExtractNumbers " <> show m1 <> " != " <> show m2
 
+testFromQuat :: Effect Unit
+testFromQuat =
+  quickCheck \d ->
+    let
+      q = Quat.fromEuler d 0.0 0.0
+
+      m1 = fromXRotation (toRadian d)
+
+      m2 = fromQuat q
+    in
+      equals m1 m2 <?> "testFromQuat " <> show m1 <> " " <> show m2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -360,3 +373,4 @@ main = do
   testTargetTo
   testTranspose
   testExtractNumbers
+  testFromQuat
