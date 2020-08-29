@@ -2,11 +2,12 @@ module GLMatrix.Mat4.Mix
   ( fromQuat
   , fromVec4
   , fromRotationTranslation
+  , fromRotationTranslationScale
   ) where
 
 import Prelude
 
-import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
+import Data.Function.Uncurried (Fn1, Fn2, Fn3, runFn1, runFn2, runFn3)
 import GLMatrix.Mat4 (Mat4, unsafeFromNumbers)
 import GLMatrix.Quat (Quat)
 import GLMatrix.Vec3 (Vec3)
@@ -30,3 +31,9 @@ foreign import js_fromRotationTranslation :: Fn2 Quat Vec3 Mat4
 -- |Creates a matrix from a quaternion rotation and vector translation This is equivalent to (but much faster than): mat4.identity(dest); mat4.translate(dest, vec); let quatMat = mat4.create(); quat4.toMat4(quat, quatMat); mat4.multiply(dest, quatMat);
 fromRotationTranslation :: Quat -> Vec3 -> Mat4
 fromRotationTranslation = runFn2 js_fromRotationTranslation
+
+foreign import js_fromRotationTranslationScale :: Fn3 Quat Vec3 Vec3 Mat4
+
+-- |Creates a matrix from a quaternion rotation, vector translation and vector scale This is equivalent to (but much faster than): mat4.identity(dest); mat4.translate(dest, vec); let quatMat = mat4.create(); quat4.toMat4(quat, quatMat); mat4.multiply(dest, quatMat); mat4.scale(dest, scale)
+fromRotationTranslationScale :: Quat -> Vec3 -> Vec3 -> Mat4
+fromRotationTranslationScale = runFn3 js_fromRotationTranslationScale

@@ -13,3 +13,9 @@ exports.js_fromRotationTranslation = (q, v) => {
     return m.mat4.fromRotationTranslation(out, q, v)
     return out
 }
+
+exports.js_fromRotationTranslationScale = (q, v, s) => {
+    let out = m.mat4.create()
+    return m.mat4.fromRotationTranslationScale(out, q, v, s)
+    return out
+}
