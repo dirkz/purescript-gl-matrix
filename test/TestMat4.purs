@@ -8,7 +8,7 @@ import GLMatrix (equalArrays, toRadian)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat4 (Mat4, add, adjoint, determinant, equals, frob, fromRotation, fromScaling, fromTranslation, fromXRotation, fromYRotation, fromZRotation, frustum, identity, invert, lookAt, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, ortho, perspective, perspectiveFromFieldOfView, rotate, rotateX, rotateY, rotateZ, scale, slice, subtract, translate, transpose, unsafeFromNumbers)
 import GLMatrix.Mat4 as Mat4
-import GLMatrix.Mat4.Mix (fromQuat, fromVec4)
+import GLMatrix.Mat4.Mix (fromQuat, fromRotationTranslation, fromVec4)
 import GLMatrix.Quat as Quat
 import GLMatrix.Vec3 as Vec3
 import Math (sqrt)
@@ -368,6 +368,20 @@ testFromQuatWithZRotation =
     in
       equals m1 m2 <?> "testFromQuatWithZRotation " <> show m1 <> " " <> show m2
 
+testFromRotationTranslation :: Effect Unit
+testFromRotationTranslation =
+  quickCheck \(ArbQuat q) (ArbVec3 v) ->
+    let
+      r1 = fromRotationTranslation q v
+
+      mTranslation = translate identity v
+
+      mRotation = fromQuat q
+
+      r2 = multiply mTranslation mRotation
+    in
+      equals r1 r2 <?> "testFromRotationTranslation " <> show r1 <> " " <> show r2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -400,3 +414,4 @@ main = do
   testFromQuatWithXRotation
   testFromQuatWithYRotation
   testFromQuatWithZRotation
+  testFromRotationTranslation
