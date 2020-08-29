@@ -156,3 +156,7 @@ exports.js_bezier = (a, b, c, d, t) => {
     return m.vec3.bezier(out, a, b, c, d, t)
 }
 
+exports.js_hermite = (a, b, c, d, t) => {
+    let out = m.vec3.create()
+    return m.vec3.hermite(out, a, b, c, d, t)
+}

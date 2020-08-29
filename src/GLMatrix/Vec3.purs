@@ -11,6 +11,7 @@ module GLMatrix.Vec3
   , equals
   , floor
   , fromValues
+  , hermite
   , inverse
   , length
   , lerp
@@ -264,3 +265,9 @@ foreign import js_bezier :: Fn5 Vec3 Vec3 Vec3 Vec3 Number Vec3
 -- |Performs a bezier interpolation with two control points
 bezier :: Vec3 -> Vec3 -> Vec3 -> Vec3 -> Number -> Vec3
 bezier = runFn5 js_bezier
+
+foreign import js_hermite :: Fn5 Vec3 Vec3 Vec3 Vec3 Number Vec3
+
+-- |Performs a hermite interpolation with two control points
+hermite :: Vec3 -> Vec3 -> Vec3 -> Vec3 -> Number -> Vec3
+hermite = runFn5 js_hermite
