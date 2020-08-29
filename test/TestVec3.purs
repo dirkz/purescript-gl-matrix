@@ -7,9 +7,10 @@ import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Vec3 (Vec3, add, angle, bezier, ceil, cross, distance, divide, dot, equals, floor, hermite, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
+import GLMatrix.Vec3 (Vec3, add, angle, bezier, ceil, cross, distance, divide, dot, equals, floor, hermite, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
 import GLMatrix.Vec3 as Vec
 import GLMatrix.Vec3 as Vec3
+import GLMatrix.Vec3.Mix (transformMat3)
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
