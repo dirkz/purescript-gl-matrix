@@ -344,6 +344,30 @@ testFromQuatWithXRotation =
     in
       equals m1 m2 <?> "testFromQuatWithXRotation " <> show m1 <> " " <> show m2
 
+testFromQuatWithYRotation :: Effect Unit
+testFromQuatWithYRotation =
+  quickCheck \d ->
+    let
+      q = Quat.fromEuler 0.0 d 0.0
+
+      m1 = fromYRotation (toRadian d)
+
+      m2 = fromQuat q
+    in
+      equals m1 m2 <?> "testFromQuatWithYRotation " <> show m1 <> " " <> show m2
+
+testFromQuatWithZRotation :: Effect Unit
+testFromQuatWithZRotation =
+  quickCheck \d ->
+    let
+      q = Quat.fromEuler 0.0 0.0 d
+
+      m1 = fromZRotation (toRadian d)
+
+      m2 = fromQuat q
+    in
+      equals m1 m2 <?> "testFromQuatWithZRotation " <> show m1 <> " " <> show m2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -374,3 +398,5 @@ main = do
   testTranspose
   testExtractNumbers
   testFromQuatWithXRotation
+  testFromQuatWithYRotation
+  testFromQuatWithZRotation
