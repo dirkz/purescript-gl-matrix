@@ -3,11 +3,12 @@ module GLMatrix.Mat4.Mix
   , fromVec4
   , fromRotationTranslation
   , fromRotationTranslationScale
+  , fromRotationTranslationScaleOrigin
   ) where
 
 import Prelude
 
-import Data.Function.Uncurried (Fn1, Fn2, Fn3, runFn1, runFn2, runFn3)
+import Data.Function.Uncurried (Fn1, Fn2, Fn3, Fn4, runFn1, runFn2, runFn3, runFn4)
 import GLMatrix.Mat4 (Mat4, unsafeFromNumbers)
 import GLMatrix.Quat (Quat)
 import GLMatrix.Vec3 (Vec3)
@@ -37,3 +38,9 @@ foreign import js_fromRotationTranslationScale :: Fn3 Quat Vec3 Vec3 Mat4
 -- |Creates a matrix from a quaternion rotation, vector translation and vector scale This is equivalent to (but much faster than): mat4.identity(dest); mat4.translate(dest, vec); let quatMat = mat4.create(); quat4.toMat4(quat, quatMat); mat4.multiply(dest, quatMat); mat4.scale(dest, scale)
 fromRotationTranslationScale :: Quat -> Vec3 -> Vec3 -> Mat4
 fromRotationTranslationScale = runFn3 js_fromRotationTranslationScale
+
+foreign import js_fromRotationTranslationScaleOrigin :: Fn4 Quat Vec3 Vec3 Vec3 Mat4
+
+-- |Creates a matrix from a quaternion rotation, vector translation and vector scale, rotating and scaling around the given origin This is equivalent to (but much faster than): mat4.identity(dest); mat4.translate(dest, vec); mat4.translate(dest, origin); let quatMat = mat4.create(); quat4.toMat4(quat, quatMat); mat4.multiply(dest, quatMat); mat4.scale(dest, scale) mat4.translate(dest, negativeOrigin);
+fromRotationTranslationScaleOrigin :: Quat -> Vec3 -> Vec3 -> Vec3 -> Mat4
+fromRotationTranslationScaleOrigin = runFn4 js_fromRotationTranslationScaleOrigin
