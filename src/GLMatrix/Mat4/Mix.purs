@@ -1,5 +1,6 @@
 module GLMatrix.Mat4.Mix
-  ( fromVec4
+  ( fromQuat
+  , fromVec4
   ) where
 
 import Prelude
