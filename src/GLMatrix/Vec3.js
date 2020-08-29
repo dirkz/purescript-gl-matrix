@@ -150,3 +150,9 @@ exports.js_zero = () => {
 exports.js_numbers = (ar) => {
     return Array.prototype.slice.call(ar)
 }
+
+exports.js_bezier = (a, b, c, d, t) => {
+    let out = m.vec3.create()
+    return m.vec3.bezier(out, a, b, c, d, t)
+}
+
