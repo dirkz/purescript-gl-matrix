@@ -7,7 +7,7 @@ import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Vec3 (Vec3, add, angle, ceil, cross, distance, divide, dot, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
+import GLMatrix.Vec3 (Vec3, add, angle, bezier, ceil, cross, distance, divide, dot, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec3 as Vec
 import GLMatrix.Vec3 as Vec3
 import Math as Math
@@ -296,6 +296,18 @@ testZero =
     in
       equals r1 v <?> "testZero " <> show r
 
+testBezierOriginal :: Effect Unit
+testBezierOriginal =
+  quickCheck \(ArbVec3 v1) (ArbVec3 v2) (ArbVec3 v3) (ArbVec3 v4) ->
+    equals (bezier v1 v2 v3 v4 0.0) v1
+      <?> "testBezierOriginal"
+
+testBezierEnd :: Effect Unit
+testBezierEnd =
+  quickCheck \(ArbVec3 v1) (ArbVec3 v2) (ArbVec3 v3) (ArbVec3 v4) ->
+    equals (bezier v1 v2 v3 v4 1.0) v4
+      <?> "testBezierEnd"
+
 main :: Effect Unit
 main = do
   testAdd
@@ -326,3 +338,5 @@ main = do
   testSquaredLength
   testSubtract
   testZero
+  testBezierOriginal
+  testBezierEnd
