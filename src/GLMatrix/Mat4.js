@@ -4,14 +4,12 @@ const m = require("gl-matrix")
 
 exports.js_add = (a, b) => {
     let out = m.mat4.create()
-    m.mat4.add(out, a, b)
-    return out
+    return m.mat4.add(out, a, b)
 }
 
 exports.js_adjoint = (a) => {
     let out = m.mat4.create()
-    m.mat4.adjoint(out, a)
-    return out
+    return m.mat4.adjoint(out, a)
 }
 
 exports.js_determinant = (a) => {
@@ -32,20 +30,17 @@ exports.js_frob = (a) => {
 
 exports.js_fromRotation = (r, axis) => {
     let out = m.mat4.create()
-    m.mat4.fromRotation(out, r, axis)
-    return out
+    return m.mat4.fromRotation(out, r, axis)
 }
 
 exports.js_fromScaling = (v) => {
     let out = m.mat4.create()
-    m.mat4.fromScaling(out, v)
-    return out
+    return m.mat4.fromScaling(out, v)
 }
 
 exports.js_fromTranslation = (v) => {
     let out = m.mat4.create()
-    m.mat4.fromTranslation(out, v)
-    return out
+    return m.mat4.fromTranslation(out, v)
 }
 
 exports.js_fromValues = function (m00) {
@@ -84,26 +79,22 @@ exports.js_fromValues = function (m00) {
  
 exports.js_fromXRotation = (r) => {
     let out = m.mat4.create()
-    m.mat4.fromXRotation(out, r)
-    return out
+    return m.mat4.fromXRotation(out, r)
 }
 
 exports.js_fromYRotation = (r) => {
     let out = m.mat4.create()
-    m.mat4.fromYRotation(out, r)
-    return out
+    return m.mat4.fromYRotation(out, r)
 }
 
 exports.js_fromZRotation = (r) => {
     let out = m.mat4.create()
-    m.mat4.fromZRotation(out, r)
-    return out
+    return m.mat4.fromZRotation(out, r)
 }
 
 exports.js_frustum = (left, right, bottom, top, near, far) => {
     let out = m.mat4.create()
-    m.mat4.frustum(out, left, right, bottom, top, near, far)
-    return out
+    return m.mat4.frustum(out, left, right, bottom, top, near, far)
 }
 
 exports.js_identity = () => {
@@ -112,92 +103,77 @@ exports.js_identity = () => {
 
 exports.js_getScaling = (mat4) => {
     let out = m.vec3.create()
-    m.mat4.getScaling(out, mat4)
-    return out
+    return m.mat4.getScaling(out, mat4)
 }
 
 exports.js_getTranslation = (mat4) => {
     let out = m.vec3.create()
-    m.mat4.getTranslation(out, mat4)
-    return out
+    return m.mat4.getTranslation(out, mat4)
 }
 
 exports.js_invert = (a) => {
     let out = m.mat4.create()
-    m.mat4.invert(out, a)
-    return out
+    return m.mat4.invert(out, a)
 }
 
 exports.js_lookAt = (eye, center, up) => {
     let out = m.mat4.create()
-    m.mat4.lookAt(out, eye, center, up)
-    return out
+    return m.mat4.lookAt(out, eye, center, up)
 }
 
 exports.js_multiply = (a, b) => {
     let out = m.mat4.create()
-    m.mat4.multiply(out, a, b)
-    return out
+    return m.mat4.multiply(out, a, b)
 }
 
 exports.js_multiplyScalar = (a, b) => {
     let out = m.mat4.create()
-    m.mat4.multiplyScalar(out, a, b)
-    return out
+    return m.mat4.multiplyScalar(out, a, b)
 }
 
 exports.js_multiplyScalarAndAdd = (a, b, scale) => {
     let out = m.mat4.create()
-    m.mat4.multiplyScalarAndAdd(out, a, b, scale)
-    return out
+    return m.mat4.multiplyScalarAndAdd(out, a, b, scale)
 }
 
 exports.js_ortho = (left, right, bottom, top, near, far) => {
     let out = m.mat4.create()
-    m.mat4.frustum(out, left, right, bottom, top, near, far)
-    return out
+    return m.mat4.frustum(out, left, right, bottom, top, near, far)
 }
 
 exports.js_perspective = (fovy, aspect, near, far) => {
     let out = m.mat4.create()
-    m.mat4.perspective(out, fovy, aspect, near, far)
-    return out
+    return m.mat4.perspective(out, fovy, aspect, near, far)
 }
 
 exports.js_perspectiveFromFieldOfView = (fov, near, far) => {
     let out = m.mat4.create()
-    m.mat4.perspectiveFromFieldOfView(out, fov, near, far)
-    return out
+    return m.mat4.perspectiveFromFieldOfView(out, fov, near, far)
 }
 
 exports.js_rotate = (a, r, axis) => {
     let out = m.mat4.create()
-    m.mat4.rotate(out, a, r, axis)
-    return out
+    return m.mat4.rotate(out, a, r, axis)
 }
 
 exports.js_rotateX = (a, r) => {
     let out = m.mat4.create()
-    m.mat4.rotateX(out, a, r)
-    return out
+    return m.mat4.rotateX(out, a, r)
 }
 
 exports.js_rotateY = (a, r) => {
     let out = m.mat4.create()
-    m.mat4.rotateY(out, a, r)
-    return out
+    return m.mat4.rotateY(out, a, r)
 }
 
 exports.js_rotateZ = (a, r) => {
     let out = m.mat4.create()
-    m.mat4.rotateZ(out, a, r)
-    return out
+    return m.mat4.rotateZ(out, a, r)
 }
 
 exports.js_scale = (mat4, v) => {
     let out = m.mat4.create()
-    m.mat4.scale(out, mat4, v)
-    return out
+    return m.mat4.scale(out, mat4, v)
 }
 
 exports.js_str = (a) => {
@@ -206,26 +182,22 @@ exports.js_str = (a) => {
 
 exports.js_subtract = (a, b) => {
     let out = m.mat4.create()
-    m.mat4.subtract(out, a, b)
-    return out
+    return m.mat4.subtract(out, a, b)
 }
 
 exports.js_targetTo = (eye, center, up) => {
     let out = m.mat4.create()
-    m.mat4.targetTo(out, eye, center, up)
-    return out
+    return m.mat4.targetTo(out, eye, center, up)
 }
 
 exports.js_translate = (a, v) => {
     let out = m.mat4.create()
-    m.mat4.translate(out, a, v)
-    return out
+    return m.mat4.translate(out, a, v)
 }
 
 exports.js_transpose = (a) => {
     let out = m.mat4.create()
-    m.mat4.transpose(out, a)
-    return out
+    return m.mat4.transpose(out, a)
 }
 
 exports.js_numbers = (ar) => {

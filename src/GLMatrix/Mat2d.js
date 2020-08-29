@@ -4,8 +4,7 @@ const m = require("gl-matrix")
 
 exports.js_add = (a, b) => {
     let out = m.mat2d.create()
-    m.mat2d.add(out, a, b)
-    return out
+    return m.mat2d.add(out, a, b)
 }
 
 exports.js_determinant = (a) => {
@@ -26,8 +25,7 @@ exports.js_frob = (a) => {
 
 exports.js_fromRotation = (r) => {
     let out = m.mat2d.create()
-    m.mat2d.fromRotation(out, r)
-    return out
+    return m.mat2d.fromRotation(out, r)
 }
 
 exports.js_fromValues = (a, b, c, d, tx, ty) => {
@@ -40,32 +38,27 @@ exports.js_identity = () => {
 
 exports.js_invert = (a) => {
     let out = m.mat2d.create()
-    m.mat2d.invert(out, a)
-    return out
+    return m.mat2d.invert(out, a)
 }
 
 exports.js_multiply = (a, b) => {
     let out = m.mat2d.create()
-    m.mat2d.multiply(out, a, b)
-    return out
+    return m.mat2d.multiply(out, a, b)
 }
 
 exports.js_multiplyScalar = (a, b) => {
     let out = m.mat2d.create()
-    m.mat2d.multiplyScalar(out, a, b)
-    return out
+    return m.mat2d.multiplyScalar(out, a, b)
 }
 
 exports.js_multiplyScalarAndAdd = (a, b, scale) => {
     let out = m.mat2d.create()
-    m.mat2d.multiplyScalarAndAdd(out, a, b, scale)
-    return out
+    return m.mat2d.multiplyScalarAndAdd(out, a, b, scale)
 }
 
 exports.js_rotate = (a, r) => {
     let out = m.mat2d.create()
-    m.mat2d.rotate(out, a, r)
-    return out
+    return m.mat2d.rotate(out, a, r)
 }
 
 exports.js_str = (a) => {
@@ -74,8 +67,7 @@ exports.js_str = (a) => {
 
 exports.js_subtract = (a, b) => {
     let out = m.mat2d.create()
-    m.mat2d.subtract(out, a, b)
-    return out
+    return m.mat2d.subtract(out, a, b)
 }
 
 exports.js_numbers = (ar) => {
