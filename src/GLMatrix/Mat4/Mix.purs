@@ -4,6 +4,7 @@ module GLMatrix.Mat4.Mix
   , fromRotationTranslation
   , fromRotationTranslationScale
   , fromRotationTranslationScaleOrigin
+  , getRotation
   ) where
 
 import Prelude
@@ -44,3 +45,9 @@ foreign import js_fromRotationTranslationScaleOrigin :: Fn4 Quat Vec3 Vec3 Vec3 
 -- |Creates a matrix from a quaternion rotation, vector translation and vector scale, rotating and scaling around the given origin This is equivalent to (but much faster than): mat4.identity(dest); mat4.translate(dest, vec); mat4.translate(dest, origin); let quatMat = mat4.create(); quat4.toMat4(quat, quatMat); mat4.multiply(dest, quatMat); mat4.scale(dest, scale) mat4.translate(dest, negativeOrigin);
 fromRotationTranslationScaleOrigin :: Quat -> Vec3 -> Vec3 -> Vec3 -> Mat4
 fromRotationTranslationScaleOrigin = runFn4 js_fromRotationTranslationScaleOrigin
+
+foreign import js_getRotation :: Fn1 Mat4 Quat
+
+-- |Returns a quaternion representing the rotational component of a transformation matrix. If a matrix is built with fromRotationTranslation, the returned quaternion will be the same as the quaternion originally supplied.
+getRotation :: Mat4 -> Quat
+getRotation = runFn1 js_getRotation
