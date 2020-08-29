@@ -16,44 +16,37 @@ exports.js_length = (a) => {
 
 exports.js_sqlerp = (a, b, c, d, t) => {
     let out = m.quat.create()
-    m.quat.sqlerp(out, a, b, c, d, t)
-    return out
+    return m.quat.sqlerp(out, a, b, c, d, t)
 }
 
 exports.js_add = (a, b) => {
     let out = m.quat.create()
-    m.quat.add(out, a, b)
-    return out
+    return m.quat.add(out, a, b)
 }
 
 exports.js_calculateW = (a) => {
     let out = m.quat.create()
-    m.quat.calculateW(out, a)
-    return out
+    return m.quat.calculateW(out, a)
 }
 
 exports.js_conjugate = (a) => {
     let out = m.quat.create()
-    m.quat.conjugate(out, a)
-    return out
+    return m.quat.conjugate(out, a)
 }
 
 exports.js_dot = (a, b) => {
     let out = m.quat.create()
-    m.quat.dot(out, a, b)
-    return out
+    return m.quat.dot(out, a, b)
 }
 
 exports.js_exp = (a) => {
     let out = m.quat.create()
-    m.quat.exp(out, a)
-    return out
+    return m.quat.exp(out, a)
 }
 
 exports.js_fromEuler = (x, y, z) => {
     let out = m.quat.create()
-    m.quat.fromEuler(out, x, y, z)
-    return out
+    return m.quat.fromEuler(out, x, y, z)
 }
 
 exports.js_fromValues = (x, y, z, w) => {
@@ -66,74 +59,62 @@ exports.js_getAngle = (a, b) => {
 
 exports.js_identity = () => {
     let out = m.quat.create()
-    m.quat.identity(out)
-    return out
+    return m.quat.identity(out)
 }
 
 exports.js_invert = (a) => {
     let out = m.quat.create()
-    m.quat.invert(out, a)
-    return out
+    return m.quat.invert(out, a)
 }
 
 exports.js_lerp = (a, b, t) => {
     let out = m.quat.create()
-    m.quat.lerp(out, a, b, t)
-    return out
+    return m.quat.lerp(out, a, b, t)
 }
 
 exports.js_ln = (a) => {
     let out = m.quat.create()
-    m.quat.ln(out, a)
-    return out
+    return m.quat.ln(out, a)
 }
 
 exports.js_multiply = (a, b) => {
     let out = m.quat.create()
-    m.quat.multiply(out, a, b)
-    return out
+    return m.quat.multiply(out, a, b)
 }
 
 exports.js_normalize = (a) => {
     let out = m.quat.create()
-    m.quat.normalize(out, a)
-    return out
+    return m.quat.normalize(out, a)
 }
 
 exports.js_pow = (a, b) => {
     let out = m.quat.create()
-    m.quat.pow(out, a, b)
-    return out
+    return m.quat.pow(out, a, b)
 }
 
 exports.js_rotateX = (a, r) => {
     let out = m.quat.create()
-    m.quat.rotateX(out, a, r)
-    return out
+    return m.quat.rotateX(out, a, r)
 }
 
 exports.js_rotateY = (a, r) => {
     let out = m.quat.create()
-    m.quat.rotateY(out, a, r)
-    return out
+    return m.quat.rotateY(out, a, r)
 }
 
 exports.js_rotateZ = (a, r) => {
     let out = m.quat.create()
-    m.quat.rotateZ(out, a, r)
-    return out
+    return m.quat.rotateZ(out, a, r)
 }
 
 exports.js_scale = (a, s) => {
     let out = m.quat.create()
-    m.quat.scale(out, a, s)
-    return out
+    return m.quat.scale(out, a, s)
 }
 
 exports.js_slerp = (a, b, t) => {
     let out = m.quat.create()
-    m.quat.slerp(out, a, b, t)
-    return out
+    return m.quat.slerp(out, a, b, t)
 }
 
 exports.js_squaredLength = (a) => {

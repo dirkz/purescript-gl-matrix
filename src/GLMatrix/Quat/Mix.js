@@ -4,20 +4,17 @@ const m = require("gl-matrix")
 
 exports.js_rotationTo = (a, b) => {
     let out = m.quat.create()
-    m.quat.rotationTo(out, a, b)
-    return out
+    return m.quat.rotationTo(out, a, b)
 }
 
 exports.js_setAxes = (view, right, up) => {
     let out = m.quat.create()
-    m.quat.setAxes(out, view, right, up)
-    return out
+    return m.quat.setAxes(out, view, right, up)
 }
 
 exports.js_fromMat3 = (mat3) => {
     let out = m.quat.create()
-    m.quat.fromMat3(out, mat3)
-    return out
+    return m.quat.fromMat3(out, mat3)
 }
 
 exports.js_getAxisAngle = (v3, a) => {
@@ -26,6 +23,5 @@ exports.js_getAxisAngle = (v3, a) => {
 
 exports.js_setAxisAngle = (v3, a) => {
     let out = m.quat.create()
-    m.quat.setAxisAngle(out, v3, a)
-    return out
+    return m.quat.setAxisAngle(out, v3, a)
 }
