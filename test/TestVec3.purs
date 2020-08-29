@@ -4,13 +4,14 @@ import Test.Arbitrary
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
-import GLMatrix (equalArrays)
+import GLMatrix (equalArrays, toRadian)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat3 as Mat3
+import GLMatrix.Quat as Quat
 import GLMatrix.Vec3 (Vec3, add, angle, bezier, ceil, cross, distance, divide, dot, equals, floor, hermite, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotateX, rotateY, rotateZ, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
 import GLMatrix.Vec3 as Vec
 import GLMatrix.Vec3 as Vec3
-import GLMatrix.Vec3.Mix (transformMat3)
+import GLMatrix.Vec3.Mix (transformMat3, transformQuat)
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
@@ -321,6 +322,18 @@ testHermiteEnd =
     equals (hermite v1 v2 v3 v4 1.0) v4
       <?> "testHermiteEnd"
 
+testTransformQuat :: Effect Unit
+testTransformQuat =
+  quickCheck \(ArbVec3 v) d ->
+    let
+      r1 = rotateX v zero (toRadian d)
+
+      q = Quat.fromEuler d 0.0 0.0
+
+      r2 = transformQuat v q
+    in
+      equals r1 r2 <?> "testTransformQuat " <> show v <> " " <> show d
+
 main :: Effect Unit
 main = do
   testAdd
@@ -355,3 +368,4 @@ main = do
   testBezierEnd
   testHermiteOriginal
   testHermiteEnd
+  testTransformQuat
