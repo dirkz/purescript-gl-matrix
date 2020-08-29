@@ -2,6 +2,7 @@ module GLMatrix.Vec3
   ( Vec3
   , add
   , angle
+  , bezier
   , ceil
   , cross
   , distance
@@ -37,7 +38,7 @@ module GLMatrix.Vec3
   ) where
 
 import Data.Array as Array
-import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, runFn0, runFn1, runFn2, runFn3)
+import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn5, runFn0, runFn1, runFn2, runFn3, runFn5)
 import GLMatrix.Mat3 (Mat3)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
@@ -257,3 +258,9 @@ zipWith fn v1 v2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers
 -- |Like `Array.slice`
 slice :: Int -> Int -> Vec3 -> Array Number
 slice a b m = Array.slice a b $ numbers m
+
+foreign import js_bezier :: Fn5 Vec3 Vec3 Vec3 Vec3 Number Vec3
+
+-- |Performs a bezier interpolation with two control points
+bezier :: Vec3 -> Vec3 -> Vec3 -> Vec3 -> Number -> Vec3
+bezier = runFn5 js_bezier
