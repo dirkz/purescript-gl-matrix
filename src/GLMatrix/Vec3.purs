@@ -29,7 +29,6 @@ module GLMatrix.Vec3
   , squaredDistance
   , squaredLength
   , subtract
-  , transformMat3
   , zero
   , numbers
   , map
@@ -40,7 +39,6 @@ module GLMatrix.Vec3
 
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn5, runFn0, runFn1, runFn2, runFn3, runFn5)
-import GLMatrix.Mat3 (Mat3)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude
@@ -220,17 +218,22 @@ foreign import js_subtract :: Fn2 Vec3 Vec3 Vec3
 subtract :: Vec3 -> Vec3 -> Vec3
 subtract = runFn2 js_subtract
 
--- TODO: (static) transformMat2d(out, a, m) → {Vec3}
-foreign import js_transformMat3 :: Fn2 Vec3 Mat3 Vec3
-
-transformMat3 :: Vec3 -> Mat3 -> Vec3
-transformMat3 = runFn2 js_transformMat3
-
--- TODO: (static) transformMat4(out, a, m) → {Vec3}
 foreign import js_zero :: Fn0 Vec3
 
 zero :: Vec3
 zero = runFn0 js_zero
+
+foreign import js_bezier :: Fn5 Vec3 Vec3 Vec3 Vec3 Number Vec3
+
+-- |Performs a bezier interpolation with two control points
+bezier :: Vec3 -> Vec3 -> Vec3 -> Vec3 -> Number -> Vec3
+bezier = runFn5 js_bezier
+
+foreign import js_hermite :: Fn5 Vec3 Vec3 Vec3 Vec3 Number Vec3
+
+-- |Performs a hermite interpolation with two control points
+hermite :: Vec3 -> Vec3 -> Vec3 -> Vec3 -> Number -> Vec3
+hermite = runFn5 js_hermite
 
 foreign import js_numbers :: Fn1 Vec3 (Array Number)
 
@@ -259,15 +262,3 @@ zipWith fn v1 v2 = unsafePartial $ unsafeFromNumbers $ Array.zipWith fn (numbers
 -- |Like `Array.slice`
 slice :: Int -> Int -> Vec3 -> Array Number
 slice a b m = Array.slice a b $ numbers m
-
-foreign import js_bezier :: Fn5 Vec3 Vec3 Vec3 Vec3 Number Vec3
-
--- |Performs a bezier interpolation with two control points
-bezier :: Vec3 -> Vec3 -> Vec3 -> Vec3 -> Number -> Vec3
-bezier = runFn5 js_bezier
-
-foreign import js_hermite :: Fn5 Vec3 Vec3 Vec3 Vec3 Number Vec3
-
--- |Performs a hermite interpolation with two control points
-hermite :: Vec3 -> Vec3 -> Vec3 -> Vec3 -> Number -> Vec3
-hermite = runFn5 js_hermite
