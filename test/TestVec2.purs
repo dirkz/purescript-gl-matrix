@@ -1,7 +1,6 @@
 module Test.TestVec2 where
 
 import Test.Arbitrary
-
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -10,9 +9,10 @@ import GLMatrix as GLMatrix
 import GLMatrix.Mat2 as Mat2
 import GLMatrix.Mat2d as Mat2d
 import GLMatrix.Mat3 as Mat3
+import GLMatrix.Mat4 as Mat4
 import GLMatrix.Vec2 (Vec2, add, angle, ceil, cross, distance, divide, dot, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec2 as Vec2
-import GLMatrix.Vec2.Mix (transformMat2, transformMat2d)
+import GLMatrix.Vec2.Mix (transformMat2, transformMat2d, transformMat4)
 import GLMatrix.Vec3 as Vec3
 import GLMatrix.Vec3.Mix (fromVec2)
 import Math as Math
@@ -303,6 +303,14 @@ testTransformMat3 =
   extractNumbers :: Partial => Array Number -> Array Number
   extractNumbers [ m00, m01, _, m10, m11, _, m20, m21, _ ] = [ m00, m01, 1.0, m10, m11, 1.0, m20, m21, 1.0 ]
 
+testTransformMat4 :: Effect Unit
+testTransformMat4 =
+  quickCheck \(ArbVec2 v) ->
+    let
+      r1 = transformMat4 v Mat4.identity
+    in
+      equals r1 v <?> "testTransformMat4 " <> show v
+
 testZero :: Effect Unit
 testZero =
   quickCheck \r ->
@@ -343,4 +351,5 @@ main = do
   testTransformMat2
   testTransformMat2d
   testTransformMat3
+  testTransformMat4
   testZero
