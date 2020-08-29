@@ -1,16 +1,18 @@
 module Test.TestVec2 where
 
 import Test.Arbitrary
+
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
 import GLMatrix.Mat2 as Mat2
+import GLMatrix.Mat2d as Mat2d
 import GLMatrix.Mat3 as Mat3
-import GLMatrix.Vec2.Mix (transformMat2)
 import GLMatrix.Vec2 (Vec2, add, angle, ceil, cross, distance, divide, dot, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, rotate, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, transformMat3, zero)
 import GLMatrix.Vec2 as Vec2
+import GLMatrix.Vec2.Mix (transformMat2, transformMat2d)
 import GLMatrix.Vec3 as Vec3
 import GLMatrix.Vec3.Mix (fromVec2)
 import Math as Math
@@ -276,6 +278,14 @@ testTransformMat2 =
     in
       equals r1 v <?> "testTransformMat2 " <> show v
 
+testTransformMat2d :: Effect Unit
+testTransformMat2d =
+  quickCheck \(ArbVec2 v) ->
+    let
+      r1 = transformMat2d v Mat2d.identity
+    in
+      equals r1 v <?> "testTransformMat2d " <> show v
+
 testTransformMat3 :: Effect Unit
 testTransformMat3 =
   quickCheck \(ArbVec2 v) (ArbMat3 m1) ->
@@ -331,5 +341,6 @@ main = do
   testSquaredLength
   testSubtract
   testTransformMat2
+  testTransformMat2d
   testTransformMat3
   testZero
