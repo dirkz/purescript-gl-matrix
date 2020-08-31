@@ -6,8 +6,10 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec4 (add, ceil, cross, distance, divide, dot, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, slice, squaredDistance, squaredLength, subtract, zero)
+import GLMatrix.Mat4.Mix as Mat4
+import GLMatrix.Quat as Quat
 import GLMatrix.Vec3 as Vec3
+import GLMatrix.Vec4 (add, ceil, cross, distance, divide, dot, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, slice, squaredDistance, squaredLength, subtract, transformMat4, transformQuat, zero)
 import GLMatrix.Vec4 as Vec4
 import GLMatrix.Vec4.Mix (fromVec3)
 import Math as Math
@@ -265,6 +267,20 @@ testDot =
         <> " "
         <> show v2
 
+testTransformMat4 :: Effect Unit
+testTransformMat4 =
+  quickCheck \(ArbVec4 v) d ->
+    let
+      q = Quat.fromEuler d 0.0 0.0
+
+      r1 = transformQuat v q
+
+      m = Mat4.fromQuat q
+
+      r2 = transformMat4 v m
+    in
+      equals r1 r2 <?> "testTransformMat4 " <> show v <> " " <> show d
+
 main :: Effect Unit
 main = do
   testAdd
@@ -292,3 +308,4 @@ main = do
   testCrossSimple
   testCross
   testDot
+  testTransformMat4
