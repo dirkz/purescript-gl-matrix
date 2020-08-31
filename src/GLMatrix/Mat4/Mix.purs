@@ -8,7 +8,6 @@ module GLMatrix.Mat4.Mix
   ) where
 
 import Prelude
-
 import Data.Function.Uncurried (Fn1, Fn2, Fn3, Fn4, runFn1, runFn2, runFn3, runFn4)
 import GLMatrix.Mat4 (Mat4, unsafeFromNumbers)
 import GLMatrix.Quat (Quat)

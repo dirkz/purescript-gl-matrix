@@ -2,7 +2,6 @@
 module Test.TestVec3 where
 
 import Test.Arbitrary
-
 import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)

@@ -11,7 +11,6 @@ module GLMatrix.Mat3.Mix
   ) where
 
 import Prelude
-
 import Data.Function.Uncurried (Fn1, Fn2, runFn1, runFn2)
 import GLMatrix.Mat2d (Mat2d)
 import GLMatrix.Mat3 (Mat3)

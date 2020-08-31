@@ -1,7 +1,6 @@
 module Test.Arbitrary where
 
 import Prelude
-
 import GLMatrix.Mat2 (Mat2)
 import GLMatrix.Mat2 as Mat2
 import GLMatrix.Mat2d (Mat2d)
