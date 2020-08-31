@@ -6,7 +6,7 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec4 (add, ceil, distance, divide, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
+import GLMatrix.Vec4 (add, ceil, cross, distance, divide, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
 import GLMatrix.Vec4 as Vec
 import GLMatrix.Vec4 as Vec4
 import Math as Math
@@ -227,6 +227,15 @@ testZero =
     in
       equals r1 v <?> "testZero " <> show r
 
+-- |Only makes sure that invoking `Vec4.cross` doesn't explode, nothing more.
+testCrossSimple :: Effect Unit
+testCrossSimple =
+  quickCheck \(ArbVec4 v1) (ArbVec4 v2) (ArbVec4 v3) ->
+    let
+      r1 = cross v1 v2 v3
+    in
+      true <?> "testCrossSimple " <> show r1
+
 main :: Effect Unit
 main = do
   testAdd
@@ -251,3 +260,4 @@ main = do
   testSquaredLength
   testSubtract
   testZero
+  testCrossSimple
