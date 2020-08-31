@@ -138,6 +138,11 @@ exports.js_transformMat4 = (a, mat) => {
     return m.vec4.transformMat4(out, a, mat)
 }
 
+exports.js_transformQuat = (a, mat) => {
+    let out = m.vec4.create()
+    return m.vec4.transformQuat(out, a, mat)
+}
+
 exports.js_zero = () => {
     let out = m.vec4.create()
     return m.vec4.zero(out)
