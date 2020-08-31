@@ -6,9 +6,10 @@ import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec4 (add, ceil, cross, distance, divide, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, slice, squaredDistance, squaredLength, subtract, zero)
-import GLMatrix.Vec4 as Vec
+import GLMatrix.Vec4 (add, ceil, cross, distance, divide, dot, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, slice, squaredDistance, squaredLength, subtract, zero)
+import GLMatrix.Vec3 as Vec3
 import GLMatrix.Vec4 as Vec4
+import GLMatrix.Vec4.Mix (fromVec3)
 import Math as Math
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
@@ -135,7 +136,7 @@ testMultiply =
     let
       r1 = multiply v1 v2
 
-      r2 = Vec.zipWith (*) v1 v2
+      r2 = Vec4.zipWith (*) v1 v2
     in
       equals r1 r2 <?> "testMultiply " <> show v1 <> " " <> show v2
 
@@ -145,7 +146,7 @@ testNegate =
     let
       r1 = negate v
 
-      r2 = Vec.map Prelude.negate v
+      r2 = Vec4.map Prelude.negate v
     in
       equals r1 r2 <?> "testNegate " <> show v
 
@@ -250,6 +251,20 @@ testCross =
     in
       slice 0 3 r1 == [ 0.0, 0.0, 0.0 ] <?> "testCross " <> show r1
 
+testDot :: Effect Unit
+testDot =
+  quickCheck \(ArbVec3 v1) (ArbVec3 v2) ->
+    let
+      v3 = fromVec3 v1
+
+      v4 = fromVec3 v2
+    in
+      GLMatrix.equals (dot v3 v4) (Vec3.dot v1 v2)
+        <?> "testDot "
+        <> show v1
+        <> " "
+        <> show v2
+
 main :: Effect Unit
 main = do
   testAdd
@@ -276,3 +291,4 @@ main = do
   testZero
   testCrossSimple
   testCross
+  testDot
