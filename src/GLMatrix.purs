@@ -1,8 +1,6 @@
 module GLMatrix
-  ( MatrixArrayType
+  ( MatrixArrayType(..)
   , equals
-  , setMatrixArrayTypeArray
-  , setMatrixArrayTypeFloat32Array
   , setMatrixArrayType
   , toRadian
   , equalArrays
