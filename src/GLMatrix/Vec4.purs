@@ -27,6 +27,7 @@ module GLMatrix.Vec4
   , squaredLength
   , subtract
   , transformMat4
+  , transformQuat
   , zero
   , numbers
   , map
