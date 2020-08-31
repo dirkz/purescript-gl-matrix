@@ -14,11 +14,13 @@
         "output"
     ],
     "dependencies": {
-        "purescript-console": "^v4.4.0",
+        "purescript-arrays": "^v5.3.1",
         "purescript-effect": "^v2.0.1",
+        "purescript-foldable-traversable": "^v4.1.1",
         "purescript-functions": "^v4.0.0",
+        "purescript-math": "^v2.1.1",
         "purescript-partial": "^v2.0.1",
-        "purescript-psci-support": "^v4.0.0",
-        "purescript-quickcheck": "^v6.1.0"
+        "purescript-prelude": "^v4.1.1",
+        "purescript-psci-support": "^v4.0.0"
     }
 }
