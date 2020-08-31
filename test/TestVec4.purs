@@ -1,7 +1,7 @@
 module Test.TestVec4 where
 
 import Test.Arbitrary
-import Data.Array (zipWith)
+import Data.Array (take, zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (equalArrays)
@@ -236,6 +236,20 @@ testCrossSimple =
     in
       true <?> "testCrossSimple " <> show r1
 
+testCross :: Effect Unit
+testCross =
+  quickCheck \n ->
+    let
+      v1 = Vec4.fromValues n 0.0 0.0 0.0
+
+      v2 = Vec4.fromValues 0.0 n 0.0 0.0
+
+      v3 = Vec4.fromValues 0.0 0.0 n 0.0
+
+      r1 = cross v1 v2 v3
+    in
+      take 3 (numbers r1) == [ 0.0, 0.0, 0.0 ] <?> "testCross " <> show r1
+
 main :: Effect Unit
 main = do
   testAdd
@@ -261,3 +275,4 @@ main = do
   testSubtract
   testZero
   testCrossSimple
+  testCross
