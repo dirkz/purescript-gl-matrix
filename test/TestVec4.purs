@@ -1,12 +1,12 @@
 module Test.TestVec4 where
 
 import Test.Arbitrary
-import Data.Array (take, zipWith)
+import Data.Array (zipWith)
 import Data.Foldable (sum)
 import Effect (Effect)
 import GLMatrix (equalArrays)
 import GLMatrix as GLMatrix
-import GLMatrix.Vec4 (add, ceil, cross, distance, divide, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, squaredDistance, squaredLength, subtract, zero)
+import GLMatrix.Vec4 (add, ceil, cross, distance, divide, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, slice, squaredDistance, squaredLength, subtract, zero)
 import GLMatrix.Vec4 as Vec
 import GLMatrix.Vec4 as Vec4
 import Math as Math
@@ -248,7 +248,7 @@ testCross =
 
       r1 = cross v1 v2 v3
     in
-      take 3 (numbers r1) == [ 0.0, 0.0, 0.0 ] <?> "testCross " <> show r1
+      slice 0 3 r1 == [ 0.0, 0.0, 0.0 ] <?> "testCross " <> show r1
 
 main :: Effect Unit
 main = do
