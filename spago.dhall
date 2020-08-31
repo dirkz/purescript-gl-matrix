@@ -8,4 +8,5 @@ You can edit this file as you like.
   [ "console", "effect", "functions", "partial", "psci-support", "quickcheck" ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
+, repository = "https://github.com/dirkz/purescript-gl-matrix.git"
 }
