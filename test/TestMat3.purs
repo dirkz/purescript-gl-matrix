@@ -2,7 +2,6 @@
 module Test.TestMat3 where
 
 import Test.Arbitrary
-
 import Data.Array (unsafeIndex)
 import Data.Foldable (sum)
 import Effect (Effect)
@@ -221,7 +220,7 @@ testFromQuat =
   quickCheck \(ArbQuat q) ->
     let
       nq = normalize q
-      
+
       m = fromQuat nq
 
       q1 = normalize $ Quat.fromMat3 m
