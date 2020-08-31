@@ -5,8 +5,16 @@ You can edit this file as you like.
 { name = "gl-matrix"
 , license = "MIT"
 , dependencies =
-  [ "console", "effect", "functions", "partial", "psci-support", "quickcheck" ]
+  [ "arrays"
+  , "effect"
+  , "foldable-traversable"
+  , "functions"
+  , "math"
+  , "partial"
+  , "prelude"
+  , "psci-support"
+  ]
 , packages = ./packages.dhall
-, sources = [ "src/**/*.purs", "test/**/*.purs" ]
+, sources = [ "src/**/*.purs" ]
 , repository = "https://github.com/dirkz/purescript-gl-matrix.git"
 }
