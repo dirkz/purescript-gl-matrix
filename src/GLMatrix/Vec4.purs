@@ -37,7 +37,7 @@ module GLMatrix.Vec4
 
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn4, runFn0, runFn1, runFn2, runFn3, runFn4)
-import GLMatrix.Mat3 (Mat3)
+import GLMatrix.Mat4 (Mat4)
 import GLMatrix.Quat (Quat)
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
@@ -212,9 +212,9 @@ foreign import js_subtract :: Fn2 Vec4 Vec4 Vec4
 subtract :: Vec4 -> Vec4 -> Vec4
 subtract = runFn2 js_subtract
 
-foreign import js_transformMat4 :: Fn2 Vec4 Mat3 Vec4
+foreign import js_transformMat4 :: Fn2 Vec4 Mat4 Vec4
 
-transformMat4 :: Vec4 -> Mat3 -> Vec4
+transformMat4 :: Vec4 -> Mat4 -> Vec4
 transformMat4 = runFn2 js_transformMat4
 
 foreign import js_transformQuat :: Fn2 Vec4 Quat Vec4
