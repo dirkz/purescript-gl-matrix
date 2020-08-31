@@ -1,3 +1,4 @@
+-- |All supported functions are tested (http://glmatrix.net/docs/module-vec4.html).
 module Test.TestVec4 where
 
 import Test.Arbitrary
