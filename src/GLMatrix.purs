@@ -1,4 +1,12 @@
-module GLMatrix where
+module GLMatrix
+  ( MatrixArrayType
+  , equals
+  , setMatrixArrayTypeArray
+  , setMatrixArrayTypeFloat32Array
+  , setMatrixArrayType
+  , toRadian
+  , equalArrays
+  ) where
 
 import Prelude
 import Data.Array (zipWith)
