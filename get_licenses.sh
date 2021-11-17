@@ -6,5 +6,5 @@ do
   echo
   echo ${dep}:
   echo
-  cat $(find ".spago/${dep}" -iname 'LICENSE')
+  cat $(find ".spago/${dep}" -iname 'LICENSE_THIRDPARTY')
 done
