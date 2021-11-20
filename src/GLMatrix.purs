@@ -27,6 +27,11 @@ foreign import js_setMatrixArrayTypeArray :: EffectFn1 Unit Unit
 
 foreign import js_setMatrixArrayTypeFloat32Array :: EffectFn1 Unit Unit
 
+-- |Set the (internally matrix array type). `MatrixArrayTypeArray` is highly recommended,
+-- |otherwise the API is not correct (`Number` vs `Float32`), and you'll run into trouble
+-- |sooner or later, although all tests run with both types successfully.
+-- |
+-- |The default is `MatrixArrayTypeFloat32Array`.
 setMatrixArrayType :: MatrixArrayType -> Effect Unit
 setMatrixArrayType MatrixArrayTypeArray = runEffectFn1 js_setMatrixArrayTypeArray unit
 
