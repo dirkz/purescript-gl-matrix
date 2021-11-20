@@ -9,6 +9,13 @@ For the glmatrix documention, see [here](http://glmatrix.net/docs/). Note that t
 * The API is wrong when you choose MatrixArrayTypeFloat32Array (`Number` vs `Float32`).
   This is not recommended, even though all tests usually run with both versions.
   Recommended: `setMatrixArrayType MatrixArrayTypeArray`.
+  
+## Quick Start
+
+```
+npm install
+spago -x test.dhall test
+```
 
 ## What is missing
 
