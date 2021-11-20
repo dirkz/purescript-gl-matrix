@@ -4,7 +4,7 @@ Purescript wrapper around glmatrix.net (3.3.0).
 
 For the glmatrix documention, see [here](http://glmatrix.net/docs/). Note that the purescript version uses immutable types, so no `set` functions are offered, and all functions return a new object.
 
-## Important notes
+## Important Notes
 
 * The API is wrong when you choose MatrixArrayTypeFloat32Array (`Number` vs `Float32`).
   This is not recommended, even though all tests usually run with both versions.
