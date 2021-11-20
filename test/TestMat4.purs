@@ -429,7 +429,7 @@ testGetRotation =
 
 testGetScaling :: Effect Unit
 testGetScaling =
-  quickCheck \(ArbQuat q) (ArbVec3 v) (ArbVec3 s) ->
+  quickCheck \(ArbQuat q) (ArbVec3 s) ->
     let
       qn = Quat.normalize q
 
