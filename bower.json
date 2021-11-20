@@ -1,0 +1,26 @@
+{
+    "name": "purescript-gl-matrix",
+    "license": [
+        "MIT"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dirkz/purescript-gl-matrix.git"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "output"
+    ],
+    "dependencies": {
+        "purescript-arrays": "^v6.0.1",
+        "purescript-effect": "^v3.0.0",
+        "purescript-foldable-traversable": "^v5.0.1",
+        "purescript-functions": "^v5.0.0",
+        "purescript-math": "^v3.0.0",
+        "purescript-partial": "https://github.com/purescript/purescript-partial.git#v3.0.0",
+        "purescript-prelude": "^v5.0.1",
+        "purescript-psci-support": "^v5.0.0"
+    }
+}
