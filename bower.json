@@ -19,7 +19,7 @@
         "purescript-foldable-traversable": "^v5.0.1",
         "purescript-functions": "^v5.0.0",
         "purescript-math": "^v3.0.0",
-        "purescript-partial": "https://github.com/purescript/purescript-partial.git#v3.0.0",
+        "purescript-partial": "^v3.0.0",
         "purescript-prelude": "^v5.0.1",
         "purescript-psci-support": "^v5.0.0"
     }
