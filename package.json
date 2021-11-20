@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Dirk Zimmermann",
   "license": "MIT",
   "dependencies": {
     "@types/gl-matrix": "^3.2.0",
