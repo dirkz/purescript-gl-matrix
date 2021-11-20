@@ -17,7 +17,7 @@
         "purescript-arrays": "^v6.0.1",
         "purescript-effect": "^v3.0.0",
         "purescript-foldable-traversable": "^v5.0.1",
-        "purescript-functions": "^v5.0.0",
+        "purescript-functions": "https://github.com/purescript/purescript-functions.git#v5.0.0",
         "purescript-math": "^v3.0.0",
         "purescript-partial": "^v3.0.0",
         "purescript-prelude": "^v5.0.1",
