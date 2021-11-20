@@ -29,13 +29,7 @@ foreign import js_setMatrixArrayTypeArray :: EffectFn1 Unit Unit
 setMatrixArrayTypeArray :: Unit -> Effect Unit
 setMatrixArrayTypeArray = runEffectFn1 js_setMatrixArrayTypeArray
 
-foreign import js_setMatrixArrayTypeFloat32Array :: EffectFn1 Unit Unit
-
--- |Sets the type of array used when creating new vectors and matrices
-setMatrixArrayTypeFloat32Array :: Unit -> Effect Unit
-setMatrixArrayTypeFloat32Array = runEffectFn1 js_setMatrixArrayTypeFloat32Array
-
-setMatrixArrayType :: MatrixArrayType -> Effect Unit
+foreign import js_setMatrixArrayType :: MatrixArrayType -> Effect Unit
 setMatrixArrayType MatrixArrayTypeArray = runEffectFn1 js_setMatrixArrayTypeArray unit
 
 setMatrixArrayType MatrixArrayTypeFloat32Array = runEffectFn1 js_setMatrixArrayTypeFloat32Array unit
