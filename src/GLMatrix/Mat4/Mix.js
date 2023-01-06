@@ -1,6 +1,6 @@
 "use strict";
 
-import m from "gl-matrix";
+import * as m from "gl-matrix";
 
 export function js_fromQuat(q) {
     let out = m.mat4.create()

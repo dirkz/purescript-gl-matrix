@@ -1,6 +1,6 @@
 "use strict";
 
-import m from "gl-matrix";
+import * as m from "gl-matrix";
 
 export function js_add(a, b) {
     let out = m.vec2.create()

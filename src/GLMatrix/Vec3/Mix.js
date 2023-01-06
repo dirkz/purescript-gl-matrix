@@ -1,6 +1,6 @@
 "use strict";
 
-import m from "gl-matrix";
+import * as m from "gl-matrix";
 
 export function js_transformMat3(a, mat) {
     let out = m.vec3.create()

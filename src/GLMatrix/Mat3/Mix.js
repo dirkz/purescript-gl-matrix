@@ -1,6 +1,6 @@
 "use strict";
 
-import m from "gl-matrix";
+import * as m from "gl-matrix";
 
 export function js_fromMat2d(m2) {
     let out = m.mat3.create()

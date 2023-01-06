@@ -1,6 +1,6 @@
 "use strict";
 
-import m from "gl-matrix";
+import * as m from "gl-matrix";
 
 export function js_fromScaling(r) {
     let out = m.mat2d.create()
