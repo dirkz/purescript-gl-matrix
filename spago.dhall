@@ -9,7 +9,7 @@ You can edit this file as you like.
   , "effect"
   , "foldable-traversable"
   , "functions"
-  , "math"
+  , "numbers"
   , "partial"
   , "prelude"
   , "psci-support"

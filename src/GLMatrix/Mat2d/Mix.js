@@ -1,23 +1,23 @@
 "use strict";
 
-const m = require("gl-matrix")
+import m from "gl-matrix";
 
-exports.js_fromScaling = (r) => {
+export function js_fromScaling(r) {
     let out = m.mat2d.create()
     return m.mat2d.fromScaling(out, r)
 }
 
-exports.js_fromTranslation = (v) => {
+export function js_fromTranslation(v) {
     let out = m.mat2d.create()
     return m.mat2d.fromTranslation(out, v)
 }
 
-exports.js_scale = (a, v) => {
+export function js_scale(a, v) {
     let out = m.mat2d.create()
     return m.mat2d.scale(out, a, v)
 }
 
-exports.js_translate = (a, v) => {
+export function js_translate(a, v) {
     let out = m.mat2d.create()
     return m.mat2d.translate(out, a, v)
 }
