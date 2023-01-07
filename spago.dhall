@@ -12,7 +12,6 @@ You can edit this file as you like.
   , "numbers"
   , "partial"
   , "prelude"
-  , "psci-support"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs" ]
