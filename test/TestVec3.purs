@@ -14,7 +14,7 @@ import GLMatrix.Vec3 (Vec3, add, angle, bezier, ceil, cross, distance, divide, d
 import GLMatrix.Vec3 as Vec
 import GLMatrix.Vec3 as Vec3
 import GLMatrix.Vec3.Mix (transformMat3, transformMat4, transformQuat)
-import Math as Math
+import Data.Number as Math
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
 import Test.QuickCheck (quickCheck, (<?>))

@@ -15,7 +15,7 @@ import GLMatrix.Mat4 as Mat4
 import GLMatrix.Quat (normalize)
 import GLMatrix.Quat (equals) as Quat
 import GLMatrix.Quat.Mix (fromMat3) as Quat
-import Math (sqrt)
+import Data.Number (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))

@@ -4,7 +4,7 @@ import Prelude
 import Data.Foldable (for_)
 import Effect (Effect)
 import GLMatrix (MatrixArrayType(..), equals, setMatrixArrayType, toRadian)
-import Math (pi)
+import Data.Number (pi)
 import Test.QuickCheck (quickCheck, (<?>))
 import Test.TestMat2 as TestMat2
 import Test.TestVec2 as TestVec2

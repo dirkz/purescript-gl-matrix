@@ -16,7 +16,7 @@ import GLMatrix.Quat (Quat, add, all, conjugate, equals, exp, fromEuler, fromVal
 import GLMatrix.Quat.Mix (getAxisAngle, setAxisAngle)
 import GLMatrix.Vec4 (Vec4)
 import GLMatrix.Vec4 as Vec4
-import Math as Math
+import Data.Number as Math
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, show, ($), (&&), (*), (-), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))

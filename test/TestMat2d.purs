@@ -11,8 +11,8 @@ import GLMatrix as GLMatrix
 import GLMatrix.Mat2d (Mat2d, add, determinant, equals, frob, fromRotation, fromValues, identity, invert, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, unsafeFromNumbers)
 import GLMatrix.Mat2d as Mat2d
 import GLMatrix.Mat2d.Mix (fromScaling, fromTranslation, fromVec2, scale, translate)
-import Math (sqrt)
-import Math as Math
+import Data.Number (sqrt)
+import Data.Number as Math
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, show, ($), (*), (+), (/=), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))

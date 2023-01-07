@@ -12,8 +12,8 @@ import GLMatrix.Mat4 as Mat4
 import GLMatrix.Mat4.Mix (fromQuat, fromRotationTranslation, fromRotationTranslationScale, fromRotationTranslationScaleOrigin, fromVec4, getRotation)
 import GLMatrix.Quat as Quat
 import GLMatrix.Vec3 as Vec3
-import Math (sqrt)
-import Math as Math
+import Data.Number (sqrt)
+import Data.Number as Math
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (&&), (*), (+), (/), (/=), (<), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))

@@ -13,7 +13,7 @@ import GLMatrix.Vec3 as Vec3
 import GLMatrix.Vec4 (add, ceil, cross, distance, divide, dot, equals, floor, inverse, length, lerp, max, min, multiply, negate, normalize, numbers, round, scale, scaleAndAdd, slice, squaredDistance, squaredLength, subtract, transformMat4, transformQuat, zero)
 import GLMatrix.Vec4 as Vec4
 import GLMatrix.Vec4.Mix (fromVec3)
-import Math as Math
+import Data.Number as Math
 import Prelude (Unit, discard, map, show, ($), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude
 import Test.QuickCheck (quickCheck, (<?>))

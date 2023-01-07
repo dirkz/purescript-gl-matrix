@@ -16,7 +16,7 @@ import GLMatrix.Vec2 as Vec2
 import GLMatrix.Vec2.Mix (transformMat2, transformMat2d, transformMat4)
 import GLMatrix.Vec3 as Vec3
 import GLMatrix.Vec3.Mix (fromVec2)
-import Math as Math
+import Data.Number as Math
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, show, ($), (&&), (*), (/), (/=), (<>), (==))
 import Prelude as Prelude

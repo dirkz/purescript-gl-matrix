@@ -9,7 +9,7 @@ import GLMatrix as GLMatrix
 import GLMatrix.Mat2 (add, adjoint, determinant, equals, frob, fromRotation, fromValues, identity, invert, ldu, multiply, multiplyScalar, multiplyScalarAndAdd, numbers, rotate, subtract, transpose, unsafeFromNumbers)
 import GLMatrix.Mat2.Mix (scale, fromScaling)
 import GLMatrix.Vec2 as Vec2
-import Math (sqrt)
+import Data.Number (sqrt)
 import Partial.Unsafe (unsafePartial)
 import Prelude (Unit, discard, map, negate, show, ($), (*), (+), (/), (/=), (<>), (==))
 import Test.QuickCheck (quickCheck, (<?>))
