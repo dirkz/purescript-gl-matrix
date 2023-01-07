@@ -28,7 +28,7 @@ module GLMatrix.Mat3
 
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, Fn3, Fn9, runFn0, runFn1, runFn2, runFn3, runFn9)
-import Math as Math
+import Data.Number as Math
 import Partial.Unsafe (unsafePartial)
 import Prelude (($))
 import Prelude as Prelude

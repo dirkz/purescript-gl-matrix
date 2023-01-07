@@ -1,49 +1,49 @@
 "use strict";
 
-const m = require("gl-matrix")
+import * as m from "gl-matrix";
 
-exports.js_add = (a, b) => {
+export function js_add(a, b) {
     let out = m.mat4.create()
     return m.mat4.add(out, a, b)
 }
 
-exports.js_adjoint = (a) => {
+export function js_adjoint(a) {
     let out = m.mat4.create()
     return m.mat4.adjoint(out, a)
 }
 
-exports.js_determinant = (a) => {
+export function js_determinant(a) {
     return m.mat4.determinant(a)
 }
 
-exports.js_equals = (a, b) => {
+export function js_equals(a, b) {
     return m.mat4.equals(a, b)
 }
 
-exports.js_exactEquals = (a, b) => {
+export function js_exactEquals(a, b) {
     return m.mat4.exactEquals(a, b)
 }
 
-exports.js_frob = (a) => {
+export function js_frob(a) {
     return m.mat4.frob(a)
 }
 
-exports.js_fromRotation = (r, axis) => {
+export function js_fromRotation(r, axis) {
     let out = m.mat4.create()
     return m.mat4.fromRotation(out, r, axis)
 }
 
-exports.js_fromScaling = (v) => {
+export function js_fromScaling(v) {
     let out = m.mat4.create()
     return m.mat4.fromScaling(out, v)
 }
 
-exports.js_fromTranslation = (v) => {
+export function js_fromTranslation(v) {
     let out = m.mat4.create()
     return m.mat4.fromTranslation(out, v)
 }
 
-exports.js_fromValues = function (m00) {
+export function js_fromValues(m00) {
     return function (m01) {
         return function (m02) {
             return function (m03) {
@@ -75,131 +75,131 @@ exports.js_fromValues = function (m00) {
             };
         };
     };
-};
- 
-exports.js_fromXRotation = (r) => {
+}
+
+export function js_fromXRotation(r) {
     let out = m.mat4.create()
     return m.mat4.fromXRotation(out, r)
 }
 
-exports.js_fromYRotation = (r) => {
+export function js_fromYRotation(r) {
     let out = m.mat4.create()
     return m.mat4.fromYRotation(out, r)
 }
 
-exports.js_fromZRotation = (r) => {
+export function js_fromZRotation(r) {
     let out = m.mat4.create()
     return m.mat4.fromZRotation(out, r)
 }
 
-exports.js_frustum = (left, right, bottom, top, near, far) => {
+export function js_frustum(left, right, bottom, top, near, far) {
     let out = m.mat4.create()
     return m.mat4.frustum(out, left, right, bottom, top, near, far)
 }
 
-exports.js_identity = () => {
+export function js_identity() {
     return m.mat4.create()
 }
 
-exports.js_getScaling = (mat4) => {
+export function js_getScaling(mat4) {
     let out = m.vec3.create()
     return m.mat4.getScaling(out, mat4)
 }
 
-exports.js_getTranslation = (mat4) => {
+export function js_getTranslation(mat4) {
     let out = m.vec3.create()
     return m.mat4.getTranslation(out, mat4)
 }
 
-exports.js_invert = (a) => {
+export function js_invert(a) {
     let out = m.mat4.create()
     return m.mat4.invert(out, a)
 }
 
-exports.js_lookAt = (eye, center, up) => {
+export function js_lookAt(eye, center, up) {
     let out = m.mat4.create()
     return m.mat4.lookAt(out, eye, center, up)
 }
 
-exports.js_multiply = (a, b) => {
+export function js_multiply(a, b) {
     let out = m.mat4.create()
     return m.mat4.multiply(out, a, b)
 }
 
-exports.js_multiplyScalar = (a, b) => {
+export function js_multiplyScalar(a, b) {
     let out = m.mat4.create()
     return m.mat4.multiplyScalar(out, a, b)
 }
 
-exports.js_multiplyScalarAndAdd = (a, b, scale) => {
+export function js_multiplyScalarAndAdd(a, b, scale) {
     let out = m.mat4.create()
     return m.mat4.multiplyScalarAndAdd(out, a, b, scale)
 }
 
-exports.js_ortho = (left, right, bottom, top, near, far) => {
+export function js_ortho(left, right, bottom, top, near, far) {
     let out = m.mat4.create()
     return m.mat4.frustum(out, left, right, bottom, top, near, far)
 }
 
-exports.js_perspective = (fovy, aspect, near, far) => {
+export function js_perspective(fovy, aspect, near, far) {
     let out = m.mat4.create()
     return m.mat4.perspective(out, fovy, aspect, near, far)
 }
 
-exports.js_perspectiveFromFieldOfView = (fov, near, far) => {
+export function js_perspectiveFromFieldOfView(fov, near, far) {
     let out = m.mat4.create()
     return m.mat4.perspectiveFromFieldOfView(out, fov, near, far)
 }
 
-exports.js_rotate = (a, r, axis) => {
+export function js_rotate(a, r, axis) {
     let out = m.mat4.create()
     return m.mat4.rotate(out, a, r, axis)
 }
 
-exports.js_rotateX = (a, r) => {
+export function js_rotateX(a, r) {
     let out = m.mat4.create()
     return m.mat4.rotateX(out, a, r)
 }
 
-exports.js_rotateY = (a, r) => {
+export function js_rotateY(a, r) {
     let out = m.mat4.create()
     return m.mat4.rotateY(out, a, r)
 }
 
-exports.js_rotateZ = (a, r) => {
+export function js_rotateZ(a, r) {
     let out = m.mat4.create()
     return m.mat4.rotateZ(out, a, r)
 }
 
-exports.js_scale = (mat4, v) => {
+export function js_scale(mat4, v) {
     let out = m.mat4.create()
     return m.mat4.scale(out, mat4, v)
 }
 
-exports.js_str = (a) => {
+export function js_str(a) {
     return m.mat4.str(a)
 }
 
-exports.js_subtract = (a, b) => {
+export function js_subtract(a, b) {
     let out = m.mat4.create()
     return m.mat4.subtract(out, a, b)
 }
 
-exports.js_targetTo = (eye, center, up) => {
+export function js_targetTo(eye, center, up) {
     let out = m.mat4.create()
     return m.mat4.targetTo(out, eye, center, up)
 }
 
-exports.js_translate = (a, v) => {
+export function js_translate(a, v) {
     let out = m.mat4.create()
     return m.mat4.translate(out, a, v)
 }
 
-exports.js_transpose = (a) => {
+export function js_transpose(a) {
     let out = m.mat4.create()
     return m.mat4.transpose(out, a)
 }
 
-exports.js_numbers = (ar) => {
+export function js_numbers(ar) {
     return Array.prototype.slice.call(ar)
 }
