@@ -41,8 +41,3 @@ export function js_translate(m3, v2) {
     let out = m.mat3.create()
     return m.mat3.translate(out, m3, v2)
 }
-
-export function js_normalFromMat4(a) {
-    let out = m.mat3.create()
-    return m.mat3.normalFromMat4(out, a)
-}
